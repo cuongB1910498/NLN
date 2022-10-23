@@ -1,0 +1,21 @@
+
+h1{
+    color: blue;
+    text-align: center;
+    font-size: 4em;
+    font-weight: bold;
+}
+
+button.btn a{
+    color: #ffFf;
+    text-decoration: none;
+}
+
+.error{
+    color: red;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(186, 209, 255);
+  }

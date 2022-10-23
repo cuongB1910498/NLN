@@ -1,0 +1,71 @@
+#logo{
+    width: 200px;
+    height: 100px;
+    margin-top: 1em;
+}
+.c-header button{
+    margin: 5px;
+}
+
+.main-r{
+  background-color: #ffff;
+  
+}
+
+.card{
+  margin: auto;
+  margin-top: 3rem;
+}
+
+.menu div button{
+  margin: 5px 2em;
+  margin-right: 5px;
+}
+
+.menu-L ul li a{
+  margin: 5px;
+  border-radius: 5px;
+  width: 6em;
+}
+
+.fotter div a i {
+  width: 50px;
+}
+
+button.btn a{
+    color: #ffFf;
+    text-decoration: none;
+}
+
+.khuyenmai{
+  height: 1000px;
+}
+
+.show .card:hover {
+  border: 2px solid rgb(255, 247, 0);
+  transition:0.8s;
+}
+
+img.card-img-top {
+  width: 200px;
+  height: 200px;
+}
+
+.row .pic img{
+  width: 100%;
+  height: auto;
+}
+
+.show .card img{
+  width: 100%;
+  height: 250px;
+}
+
+.show .card a{
+  text-decoration: none;
+  color: black;
+}
+
+form{
+  
+}
