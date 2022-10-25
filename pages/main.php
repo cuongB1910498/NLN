@@ -1,20 +1,10 @@
 <!-- main -->
-  
-<div class="main bg-light row">
-  <!-- main left -->
-  <div class="dropdown col-lg-3 col-md-3 col-sm-6 col-12 p-5 justify-content-start">
-    <?php 
-      include("slidebar/slidebar.php")
-    ?>
-  </div>
 
-  <!-- main-right -->
-  <div class="main-r col-lg-9 col-md-9 col-sm-6 col-12">
+<div class="main bg-light">
+  <div class="main-cont">
     <?php
-      
       if(isset($_GET['quanly'])){
         $tam = $_GET['quanly'];
-
       }else{
         $tam = '';
       }
@@ -33,13 +23,13 @@
       }elseif($tam=='timkiem'){
         include("main/timkiem.php");
       }
-      
+        
       else{
         include("main/index.php");
       }
-        
-    ?>
-  </div>      
+          
+      ?>
+  </div>  
+
+
 </div>
-
-

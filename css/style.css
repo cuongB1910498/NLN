@@ -66,6 +66,12 @@ img.card-img-top {
   color: black;
 }
 
-form{
-  
+.main{
+  width: 100%;
+  margin: 0px;
+}
+
+.main-cont{
+  width: 85%;
+  margin: 0px auto;
 }
