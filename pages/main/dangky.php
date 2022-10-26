@@ -1,47 +1,39 @@
 <?php
-    // $sql_mailcheck = "SELECT email FROM tbl_dangky";
-    // $sql_check = mysqli_query($mysqli, $sql_mailcheck);
-    // $i=0;
-    // $err= "";
-    // if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    //     $mail = $_POST["email"];
-    // }
-    // while($row = mysqli_fetch_array($sql_check)){
-    //     if($row['email'] == $mail){
-    //         $err = "email đã có người sử dụng!";
-    //         break;
-    //     }else{
-    //         $err = "";
-    //     }
-    //     $i++;
-    // }
-    
-    // function test_input($data) {
-    //     $data = trim($data);
-    //     $data = stripslashes($data);
-    //     $data = htmlspecialchars($data);
-    //     return $data;
-    // }
-?>
-<?php
     session_start();
 	include("../../admincp/config/config.php");
 	if(isset($_POST['dangky'])) {
 		$tenkhachhang = $_POST['hovaten'];
 		$email = $_POST['email'];
-        
+        //check email
+        $sql_mailcheck = "SELECT email FROM tbl_dangky";
+        $sql_check = mysqli_query($mysqli, $sql_mailcheck);
+        $i=0;
+        $found = false;
+
+        while($row = mysqli_fetch_array($sql_check)){
+            if($row['email'] == $email){
+                $found = true;
+                break;
+            }else{
+                $found = false;
+            }
+            $i++;
+        }
                         
 		$dienthoai = $_POST['dienthoai'];
 		$matkhau = md5($_POST['matkhau']);
 		$diachi = $_POST['diachi'];
         
-        $sql = "INSERT INTO tbl_dangky(tenkhachhang,email,diachi,matkhau,dienthoai) 
+        if($found == false){
+            $sql = "INSERT INTO tbl_dangky(tenkhachhang,email,diachi,matkhau,dienthoai) 
             VALUE('".$tenkhachhang."','".$email."','".$diachi."','".$matkhau."','".$dienthoai."')";
-        $sql_dangky = mysqli_query($mysqli,$sql);
-        if($sql_dangky){
-            $_SESSION['dangky'] = $tenkhachhang;
-            header("Location:../../index.php");
-        }	
+            $sql_dangky = mysqli_query($mysqli,$sql);
+            if($sql_dangky){
+                $_SESSION['dangky'] = $tenkhachhang;
+                header("Location:../../index.php");
+            }
+        }
+        	
 	}
 ?>
 
@@ -116,8 +108,8 @@
     
 	<div class="container row">
         <div class="box col offset-3">
-            <h1>NEW MEMBER</h1>
-            <form class="form-horizontal" method="POST" id="register-form" autocomplete="off" onsubmit="return validateForm()">
+            <h1>NEW MEMBER <?php echo $found; ?></h1>
+            <form class="form-horizontal" method="POST" id="register-form" autocomplete="off" onsubmit="return validateEmail()">
                 
 				<div class="form-group mb-4 row">
                     <label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="fullname">Họ và tên: </label>
@@ -132,7 +124,15 @@
                     <label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="email">Email: </label>
                     <div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
                         <input class="" type="text" name="email" id="email" placeholder="Email..." >
-                        <label class="error"></label>
+                        <?php 
+                        if ($found == true){
+                            
+                        
+                        ?>
+                        <label class="error">E mail da co nguoi SD</label>
+                        
+                        <?php } ?>
+
                     </div>
                 </div>
 
