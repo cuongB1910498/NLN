@@ -22,7 +22,12 @@
         include("main/giohang.php");
       }elseif($tam=='timkiem'){
         include("main/timkiem.php");
+      }elseif($tam=='themdon'){
+        include("main/themdon.php");
+      }elseif($tam == 'lichsudon'){
+        include("main/lichsudon.php");
       }
+      
         
       else{
         include("main/index.php");

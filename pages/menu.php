@@ -43,7 +43,7 @@
       </button>
       <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
         <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
-        <li><a class="dropdown-item" href="#">Lịch sử Đặt hàng</a></li>
+        <li><a class="dropdown-item" href="index.php?quanly=lichsudon">Lịch sử Đặt hàng</a></li>
         <li><a class="dropdown-item" href="index.php?dangxuat=1">Đăng Xuất</a></li>
       </ul>
     </div>

@@ -75,3 +75,17 @@ img.card-img-top {
   width: 85%;
   margin: 0px auto;
 }
+
+.chitietdon{
+  width: 80%;
+  margin: 0px auto;
+}
+
+table.lichsudon{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}

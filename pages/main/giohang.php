@@ -59,13 +59,14 @@
     	<p style="float: right;"><a href="pages/main/themgiohang.php?xoatatca=1">Xoá tất cả</a></p>
       <div style="clear: both;"></div>
       <?php
-        if(isset($_SESSION['dangky'])){
+        if(isset($_SESSION['dangnhap'])){
           ?>
-           <p><a href="index.php?quanly=vanchuyen">Hình thức vận chuyển</a></p>
+           <p><a href="index.php?quanly=themdon">Đăng kí đặt hàng</a></p>
+           
       <?php
         }else{
       ?>
-        <p><a href="index.php?quanly=dangky">Đăng kí đặt hàng</a></p>
+        <p>BAN VUI LONG DANG KY DE MUA HANG</p>
       <?php
         }
       ?>

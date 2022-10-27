@@ -9,7 +9,7 @@
         $rows = mysqli_fetch_array($row);
 		$count = mysqli_num_rows($row);
 		if($count>0){
-			$_SESSION['dangnhap'] = $rows['tenkhachhang'];
+			$_SESSION['dangnhap'] = $rows['id_dangky'];
 			header("Location:../../index.php");
 		}else{
 			echo '<script>alert("Tài khoản hoặc Mật khẩu không đúng,vui lòng nhập lại.");</script>';
