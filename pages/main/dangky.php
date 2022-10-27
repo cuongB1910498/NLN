@@ -1,6 +1,7 @@
 <?php
     session_start();
 	include("../../admincp/config/config.php");
+    $found = false;
 	if(isset($_POST['dangky'])) {
 		$tenkhachhang = $_POST['hovaten'];
 		$email = $_POST['email'];
@@ -8,8 +9,7 @@
         $sql_mailcheck = "SELECT email FROM tbl_dangky";
         $sql_check = mysqli_query($mysqli, $sql_mailcheck);
         $i=0;
-        $found = false;
-
+        
         while($row = mysqli_fetch_array($sql_check)){
             if($row['email'] == $email){
                 $found = true;
@@ -108,7 +108,7 @@
     
 	<div class="container row">
         <div class="box col offset-3">
-            <h1>NEW MEMBER <?php echo $found; ?></h1>
+            <h1>NEW MEMBER</h1>
             <form class="form-horizontal" method="POST" id="register-form" autocomplete="off" onsubmit="return validateEmail()">
                 
 				<div class="form-group mb-4 row">
