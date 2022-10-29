@@ -61,7 +61,7 @@
       <?php
         if(isset($_SESSION['dangnhap'])){
           ?>
-           <p><a href="index.php?quanly=themdon">Đăng kí đặt hàng</a></p>
+           <p><a href="index.php?quanly=themdon">Dặt hàng</a></p>
            
       <?php
         }else{

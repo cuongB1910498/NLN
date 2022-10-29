@@ -81,11 +81,37 @@ img.card-img-top {
   margin: 0px auto;
 }
 
-table.lichsudon{
+table{
   width: 100%;
   border-collapse: collapse;
 }
 
 tr:nth-child(even) {
   background-color: #D6EEEE;
+}
+
+.chitietdon{
+  width: 80%;
+}
+
+.chitietdon{
+  width: 100%;
+}
+
+/* dinh dang table */
+.tbl_thaotac{
+  width: 20%;
+}
+.tbl_stt{
+  width: 5%;
+}
+.tbl_tinh{
+  width: 15%;
+}
+.tbl_tendiachi{
+  width: 20%;
+}
+
+.error{
+  color: red;
 }

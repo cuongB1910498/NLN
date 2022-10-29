@@ -20,20 +20,22 @@
             <th>STT</th>
             <th>ID DON HANG</th>
             <th>TRANG THAI</th>
+            <th>THOI GIAN DAT HANG</th>
             <th>CHI TIET</th>
         </tr>
         <?php
-        $i=0; 
-        while($row = mysqli_fetch_array($query_pro)){
-        $i++;
+        $i=1; 
+        while($row = mysqli_fetch_array($query_pro)){ 
         ?>
         <tr>
             <td><?php echo $i?></td>
             <td><?php echo $row['madon'] ?></td>
             <td><?php echo $row['trangthai'] ?></td>
-            <td><a href="pages/main/chitietdon.php?id=<?php echo $row['id_dangky'] ?>">chi tiet</a></td>
+            <td><?php echo $row['ngay_tao'] ?></td>
+            <td><a href="index.php?quanly=chitietdon&id=<?php echo $row['madon'] ?>">chi tiet</a></td>
         </tr>
         <?php 
+            $i++;
         }
         ?>
     </table>

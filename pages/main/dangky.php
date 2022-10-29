@@ -25,8 +25,8 @@
 		$diachi = $_POST['diachi'];
         
         if($found == false){
-            $sql = "INSERT INTO tbl_dangky(tenkhachhang,email,diachi,matkhau,dienthoai) 
-            VALUE('".$tenkhachhang."','".$email."','".$diachi."','".$matkhau."','".$dienthoai."')";
+            $sql = "INSERT INTO tbl_dangky(tenkhachhang,email,matkhau,dienthoai) 
+            VALUE('".$tenkhachhang."','".$email."','".$matkhau."','".$dienthoai."')";
             $sql_dangky = mysqli_query($mysqli,$sql);
             if($sql_dangky){
                 $_SESSION['dangky'] = $tenkhachhang;
@@ -143,15 +143,7 @@
                         <label class="error"></label>
                     </div>
                 </div>
-                
-				<div class="form-group mb-4 row">
-                    <label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="diachi">Địa chỉ: </label>
-                    <div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
-                        <input class="" type="text" name="diachi" id="diachi" placeholder="Địa chỉ..." >
-                        <label class="error"></label>
-                    </div>
-                </div>
-
+              
                 <div class="form-group mb-4 row">
                     <label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="pwd">Mật Khẩu: </label>
                     <div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
@@ -208,7 +200,6 @@
 					hovaten: {required: true, minlength:2},
 					email: {email: true ,required:true, minlength:6},
 					dienthoai: {required: true, number: true, minlength:10, maxlength:10},
-					diachi: {required:true, minlength:6},
 					matkhau: {required:true, minlength:6},
 					c_pwd: {required: true, minlength:6, equalTo: "#pwd"},
 					agree: {required:true}
@@ -217,7 +208,6 @@
 					hovaten: {required:"Họ tên không được trống", minlength:"Họ tên quá ngắn!"},
 					email: {required:"Email không được trống", minlength:"email quá ngắn!", email: "Định dạng email sai!"},
 					dienthoai: {required:"Số điện thoại không được trống", number: "VUi lòng chỉ nhập số", minlength:"số điện thoại phải có 10 số", maxlength:"số điện thoại phải có 10 số"},
-					diachi: {required:"Địa chỉ không được trống", minlength:"Địa chỉ quá ngắn!"},
 					matkhau: {required:"Mật khẩu không được bỏ trống", minlength:"mật khẩu quá ngắn"},
 					c_pwd: {required:"Không được bỏ trống", minlength:"mật khẩu quá ngắn", equalTo:"Mật Khẩu chưa trùng"},
 					agree: {required:"Bạn phải chấp nhận quy định của chúng tôi!"}

@@ -26,8 +26,20 @@
         include("main/themdon.php");
       }elseif($tam == 'lichsudon'){
         include("main/lichsudon.php");
+      }elseif($tam == 'chitietdon'){
+        include("main/chitietdon.php");
+      }elseif($tam == 'qltaikhoan'){
+        include("main/qltaikhoan.php");
+      }elseif($tam== 'diachi'){
+        include("main/quanly_diachi/diachi.php");
+      }elseif($tam == 'xoadiachi'){
+        include("main/quanly_diachi/xoadiachi.php");
+      }elseif($tam == 'themdiachi'){
+        include("main/quanly_diachi/themdiachi.php");
+      }elseif($tam == 'suadiachi'){
+        include("main/quanly_diachi/suadiachi.php");
       }
-      
+        
         
       else{
         include("main/index.php");

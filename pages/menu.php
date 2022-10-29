@@ -42,7 +42,8 @@
       <i class="fa-solid fa-user"></i> Tài khoản của tôi
       </button>
       <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
+        <li><a class="dropdown-item" href="index.php?quanly=qltaikhoan">Quản lý tài khoản</a></li>
+        <li><a class="dropdown-item" href="index.php?quanly=diachi">Địa Chỉ giao hàng</a></li>
         <li><a class="dropdown-item" href="index.php?quanly=lichsudon">Lịch sử Đặt hàng</a></li>
         <li><a class="dropdown-item" href="index.php?dangxuat=1">Đăng Xuất</a></li>
       </ul>
