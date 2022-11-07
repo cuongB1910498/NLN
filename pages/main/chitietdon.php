@@ -8,8 +8,15 @@
     $query_pro = mysqli_query($mysqli, $sql);
     // echo $sql;
 
+    // lấy chi tiết đơn hàng có những trạng thái nào
+    $sql_trangthai = "SELECT * FROM tbl_trangthaidon as a, tbl_chitiet_tt as b
+    WHERE a.id_trangthai = b.id_trangthai
+    AND madon = '".$madon."' ";
+    $query_madon = mysqli_query($mysqli, $sql_trangthai);
+
 ?>
-<h2>ma don hang: <?php echo $madon ?></h2>
+
+<h2>CÁC SẢN PHẨM MUA TRONG ĐƠN: <?php echo $madon ?></h2>
 <table border="1" class="chitietdon">
     <tr>
         <th>STT</th>
@@ -48,4 +55,35 @@
     </tr>
 
 </table>
+
+<h2>CHI TIẾT ĐƠN HÀNG</h2>
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Trạng Thái</th>
+        <th>Ghi chú</th>
+        <th>Thời gian</th>
+    </tr>
+
+    
+    <?php 
+        $i = 0;
+        while($row_ct = mysqli_fetch_array($query_madon)){
+            $i++;
+
+        ?>
+    <tr>
+        <td><?php echo $i ?> </td>
+        <td><?php echo $row_ct['tentrangthai'] ?> </td>
+        <td><?php echo $row_ct['ghichu'] ?> </td>
+        <td><?php echo $row_ct['thoigian'] ?> </td>
+    </tr>
+    <?php
+        }
+    ?>
+    
+
+
+</table>
+
 </div>

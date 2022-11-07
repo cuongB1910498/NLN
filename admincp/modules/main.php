@@ -21,6 +21,12 @@
         include("modules/quanlysp/sua.php");
     }elseif($tam=='quanlysp' && $query=='xoa'){
         include("modules/quanlysp/xoa.php");
+    }elseif($tam == 'quanlydonhang' && $query == 'xemdon'){
+        include("modules/quanlydonhang/xemdonhang.php");
+    }elseif($tam == 'quanlydonhang' && $query == 'xemchitiet'){
+        include("modules/quanlydonhang/xemchitietdon.php");
+    }elseif($tam == 'quanlydonhang' && $query == 'themtrangthai'){
+        include("modules/quanlydonhang/themtrangthai.php");
     }
         
     else{
@@ -28,3 +34,4 @@
     }
 
 ?>
+

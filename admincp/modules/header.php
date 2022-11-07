@@ -1,5 +1,5 @@
 <?php
-    if(isset($_GET['dangxuat']) && $_GET['dangxuat']== 1){
+    if(isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1){
         unset($_SESSION['dangnhap']);
         header("Location:login.php");
     }
@@ -11,8 +11,8 @@
 
     <div class="h_status row">
         <div class="col d-flex justify-content-end">
-            <button class="btn btn-warning"><a href="index.php?dangxuat=1">Đăng Xuất: <?php if(isset($_SESSION['dangnhap'])){
-		echo $_SESSION['dangnhap'];
+            <button class="btn btn-warning"><a href="index.php?dangxuat=1">Đăng Xuất: <?php if(isset($_SESSION['admin'])){
+		echo $_SESSION['admin'];
 
 	} ?></a></button>
         </div>

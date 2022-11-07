@@ -13,10 +13,18 @@
     // }
     
     $id_dangky = $_SESSION['dangnhap'];
-    $trangthai = "DA DAC HANG";
+    
     $madon = time();
-    $sql_themdon = "INSERT INTO tbl_donhang(id_dangky, madon, trangthai) VALUE ('".$id_dangky."', '".$madon."', '".$trangthai."')";
+    $sql_themdon = "INSERT INTO tbl_donhang(id_dangky, madon) VALUE ('".$id_dangky."', '".$madon."')";
     $query_themdon = mysqli_query($mysqli, $sql_themdon);
+
+
+    $id_trangthai = 1;
+    $ghichu = "";
+    $sql_themcttt = "INSERT INTO tbl_chitiet_tt(madon, id_trangthai, ghichu)
+    VALUE ('".$madon."',$id_trangthai, '".$ghichu."')";
+    echo $sql_themcttt;
+    $query_themcttt = mysqli_query($mysqli, $sql_themcttt);
     
     foreach($_SESSION['cart'] as $row){
         $sql_chitietdon = "INSERT INTO tbl_chitietdon(madon, id_sanpham, sl_mua) VALUE ('".$madon."', '".$row['id']."', '".$row['soluong']."')";

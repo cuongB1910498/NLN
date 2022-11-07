@@ -8,7 +8,7 @@
 		$row = mysqli_query($mysqli,$sql);
 		$count = mysqli_num_rows($row);
 		if($count>0){
-			$_SESSION['dangnhap'] = $taikhoan;
+			$_SESSION['admin'] = $taikhoan;
 			header("Location:index.php");
 		}else{
 			echo '<script>alert("Tài khoản hoặc Mật khẩu không đúng,vui lòng nhập lại.");</script>';
@@ -130,8 +130,8 @@
                     password: {required:true, minlength:2}
                 },
                 messages:{
-                    username: {required:"Username was not null", minlength:"at lease 6 char"},
-                    password: {required:"Password was not null", minlength:"at lease 6 char"}
+                    username: {required:"Username was not null", minlength:"at lease 2 char"},
+                    password: {required:"Password was not null", minlength:"at lease 2 char"}
                 },
                 
             });

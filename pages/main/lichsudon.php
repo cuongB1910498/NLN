@@ -19,7 +19,6 @@
         <tr>
             <th>STT</th>
             <th>ID DON HANG</th>
-            <th>TRANG THAI</th>
             <th>THOI GIAN DAT HANG</th>
             <th>CHI TIET</th>
         </tr>
@@ -30,7 +29,6 @@
         <tr>
             <td><?php echo $i?></td>
             <td><?php echo $row['madon'] ?></td>
-            <td><?php echo $row['trangthai'] ?></td>
             <td><?php echo $row['ngay_tao'] ?></td>
             <td><a href="index.php?quanly=chitietdon&id=<?php echo $row['madon'] ?>">chi tiet</a></td>
         </tr>

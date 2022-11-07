@@ -27,6 +27,7 @@
         $sql = "UPDATE tbl_diachi SET tendiachi = '".$tendiachi."', diachi = '".$diachi."', id_tinh ='".$id_tinh."' 
         WHERE id_diachi = $id_diachi";
         $query = mysqli_query($mysqli, $sql);
+        header("Location: index.php?quanly=diachi");
     }
 
 
