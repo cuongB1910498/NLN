@@ -1,21 +1,24 @@
 <?php
-    // echo $_SESSION['dangnhap'];
-    // echo "<hr>";
-    // foreach($_SESSION['cart'] as $row){
-    //     echo "id sp: ".$row['id'];
-    //     echo " | ";
-    //     echo "ten sp: ".$row['tensanpham'];
-    //     echo " | ";
-    //     echo "sl mua: ".$row['soluong'];
-    //     echo " | ";
-    //     echo "gia sp: ".$row['giasp'];
-    //     echo "<hr>";
-    // }
     
     $id_dangky = $_SESSION['dangnhap'];
+    //echo $_POST['diachi'];
+    
+    //lấy id địa chỉ bằng cách tách chuỗi từ chuỗi bên trang vanchuyen.php
+    $tachdiachi = explode(' , ', $_POST['diachi']);
+    
+
+    $tendiachi = $tachdiachi[0];
+    //echo "<br>".$tendiachi;
+    $sql = "SELECT * FROM tbl_diachi WHERE tendiachi = '".$tendiachi."' AND id_dangky = '".$id_dangky."' ";
+    $query = mysqli_query($mysqli, $sql);
+    $row = mysqli_fetch_array($query);
+    $id_diachi = $row['id_diachi'];
+    //echo "<br>".$id_diachi;
+
+
     
     $madon = time();
-    $sql_themdon = "INSERT INTO tbl_donhang(id_dangky, madon) VALUE ('".$id_dangky."', '".$madon."')";
+    $sql_themdon = "INSERT INTO tbl_donhang(id_dangky, madon, id_diachi) VALUE ('".$id_dangky."', '".$madon."', '".$id_diachi."')";
     $query_themdon = mysqli_query($mysqli, $sql_themdon);
 
 
@@ -28,6 +31,9 @@
     
     foreach($_SESSION['cart'] as $row){
         $sql_chitietdon = "INSERT INTO tbl_chitietdon(madon, id_sanpham, sl_mua) VALUE ('".$madon."', '".$row['id']."', '".$row['soluong']."')";
+        // cập nhật đơn hàng: số lượng  = số lượng - sl mua
+        $sql_trusl="UPDATE tbl_sanpham SET soluong = soluong - '".$row['soluong']."' WHERE id_sanpham = '".$row['id']."'";
+        $sql_trusl = mysqli_query($mysqli, $sql_trusl);
         $query_chitietdon = mysqli_query($mysqli, $sql_chitietdon);
     }
     

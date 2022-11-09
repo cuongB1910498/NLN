@@ -20,10 +20,24 @@
         $row_tentt = mysqli_fetch_array($query_tentt);
         $id_trangthai = $row_tentt['id_trangthai'];
         $ghichu = $_POST['ghichu'];
+        
+        // cập nhật lại csdl nếu hủy đơn
+        if($id_trangthai == 6){
+            $sql_chondonhuy = "SELECT * from tbl_chitietdon WHERE madon = '".$madon."' ";
+            $query_chondonhuy = mysqli_query($mysqli, $sql_chondonhuy);
+            
+            while ($row = mysqli_fetch_array($query_chondonhuy)){
+                $sql_themlai = "UPDATE tbl_sanpham SET soluong = soluong + '".$row['sl_mua']."' 
+                WHERE id_sanpham = '".$row['id_sanpham']."' ";
+                $query_themlai = mysqli_query($mysqli, $sql_themlai);
+            }
+        }
+
+
         //echo $id_trangthai;
         $sql_capnhat = "INSERT INTO tbl_chitiet_tt(madon, id_trangthai, ghichu) 
         VALUES ('".$madon."', '".$id_trangthai."', '".$ghichu."')";
-        //echo $sql_capnhat;
+        //echo $sql_capnhat;        
         $query_capnhat = mysqli_query($mysqli, $sql_capnhat);
         header("Location:index.php?action=quanlydonhang&query=xemchitiet&madon=$madon");
     }

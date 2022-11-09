@@ -22,7 +22,7 @@
                         
 		$dienthoai = $_POST['dienthoai'];
 		$matkhau = md5($_POST['matkhau']);
-		$diachi = $_POST['diachi'];
+		//$diachi = $_POST['diachi'];
         
         if($found == false){
             $sql = "INSERT INTO tbl_dangky(tenkhachhang,email,matkhau,dienthoai) 
@@ -129,7 +129,7 @@
                             
                         
                         ?>
-                        <label class="error">E mail da co nguoi SD</label>
+                        <label class="error">Email đã có người sử dụng!!</label>
                         
                         <?php } ?>
 

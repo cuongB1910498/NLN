@@ -38,6 +38,8 @@
         include("main/quanly_diachi/themdiachi.php");
       }elseif($tam == 'suadiachi'){
         include("main/quanly_diachi/suadiachi.php");
+      }elseif ($tam == 'tpvc'){
+        include("main/vanchuyen.php");
       }
         
         

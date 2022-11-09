@@ -60,13 +60,12 @@
       <div style="clear: both;"></div>
       <?php
         if(isset($_SESSION['dangnhap'])){
-          ?>
-           <p><a href="index.php?quanly=themdon">Dặt hàng</a></p>
-           
+      ?>
+        <a class="btn btn-primary" href="index.php?quanly=tpvc">TIẾN HÀNH ĐẶT HÀNG</a>   
       <?php
         }else{
       ?>
-        <p>BAN VUI LONG DANG KY DE MUA HANG</p>
+        <p>BẠN VUI LÒNG ĐĂNG KÝ TÀI KHOẢNG ĐỂ MUA HÀNG</p>
       <?php
         }
       ?>
