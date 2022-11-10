@@ -1,6 +1,6 @@
 <!-- main -->
 
-<div class="main bg-light">
+<div class="main ">
   <div class="main-cont">
     <?php
       if(isset($_GET['quanly'])){

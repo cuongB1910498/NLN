@@ -1,5 +1,3 @@
-<p>Thêm sản phẩm</p>
-
 <div class="main row">
 <div class="col offset-2">
 	<p>Thêm sản phẩm</p>

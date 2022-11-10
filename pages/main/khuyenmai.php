@@ -1,3 +1,3 @@
 <div class="khuyenmai">
-    <p>day la trang khuyen mai</p>
+    <h1>COMING SOON</h1>
 </div>

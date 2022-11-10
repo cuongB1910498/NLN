@@ -1,13 +1,47 @@
 <!-- headder -->
-<div class="header row bg-info">
-    <div class="logo col-lg-4 col-md-4 col-sm-12 col-12">
-        <img src="images/Untitled.png" alt="LOGO" id="logo">
+<div class="header row mb-3">
+    <div class="logo align-items-center col-2">
+        <a href="index.php"><img src="images/Untitled.png" alt="LOGO" id="logo"></a>
     </div>
-    <div class="c-header col-lg-8 col-md-8 col-sm-12 col-12 d-flex p-5 justify-content-end ">
-        <form action="index.php?quanly=timkiem" method="POST" id="search_form">
-            <input type="search" style="width: 50%" placeholder="Tìm kiếm ... " name="tukhoa">
-            <button class="btn btn-sm btn-warning " type="submit" name="tiemkiem"> Tìm Kiếm</button>
+    <div class="c-header col-10 row d-flex justify-content-end align-items-center">
+        <form action="index.php?quanly=timkiem" method="POST" id="search_form" class="col">
+            <div class="form-group col d-flex justify-content-end">  
+                <div class="row">
+                    <input type="search" placeholder="Tìm kiếm ... " name="tukhoa">
+                    <label class="error"></label>
+                </div>
+                <button class="btn btn-sm btn-warning " type="submit" name="tiemkiem"> Tìm Kiếm</button>
+            </div>
+            
+            
         </form>
-        <button class="btn btn-sm btn-warning"><a href="index.php?quanly=giohang"><i class="fa-solid fa-cart-shopping "></i></a></button>
+        <div class="col-1">
+            <button class="btn btn-sm btn-warning" >
+                <a href="index.php?quanly=giohang">
+                    <i class="fa-solid fa-cart-shopping "></i>
+                </a>
+            </button>
+        </div>
+        
     </div>
 </div>
+
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+   <script>
+        $(document).ready(function (){
+            $("#search_form").validate({
+                rules:{
+                    tukhoa: {required:true, }
+                    
+                },
+                messages:{
+                    tukhoa: {required:"CHƯA NHẬP SAO MÀ TIỀM KIẾM BẠN ƠI"}
+                    
+                },
+                
+            });
+        });
+   </script>

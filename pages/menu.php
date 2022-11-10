@@ -7,7 +7,7 @@
         
     }
 ?>
-<div class="menu bg-warning row ">
+<div class="menu bg-secondary row ">
   <div class="menu-L col-lg-7 col-md-12 col-sm-12 col-12 offset-1">
                 
     <button type="button" class="btn btn-primary"><a href="index.php">Trang chủ</a></button>

@@ -3,9 +3,7 @@
     height: 100px;
     margin-top: 1em;
 }
-.c-header button{
-    margin: 5px;
-}
+
 
 .main-r{
   background-color: #ffff;
@@ -114,4 +112,19 @@ tr:nth-child(even) {
 
 .error{
   color: red;
+}
+
+/* định dạng trang liên hệ */
+
+.lh_1{
+  text-align: center;
+  text-transform: uppercase;
+  color: blue;
+  font-weight: bold;
+  margin-top: 10px;
+
+}
+
+.lh_2{
+  text-align: center;
 }

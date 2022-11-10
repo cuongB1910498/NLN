@@ -27,10 +27,12 @@
         include("modules/quanlydonhang/xemchitietdon.php");
     }elseif($tam == 'quanlydonhang' && $query == 'themtrangthai'){
         include("modules/quanlydonhang/themtrangthai.php");
+    }elseif($tam == 'quanlybaiviet' && $query == 'thembaiviet'){
+        include("modules/qlbaiviet/baiviet.php");
     }
         
     else{
-        include("dashboard.php");
+        include("modules/quanlydonhang/xemdonhang.php");
     }
 
 ?>
