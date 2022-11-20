@@ -20,9 +20,11 @@
 ?>
 
 
+<div class="alert alert-success mb-3" role="alert">
 <p>Sản phẩm nổi bật
 
 </p>
+</div>
     
     <?php
         while($row = mysqli_fetch_array($query_pro)){

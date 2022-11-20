@@ -29,6 +29,10 @@
         include("modules/quanlydonhang/themtrangthai.php");
     }elseif($tam == 'quanlybaiviet' && $query == 'thembaiviet'){
         include("modules/qlbaiviet/baiviet.php");
+    }elseif($tam == 'quanlybaiviet' && $query == 'sua'){
+        include("modules/qlbaiviet/sua_bv.php");
+    }elseif($tam == 'quanlybaiviet' && $query == 'xoa'){
+         include("modules/qlbaiviet/xoa.php");
     }
         
     else{

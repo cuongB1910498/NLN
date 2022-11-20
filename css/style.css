@@ -11,8 +11,8 @@
 }
 
 .card{
-  margin: auto;
-  margin-top: 3rem;
+  margin: 10px;
+
 }
 
 .menu div button{
@@ -66,6 +66,7 @@ img.card-img-top {
 
 .main{
   width: 100%;
+  height: fit-content;
   margin: 0px;
 }
 
@@ -127,4 +128,121 @@ tr:nth-child(even) {
 
 .lh_2{
   text-align: center;
+}
+
+
+/* css baiviet.php */
+
+#baiviet{
+  display: block;
+}
+
+#baiviet_h1{
+  margin: 1em 0px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  
+}
+
+.baiviet .row .col a{
+  text-decoration: none;
+  font-weight: bold;
+  color: blue;
+}
+
+.baiviet .row .col a:hover{
+  color: yellowgreen;
+}
+
+#ngaytao{
+  color: blue;
+}
+
+.list{
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* css chitiet bv */
+
+.chitiet .tieude{
+  margin-top: 1em;
+  text-transform: uppercase;
+  
+}
+
+.row .img{
+  margin: 0px auto;
+  width: 70%;
+  height: auto;
+}
+
+.btn{
+  border: none;
+}
+
+.menu-L button a{
+  color: white;
+}
+
+
+/* css header */
+.c-header{
+  
+  background-image: url(../images/baner.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 140px;
+}
+
+.logo{
+  background-image: url(../images/lolo_chinhthuc.jpg);
+  background-size: 95% 140px;
+}
+
+.header{
+  height: 140px;
+}
+
+a{
+  color: white;
+}
+
+button.btn.btn-primary {
+  background-color: mediumseagreen;
+}
+
+button.btn.btn-primary:hover {
+  background-color: rgb(255, 255, 140);
+  
+}
+
+button.btn.btn-primary a{
+  font-weight: 600;
+}
+
+button.btn.btn.btn-primary.dropdown-toggle:hover{
+  color: black;
+}
+
+button.btn.btn-primary a:hover{
+  color: black;
+}
+
+.bg-info {
+  background-color: rgb(226, 250, 250);
+}
+/* CSS FOOTER */
+
+.footer a.f_baiviet{
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.lk a{
+  text-decoration: none;
+}
+
+.mxh a{
+  text-decoration: none;
 }

@@ -11,7 +11,7 @@
       if($tam =='danhmucsanpham'){
         include("main/danhmuc.php");
       }elseif($tam=='tintuc'){
-        include("main/tintuc.php");
+        include("main/baiviet.php");
       }elseif($tam=='khuyenmai'){
         include("main/khuyenmai.php");
       }elseif($tam=='lienhe'){
@@ -40,6 +40,8 @@
         include("main/quanly_diachi/suadiachi.php");
       }elseif ($tam == 'tpvc'){
         include("main/vanchuyen.php");
+      }elseif ($tam == 'chitiet_bv'){
+        include("main/chitiet_bv.php");
       }
         
         

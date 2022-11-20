@@ -7,7 +7,7 @@
         
     }
 ?>
-<div class="menu bg-secondary row ">
+<div class="menu  row ">
   <div class="menu-L col-lg-7 col-md-12 col-sm-12 col-12 offset-1">
                 
     <button type="button" class="btn btn-primary"><a href="index.php">Trang chủ</a></button>
@@ -15,7 +15,7 @@
       $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
       $query_danhmuc = mysqli_query($mysqli,$sql_danhmuc);
     ?>
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+    <button type="button" class="btn btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
     Danh mục sản phẩm
     </button>
     <ul class="dropdown-menu">
@@ -28,9 +28,9 @@
       }
       ?>
     </ul>
-    <button type="button" class="btn btn-primary"><a href="index.php?quanly=tintuc">Tin Tức</a></button>
-    <button type="button" class="btn btn-primary"><a href="index.php?quanly=khuyenmai">Khuyến mãi</a></button>
-    <button type="button" class="btn btn-primary"><a href="index.php?quanly=lienhe">Liên Hệ</a></button>
+    <button type="button" class="btn btn btn-primary"><a href="index.php?quanly=tintuc">Bài viết</a></button>
+    <button type="button" class="btn btn btn-primary"><a href="index.php?quanly=khuyenmai">Khuyến mãi</a></button>
+    <button type="button" class="btn btn btn-primary"><a href="index.php?quanly=lienhe">Liên Hệ</a></button>
   </div>
 
   <?php

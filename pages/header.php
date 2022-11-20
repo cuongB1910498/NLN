@@ -1,7 +1,7 @@
 <!-- headder -->
-<div class="header row mb-3">
+<div class="header row">
     <div class="logo align-items-center col-2">
-        <a href="index.php"><img src="images/Untitled.png" alt="LOGO" id="logo"></a>
+        <a href="index.php"></a>
     </div>
     <div class="c-header col-10 row d-flex justify-content-end align-items-center">
         <form action="index.php?quanly=timkiem" method="POST" id="search_form" class="col">
@@ -10,7 +10,7 @@
                     <input type="search" placeholder="Tìm kiếm ... " name="tukhoa">
                     <label class="error"></label>
                 </div>
-                <button class="btn btn-sm btn-warning " type="submit" name="tiemkiem"> Tìm Kiếm</button>
+                <button class="btn btn-sm btn-warning " type="submit" name="tiemkiem"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             
             
@@ -27,7 +27,7 @@
 </div>
 
 <!-- Jquery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
    <script>
@@ -44,4 +44,4 @@
                 
             });
         });
-   </script>
+   </script> -->

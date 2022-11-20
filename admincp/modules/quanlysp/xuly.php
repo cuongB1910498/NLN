@@ -17,7 +17,8 @@ $danhmuc = $_POST['danhmuc'];
 
 if(isset($_POST['themsanpham'])){
 	//them
-	$sql_them = "INSERT INTO tbl_sanpham(tensanpham,masp,giasp,soluong,hinhanh,tomtat,noidung,tinhtrang,id_danhmuc) VALUE('".$tensanpham."','".$masp."','".$giasp."','".$soluong."','".$hinhanh."','".$tomtat."','".$noidung."','".$tinhtrang."','".$danhmuc."')";
+	$sql_them = "INSERT INTO tbl_sanpham(tensanpham,masp,giasp,soluong,hinhanh,tomtat,noidung,tinhtrang,id_danhmuc) 
+	VALUE('".$tensanpham."','".$masp."','".$giasp."','".$soluong."','".$hinhanh."','".$tomtat."','".$noidung."','".$tinhtrang."','".$danhmuc."')";
 	mysqli_query($mysqli,$sql_them);
 	move_uploaded_file($hinhanh_tmp,'uploads/'.$hinhanh);
 	header('Location:../../index.php?action=quanlysp&query=them');
