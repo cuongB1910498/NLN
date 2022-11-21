@@ -26,7 +26,7 @@
     $ghichu = "";
     $sql_themcttt = "INSERT INTO tbl_chitiet_tt(madon, id_trangthai, ghichu)
     VALUE ('".$madon."',$id_trangthai, '".$ghichu."')";
-    echo $sql_themcttt;
+    //echo $sql_themcttt;
     $query_themcttt = mysqli_query($mysqli, $sql_themcttt);
     
     foreach($_SESSION['cart'] as $row){
@@ -39,9 +39,8 @@
     
     
     if($query_themdon && $query_chitietdon){
-        echo "them thanh cong";
         unset($_SESSION['cart']);
-        header("Location:index.php?quanly=lichsudon");
+        header("Location: index.php?quanly=lichsudon");
         
     }
 ?>

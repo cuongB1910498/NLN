@@ -8,7 +8,7 @@
     </div>
     <div class="col-lg-2 col-6">
         <?php
-            $sql = "SELECT * FROM tbl_baiviet order by ngaytao DESC";
+            $sql = "SELECT * FROM tbl_baiviet order by ngaytao DESC LIMIT 5";
             $query = mysqli_query($mysqli, $sql);
 
         ?>

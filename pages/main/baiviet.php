@@ -4,7 +4,7 @@
 
 ?>
 <div class="baiviet">
-    <h1 id="baiviet_h1">DANH SÁCH BÀI VIẾT: </h1>
+    <h1 id="baiviet_h1">CÁC BÀI VIẾT: </h1>
     <div class="row">
         
        
