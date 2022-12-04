@@ -3,7 +3,7 @@
 	$query_lietke_sp = mysqli_query($mysqli,$sql_lietke_sp);
 ?>
 <p>Liệt kê danh mục sản phẩm</p>
-<table style="width:100%" border="1" style="border-collapse: collapse;">
+<table style="width:100%" border="1">
   <tr>
   	<th>Id</th>
     <th>Tên sản phẩm</th>

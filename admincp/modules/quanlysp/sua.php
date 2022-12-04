@@ -1,4 +1,6 @@
-<?php
+<div class="row">
+	<div class="col-10 offset-1">
+	<?php
 	$sql_sua_sp = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$_GET[idsanpham]' LIMIT 1";
 	$query_sua_sp = mysqli_query($mysqli,$sql_sua_sp);
 ?>
@@ -92,3 +94,5 @@ while($row = mysqli_fetch_array($query_sua_sp)) {
  ?>
 
 </table>
+	</div>
+</div>

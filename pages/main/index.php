@@ -21,9 +21,7 @@
 
 
 <div class="alert alert-success mb-3" role="alert">
-<p>Sản phẩm nổi bật
-
-</p>
+<h2>Sản Phẩm nổi bậc</h2>
 </div>
     
     <?php

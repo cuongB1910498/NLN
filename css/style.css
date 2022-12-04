@@ -246,3 +246,26 @@ button.btn.btn-primary a:hover{
 .mxh a{
   text-decoration: none;
 }
+
+.chitietdon a{
+  color: blue;
+  text-decoration: none;
+}
+
+.giohang a{
+  color: blue;
+  text-decoration: none;
+}
+
+a#dathang {
+  color: white;
+}
+
+.main{
+  min-height: 400px;
+}
+
+.chitiet .row p a{
+  color: blue;
+  text-decoration: none;
+}

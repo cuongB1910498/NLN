@@ -18,9 +18,9 @@
     <table border="1" class="lichsudon">
         <tr>
             <th>STT</th>
-            <th>ID DON HANG</th>
-            <th>THOI GIAN DAT HANG</th>
-            <th>CHI TIET</th>
+            <th>ID ĐƠN HÀNG</th>
+            <th>THỜI GIAN ĐẶT HÀNG</th>
+            <th>CHI TIẾT</th>
         </tr>
         <?php
         $i=1; 
@@ -30,7 +30,7 @@
             <td><?php echo $i?></td>
             <td><?php echo $row['madon'] ?></td>
             <td><?php echo $row['ngay_tao'] ?></td>
-            <td><a href="index.php?quanly=chitietdon&id=<?php echo $row['madon'] ?>">chi tiet</a></td>
+            <td><a href="index.php?quanly=chitietdon&id=<?php echo $row['madon'] ?>">xem</a></td>
         </tr>
         <?php 
             $i++;

@@ -33,7 +33,16 @@
         include("modules/main.php");
         include("modules/footter.php")
     ?>
+    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'tomtat' );
+    </script>
 
+    <script>
+        CKEDITOR.replace( 'noidung' );
+    </script>
+    
+    
 </body>
 
 </html>

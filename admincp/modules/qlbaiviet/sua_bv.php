@@ -59,7 +59,7 @@
 
         <div class="form-group mb-3">
             <label for="noidung" class="mb-3">NỘI DUNG BÀI VIẾT: </label>
-            <input id="noidung" class="form-control mb-3" type="text" name="noidung" value="<?php echo $row['noidung'] ?>">
+            <textarea name="noidung" id="" cols="30" rows="10"><?php echo $row['noidung'] ?></textarea>
         </div>
 
         <div class="form-group mb-3">

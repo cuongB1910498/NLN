@@ -1,4 +1,5 @@
-<p>Gio Hang</p>
+<div class="giohang">
+<p>Giỏ hàng của bạn</p>
 
 <table style="width:100%;text-align: center;border-collapse: collapse;" border="1">
   <tr>
@@ -61,7 +62,7 @@
       <?php
         if(isset($_SESSION['dangnhap'])){
       ?>
-        <a class="btn btn-primary" href="index.php?quanly=tpvc">TIẾN HÀNH ĐẶT HÀNG</a>   
+        <a class="btn btn-primary" id="dathang" href="index.php?quanly=tpvc">TIẾN HÀNH ĐẶT HÀNG</a>   
       <?php
         }else{
       ?>
@@ -88,3 +89,4 @@
   } 
   ?>
 </table>
+</div>

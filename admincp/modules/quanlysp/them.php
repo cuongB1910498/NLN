@@ -1,5 +1,5 @@
 <div class="main row">
-<div class="col offset-2">
+<div class="col-10 offset-1">
 	<p>Thêm sản phẩm</p>
 
 	<form method="POST" class="form-horizontal" id="them" action="modules/quanlysp/xuly.php" enctype="multipart/form-data">
@@ -46,7 +46,7 @@
 		<div class="form-group mb-4 row">
 			<label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Tóm tắt: </label>
 			<div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
-				<input type="text" name="tomtat"  placeholder="Tóm Tắt... ">
+				<textarea name="tomtat" id="" cols="30" rows="10"></textarea>
 				<label class="error"></label>
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 		<div class="form-group mb-4 row">
 			<label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Nội Dung: </label>
 			<div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
-				<input type="text" name="noidung"  placeholder="Nội Dung... ">
+			<textarea name="noidung" id="" cols="30" rows="10"></textarea>
 				<label class="error"></label>
 			</div>
 		</div>

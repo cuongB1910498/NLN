@@ -8,7 +8,7 @@
     </div>
     <div class="col-lg-2 col-6">
         <?php
-            $sql = "SELECT * FROM tbl_baiviet order by ngaytao DESC LIMIT 5";
+            $sql = "SELECT * FROM tbl_baiviet order by ngaytao DESC LIMIT 4";
             $query = mysqli_query($mysqli, $sql);
 
         ?>
@@ -33,17 +33,17 @@
 
     <div class="lk col-lg-2 col-6">
         <div><h3 style="font-weight: bold;">LIÊN KẾT</h3></div>
-        <div class="row"><a href="">Đăng Nhập</a></div>
-        <div class="row"><a href="">Bài viết</a></div>
-        <div class="row"><a href="">Khuyến mãi</a></div>
+        <div class="row"><a href="pages/main/dangnhap.php">Đăng Nhập</a></div>
+        <div class="row"><a href="index.php?quanly=tintuc">Bài viết</a></div>
+        <div class="row"><a href="index.php?quanly=khuyenmai">Khuyến mãi</a></div>
         
     </div>
 
     <div class="col-lg-3 col-12"> 
         <div><h3 style="font-weight: bold;">MẠNG XÃ HỘI</h3></div>
         
-        <div class="mxh row justify-content-center"><a href="#"><i class="fa-brands fa-facebook"></i> FACEBOOK</a></div>
-        <div class="mxh row justify-content-center"><a href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a></div>
+        <div class="mxh row justify-content-center"><a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i> FACEBOOK</a></div>
+        <div class="mxh row justify-content-center"><a href="https://www.youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i> YOUTUBE</a></div>
         
 
     </div>

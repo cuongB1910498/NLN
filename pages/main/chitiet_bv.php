@@ -5,7 +5,7 @@
     //
 ?>
 <div class="chitiet">
-    <h3 class="tieude"><?php echo $row['tieude'] ?></h3>
+    <h1 class="tieude"><?php echo $row['tieude'] ?></h2>
     <div class="row">
         <p><?php echo $row['noidung'] ?></p>
     </div>
