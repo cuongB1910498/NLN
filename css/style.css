@@ -23,7 +23,7 @@
 .menu-L ul li a{
   margin: 5px;
   border-radius: 5px;
-  width: 6em;
+  width: auto;
 }
 
 .fotter div a i {
