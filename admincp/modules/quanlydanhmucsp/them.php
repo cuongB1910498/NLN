@@ -1,3 +1,11 @@
+<?php
+	$stmt = $pdo->prepare(
+		"SELECT MAX(thutu) as max FROM tbl_danhmuc LIMIT 1"
+	);
+	$stmt->execute();
+	$row = $stmt->fetch();
+?>
+
 <div class="main row">
 <div class="col offset-2">
 	<p>Thêm danh mục sản phẩm</p>
@@ -14,7 +22,7 @@
 		<div class="form-group mb-4 row">
 			<label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Thứ Tự: </label>
 			<div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
-				<input type="text" name="thutu"  placeholder="thứ tự..." >
+				<input type="text" name="thutu"  placeholder="thứ tự..." value="<?php echo $row['max']+1?>">
 				<label class="error"></label>
 			</div>
 		</div>
