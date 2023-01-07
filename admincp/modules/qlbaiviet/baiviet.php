@@ -3,18 +3,51 @@
     if(isset($_POST['thembaiviet'])){
         $tieude = $_POST['tieude'];
         $noidung = $_POST['noidung'];
-        $anh_mh = $_FILES['anh_mh']['name'];
-        $anh_mh_tmp = $_FILES['anh_mh']['tmp_name'];
-        $anh_mh = time().'_'.$anh_mh;
         $tag = $_POST['tag'];
-        $sql = "INSERT INTO tbl_baiviet(tieude,noidung,anh_mh,tag) 
-        VALUES ('".$tieude."', '".$noidung."', '".$anh_mh."', '".$tag."');";
+
+        if(isset($_FILES['anh_mh']['name'])){
+            $anh_mh = $_FILES['anh_mh']['name'];
+            $anh_mh_tmp = $_FILES['anh_mh']['tmp_name'];
+            
+            $location = 'modules/qlbaiviet/uploads/';
+            $file_extension = pathinfo($location, PATHINFO_EXTENSION);
+            $file_extension = strtolower($file_extension);
+            $valid_extension = array("png","jpeg","jpg");
+
+            $anh_mh = time().'_'.$anh_mh.$file_extension;
+            move_uploaded_file($anh_mh_tmp, 'modules/qlbaiviet/uploads/'.$anh_mh);
+
+            $stmt = $pdo->prepare(
+                "INSERT INTO tbl_baiviet(tieude,noidung,anh_mh,tag)
+                VALUES (:td, :nd, :anh, :tag)"
+            );
+            $stmt->execute([
+                'td' =>$tieude,
+                'nd' =>$noidung,
+                'anh' =>$anh_mh,
+                'tag' => $tag
+            ]);
+            header("location: index.php?action=quanlybaiviet&query=thembaiviet");
+        }else{
+            $stmt = $pdo->prepare(
+                "INSERT INTO tbl_baiviet(tieude,noidung,tag)
+                VALUES (:td, :nd, :tag)"
+            );
+            $stmt->execute([
+                'td' =>$tieude,
+                'nd' =>$noidung,
+                'tag' => $tag
+            ]);
+            header("location: index.php?action=quanlybaiviet&query=thembaiviet");
+        }
+        // $sql = "INSERT INTO tbl_baiviet(tieude,noidung,anh_mh,tag) 
+        // VALUES ('".$tieude."', '".$noidung."', '".$anh_mh."', '".$tag."');";
         
-        $query = mysqli_query($mysqli, $sql);
+        // $query = mysqli_query($mysqli, $sql);
         
         // cẩn thận với vị trí lưu tệp. tốt nhất là nên làm 1 file xử lý độc lập
-        move_uploaded_file($anh_mh_tmp, 'modules/qlbaiviet/uploads/'.$anh_mh);
-        header("location: index.php?action=quanlybaiviet&query=thembaiviet");
+        
+        
     } 
 ?>
 

@@ -1,9 +1,18 @@
 <?php
     $id_baiviet = $_GET['id'];
-    $sql_lk = "SELECT * FROM tbl_baiviet WHERE id_baiviet = '".$id_baiviet."' ";
-    $query_lk = mysqli_query($mysqli, $sql_lk);
-    $row = mysqli_fetch_array($query_lk);
-    
+    // $sql_lk = "SELECT * FROM tbl_baiviet WHERE id_baiviet = '".$id_baiviet."' ";
+    // $query_lk = mysqli_query($mysqli, $sql_lk);
+    // $row = mysqli_fetch_array($query_lk);
+
+    $stmt_get = $pdo->prepare(
+        "SELECT * FROM tbl_baiviet WHERE id_baiviet = :id_bv"
+    );
+
+    $stmt_get->execute([
+        'id_bv' => $id_baiviet
+    ]);
+
+    $row = $stmt_get->fetch();
     
     if(isset($_POST['suabaiviet'])){
         // có upload ảnh mới
@@ -14,18 +23,41 @@
             //cập nhật lại csdl
             $tieude = $_POST['tieude'];
             $noidung = $_POST['noidung'];
+            $tag = $_POST['tag'];
+
+            //xu ly anh
             $anh_mh = $_FILES['anh_mh']['name'];
             $anh_mh_tmp = $_FILES['anh_mh']['tmp_name'];
-            $anh_mh = time().'_'.$anh_mh;
-            $tag = $_POST['tag'];
-            $sql = "UPDATE tbl_baiviet 
-            SET tieude = '".$tieude."', noidung = '".$noidung."', anh_mh = '".$anh_mh."', tag = '".$tag."'
-            WHERE id_baiviet = $id_baiviet;";
-            echo $sql;
-            $query = mysqli_query($mysqli, $sql);
+            
+            $location = 'modules/qlbaiviet/uploads/';
+            $file_extension = pathinfo($location, PATHINFO_EXTENSION);
+            $file_extension = strtolower($file_extension);
+            $valid_extension = array("png","jpeg","jpg");
+
+            $anh_mh = time().'_'.$anh_mh.$file_extension;
+            move_uploaded_file($anh_mh_tmp, $location.$anh_mh);
+
+            $stmt = $pdo->prepare(
+                "UPDATE tbl_baiviet 
+                SET tieude = :td, noidung = :nd, anh_mh = :anh, tag = :tag
+                WHERE id_baiviet = :id"
+            );
+            $stmt->execute([
+                'td' => $tieude,
+                'nd' => $noidung,
+                'anh' => $anh_mh,
+                'tag' => $tag,
+                'id' => $id_baiviet
+            ]);
+            
+            // $sql = "UPDATE tbl_baiviet 
+            // SET tieude = '".$tieude."', noidung = '".$noidung."', anh_mh = '".$anh_mh."', tag = '".$tag."'
+            // WHERE id_baiviet = $id_baiviet;";
+            // echo $sql;
+            // $query = mysqli_query($mysqli, $sql);
             
             //cẩn thận với vị trí lưu tệp. tốt nhất là nên làm 1 file xử lý độc lập
-            move_uploaded_file($anh_mh_tmp, 'modules/qlbaiviet/uploads/'.$anh_mh);
+            // move_uploaded_file($anh_mh_tmp, 'modules/qlbaiviet/uploads/'.$anh_mh);
             header("location: index.php?action=quanlybaiviet&query=thembaiviet");
         }else{
             
@@ -33,11 +65,23 @@
             $tieude = $_POST['tieude'];
             $noidung = $_POST['noidung'];
             $tag = $_POST['tag'];
-            $sql = "UPDATE tbl_baiviet 
-            SET tieude = '".$tieude."', noidung = '".$noidung."', tag = '".$tag."'
-            WHERE id_baiviet = $id_baiviet;";
-            echo $sql;
-            $query = mysqli_query($mysqli, $sql);
+            // $sql = "UPDATE tbl_baiviet 
+            // SET tieude = '".$tieude."', noidung = '".$noidung."', tag = '".$tag."'
+            // WHERE id_baiviet = $id_baiviet;";
+            // echo $sql;
+            // $query = mysqli_query($mysqli, $sql);
+
+            $stmt = $pdo->prepare(
+                "UPDATE tbl_baiviet 
+                SET tieude = :td, noidung = :nd, tag = :tag
+                WHERE id_baiviet = :id"
+            );
+            $stmt->execute([
+                'td' => $tieude,
+                'nd' => $noidung,
+                'tag' => $tag,
+                'id' => $id_baiviet
+            ]);
             
             header("location: index.php?action=quanlybaiviet&query=thembaiviet");
         }

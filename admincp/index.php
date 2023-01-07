@@ -27,7 +27,8 @@
 <body>
 
     <?php 
-        include("config/config.php");
+        include("config/config.php"); // conect mysqli
+        include("config/conect.php"); // conect pdo
         include("modules/header.php");
         include("modules/menu.php");
         include("modules/main.php");

@@ -1,12 +1,24 @@
 <?php
 	session_start();
-	include('config/config.php');
+	//include('config/config.php');
+    include('config/conect.php');
 	if(isset($_POST['dangnhap'])){
 		$taikhoan = $_POST['username'];
 		$matkhau = md5($_POST['password']);
-		$sql = "SELECT * FROM tbl_admin WHERE username='".$taikhoan."' AND password='".$matkhau."' LIMIT 1";
-		$row = mysqli_query($mysqli,$sql);
-		$count = mysqli_num_rows($row);
+
+        $stmt = $pdo->prepare(
+            "SELECT * FROM tbl_admin WHERE username= :usn AND password= :pass LIMIT 1"
+        );
+        $stmt->execute([
+            'usn' => $taikhoan,
+            'pass' => $matkhau
+        ]);
+        $row = $stmt->fetch();
+        $count = $stmt->rowCount();
+        
+        // $sql = "SELECT * FROM tbl_admin WHERE username='".$taikhoan."' AND password='".$matkhau."' LIMIT 1";
+		// $row = mysqli_query($mysqli,$sql);
+		//$count = mysqli_num_rows($row);
 		if($count>0){
 			$_SESSION['admin'] = $taikhoan;
 			header("Location:index.php");
