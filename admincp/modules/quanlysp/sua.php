@@ -1,13 +1,19 @@
 <div class="row">
 	<div class="col-10 offset-1">
 	<?php
-	$sql_sua_sp = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$_GET[idsanpham]' LIMIT 1";
-	$query_sua_sp = mysqli_query($mysqli,$sql_sua_sp);
+	// $sql_sua_sp = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$_GET[idsanpham]' LIMIT 1";
+	// $query_sua_sp = mysqli_query($mysqli,$sql_sua_sp);
+	$change = $pdo->prepare(
+		"SELECT * FROM tbl_sanpham WHERE id_sanpham = :id LIMIT 1"
+	);
+	$change->execute([
+		'id' => $_GET['idsanpham']
+	]);
 ?>
 <p>Sửa sản phẩm</p>
 <table border="1" width="100%" style="border-collapse: collapse;">
 <?php
-while($row = mysqli_fetch_array($query_sua_sp)) {
+while($row = $change->fetch()) {
 ?>
  <form method="POST" action="modules/quanlysp/xuly.php?idsanpham=<?php echo $row['id_sanpham'] ?>" enctype="multipart/form-data">
 	  <tr>

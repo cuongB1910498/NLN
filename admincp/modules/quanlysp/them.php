@@ -64,9 +64,14 @@
 			<div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
 				<select name="danhmuc">
 					<?php
-					$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
-					$query_danhmuc = mysqli_query($mysqli,$sql_danhmuc);
-					while($row_danhmuc = mysqli_fetch_array($query_danhmuc)){
+					// $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
+					// $query_danhmuc = mysqli_query($mysqli,$sql_danhmuc);
+					
+					$dm = $pdo->prepare(
+						"SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC"
+					);
+					$dm->execute();
+					while($row_danhmuc = $dm->fetch()){
 					?>
 					<option value="<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['tendanhmuc'] ?></option>
 					<?php

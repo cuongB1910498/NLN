@@ -1,6 +1,12 @@
 <?php
-	$sql_lietke_sp = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY id_sanpham DESC";
-	$query_lietke_sp = mysqli_query($mysqli,$sql_lietke_sp);
+	// $sql_lietke_sp = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY id_sanpham DESC";
+	// $query_lietke_sp = mysqli_query($mysqli,$sql_lietke_sp);
+$list = $pdo->prepare(
+  "SELECT * FROM tbl_sanpham as a, tbl_danhmuc as b 
+    WHERE a.id_danhmuc = b.id_danhmuc
+    ORDER BY id_sanpham DESC"
+);
+$list->execute();
 ?>
 <p>Liệt kê danh mục sản phẩm</p>
 <table style="width:100%" border="1">
@@ -19,7 +25,7 @@
   </tr>
   <?php
   $i = 0;
-  while($row = mysqli_fetch_array($query_lietke_sp)){
+  while($row = $list->fetch()){
   	$i++;
   ?>
   <tr>
