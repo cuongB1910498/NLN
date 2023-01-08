@@ -39,12 +39,22 @@ if(isset($_POST['themdanhmuc'])){
 	// $sql_xoa = "DELETE FROM tbl_danhmuc WHERE id_danhmuc='".$id."'";
 	// mysqli_query($mysqli,$sql_xoa);
 
+	//xoa danh muc sp
 	$del = $pdo->prepare(
 		"DELETE FROM tbl_danhmuc WHERE id_danhmuc = :id"
 	);
 
 	$del->execute([
 		'id' => $id
+	]);
+
+	//xoa san pham thhuoc danh muc x
+	$rem = $pdo->prepare(
+		"DELETE FROM tbl_sanpham WHERE id_danhmuc = :dm"
+	);
+
+	$rem->execute([
+		'dm' => $id
 	]);
 
 	header('Location:../../index.php?action=quanlydanhmucsanpham&query=them');
