@@ -1,18 +1,29 @@
 <?php
     $madon = $_GET['madon'];
     // hiển thị sản phẩm có trong đơn hàng
-    $sql_sp = "SELECT * FROM tbl_chitietdon as a, tbl_sanpham as b 
-    WHERE a.id_sanpham = b.id_sanpham
-    AND madon = '".$madon."' ";
-    $query_sp = mysqli_query($mysqli, $sql_sp);
+    // $sql_sp = "SELECT * FROM tbl_chitietdon as a, tbl_sanpham as b 
+    // WHERE a.id_sanpham = b.id_sanpham
+    // AND madon = '".$madon."' ";
+    // $query_sp = mysqli_query($mysqli, $sql_sp);
+    $query_sp = $pdo->prepare(
+        "SELECT * FROM tbl_chitietdon as a, tbl_sanpham as b 
+            WHERE a.id_sanpham = b.id_sanpham"
+    );
+    $query_sp->execute();
     //echo $sql_sp;
     
     //hiển thị trạng thái đơn
-    $sql = "SELECT * FROM tbl_trangthaidon as a, tbl_chitiet_tt as b
-    WHERE a.id_trangthai = b.id_trangthai 
-    AND madon = '".$madon."' ";
+    // $sql = "SELECT * FROM tbl_trangthaidon as a, tbl_chitiet_tt as b
+    // WHERE a.id_trangthai = b.id_trangthai 
+    // AND madon = '".$madon."' ";
     //echo $sql;
-    $query = mysqli_query($mysqli, $sql);
+    // $query = mysqli_query($mysqli, $sql);
+    $query = $pdo->prepare(
+        "SELECT * FROM tbl_trangthaidon as a, tbl_chitiet_tt as b
+            WHERE a.id_trangthai = b.id_trangthai 
+            AND madon = :ma"
+    );
+    $query->execute(['ma' => $madon]);
 ?>
 
 
@@ -36,7 +47,7 @@
         $i = 1;
         $tongtien = 0;
         $thanhtien = 0;
-        while ($row_sp = mysqli_fetch_array($query_sp)){
+        while ($row_sp = $query_sp->fetch()){
             
             $tongtien = $row_sp['giasp']*$row_sp['sl_mua'];
             $thanhtien += $tongtien;
@@ -77,7 +88,7 @@
 
             <?php 
                 $i=1;
-                while($row = mysqli_fetch_array($query)){
+                while($row = $query->fetch()){
                     
     
             ?>
@@ -100,11 +111,15 @@
 <div class="row">
     <div class="col offset-4 ">
         <?php
-            $sql_check = "SELECT * FROM tbl_chitiet_tt WHERE madon = '".$madon."' ";
+            // $sql_check = "SELECT * FROM tbl_chitiet_tt WHERE madon = '".$madon."' ";
             //echo $sql_check;
-            $query_check = mysqli_query($mysqli, $sql_check);
+            // $query_check = mysqli_query($mysqli, $sql_check);
+            $query_check = $pdo->prepare(
+                "SELECT * FROM tbl_chitiet_tt WHERE madon = :ma "
+            );
+            $query_check->execute(['ma' => $madon]);
             $found = false;
-            while ($row_check = mysqli_fetch_array($query_check)){
+            while ($row_check = $query_check->fetch()){
                 if(($row_check['id_trangthai'] == 5) || ($row_check['id_trangthai']== 6)){
                     $found = true;
                 }
