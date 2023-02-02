@@ -1,23 +1,30 @@
 <div class="show row">
 <?php
-    $select = "SELECT * FROM tbl_sanpham as a";
-    if(isset($_POST['tiemkiem'])){
-        $tukhoa = $_POST['tukhoa'];
-        //tìm kiếm dựa trên tên sản phẩm
-        $sql_tukhoa = " WHERE tensanpham LIKE '%".$tukhoa."%'";
-    }
-    $sql = "$select $sql_tukhoa";
+    // $select = "SELECT * FROM tbl_sanpham";
+    // if(isset($_POST['tiemkiem'])){
+    //     $tukhoa = $_POST['tukhoa'];
+    //     //tìm kiếm dựa trên tên sản phẩm
+    //     $sql_tukhoa = " WHERE tensanpham LIKE :tk";
+    // }
+    // $sql = "$select $sql_tukhoa";
     //$sql1 = "SELECT * FROM tbl_sanpham as a WHERE tensanpham LIKE '%".$tukhoa."%'";
     //echo $sql;
     //echo "<br>";
     //echo $sql1;
-    $query_pro = mysqli_query($mysqli, $sql);
+    // $query_pro = mysqli_query($mysqli, $sql);
+$tukhoa = $_POST['tukhoa'];
+    $query_pro = $pdo->prepare(
+        "SELECT * FROM tbl_sanpham WHERE tensanpham LIKE :tk"
+    );
+    $query_pro->execute([
+        'tk' => '%'.$tukhoa.'%'
+    ]);
 ?>
 <p>Kết quả cho từ khóa: <?php echo $tukhoa; ?></p>
     
     <?php
         $i=0;
-        while($row = mysqli_fetch_array($query_pro)){
+        while($row = $query_pro->fetch()){
     ?>
     <div class="card col-lg-3 col-md-4 col-sm-6 col-12 " style="width:300px">
         <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row['id_sanpham'] ?>">

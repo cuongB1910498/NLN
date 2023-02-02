@@ -8,10 +8,14 @@
     // AND a.id_dangky = $id_khach
     // GROUP BY a.id_dangky";
 
-    $sql_don = "SELECT * From tbl_donhang
-    WHERE id_dangky = $id_khach order by madon DESC";
-    $query_pro = mysqli_query($mysqli, $sql_don);
-    
+    // $sql_don = "SELECT * From tbl_donhang
+    // WHERE id_dangky = $id_khach order by madon DESC";
+    // $query_pro = mysqli_query($mysqli, $sql_don);
+    $query_pro = $pdo->prepare(
+        "SELECT * From tbl_donhang
+        WHERE id_dangky = $id_khach order by madon DESC"
+    );
+    $query_pro->execute();
     
 ?>
 
@@ -24,7 +28,7 @@
         </tr>
         <?php
         $i=1; 
-        while($row = mysqli_fetch_array($query_pro)){ 
+        while($row = $query_pro->fetch()){ 
         ?>
         <tr>
             <td><?php echo $i?></td>

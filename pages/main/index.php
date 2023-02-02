@@ -14,9 +14,14 @@
 		$begin = ($page*$inpage)-$inpage;
 	}
     
-    $sql_pro = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc
-    ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin, $inpage";
-    $query_pro = mysqli_query($mysqli, $sql_pro);
+    // $sql_pro = "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc
+    // ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin, $inpage";
+    // $query_pro = mysqli_query($mysqli, $sql_pro);
+    $query_pro = $pdo->prepare(
+        "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc
+        ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin, $inpage"
+    );
+    $query_pro->execute();
 ?>
 
 
@@ -25,7 +30,7 @@
 </div>
     
     <?php
-        while($row = mysqli_fetch_array($query_pro)){
+        while($row = $query_pro->fetch()){
     ?>
     <div class="card col-lg-3 col-md-4 col-sm-6 col-12 mb-3" style="width:300px">
         <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row['id_sanpham'] ?>">
@@ -48,8 +53,13 @@
     
 
     <?php
-        $sql_trang = mysqli_query($mysqli,"SELECT * FROM tbl_sanpham");
-        $dem_dong = mysqli_num_rows($sql_trang);
+        // $sql_trang = mysqli_query($mysqli,"SELECT * FROM tbl_sanpham");
+        $sql_trang = $pdo->prepare(
+            "SELECT * FROM tbl_sanpham"
+        );
+        $sql_trang->execute();
+        $row = $sql_trang->fetch();
+        $dem_dong = $sql_trang->rowCount();
         $trang = ceil($dem_dong/$inpage);
     ?>
     <!-- phan trang -->

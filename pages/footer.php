@@ -8,15 +8,18 @@
     </div>
     <div class="col-lg-2 col-6">
         <?php
-            $sql = "SELECT * FROM tbl_baiviet order by ngaytao DESC LIMIT 4";
-            $query = mysqli_query($mysqli, $sql);
-
+            // $sql = "SELECT * FROM tbl_baiviet order by ngaytao DESC LIMIT 4";
+            // $query = mysqli_query($mysqli, $sql);
+        $query = $pdo->prepare(
+            "SELECT * FROM tbl_baiviet order by ngaytao DESC LIMIT 4"
+        );
+        $query->execute();
         ?>
         <div>
             <div><h3 style="font-weight: bold;">BÀI VIẾT</h3></div>
             <div class="row">
                 <?php
-                    while ($row = mysqli_fetch_array($query)){
+                    while ($row = $query->fetch()){
 
                 ?>
                     

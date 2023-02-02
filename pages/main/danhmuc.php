@@ -1,18 +1,26 @@
 <?php 
-    $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc = '$_GET[id]' ORDER BY id_sanpham DESC";
-    $query_pro = mysqli_query($mysqli, $sql_pro);
+    // $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc = '$_GET[id]' ORDER BY id_sanpham DESC";
+    // $query_pro = mysqli_query($mysqli, $sql_pro);
+    $query_pro = $pdo->prepare(
+        "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc = :id ORDER BY id_sanpham DESC"
+    );
+    $query_pro->execute(['id' => $_GET['id']]);
 
     //ten Danh Muc
-    $sql_cate = "SELECT * FROM tbl_danhmuc WHERE tbl_danhmuc.id_danhmuc = '$_GET[id]' LIMIT 1";
-    $query_cate = mysqli_query($mysqli, $sql_cate);
-    $row_title = mysqli_fetch_array($query_cate);
+    // $sql_cate = "SELECT * FROM tbl_danhmuc WHERE tbl_danhmuc.id_danhmuc = '$_GET[id]' LIMIT 1";
+    // $query_cate = mysqli_query($mysqli, $sql_cate);
+    $query_cate = $pdo->prepare(
+        "SELECT * FROM tbl_danhmuc WHERE tbl_danhmuc.id_danhmuc = :id LIMIT 1"
+    );
+    $query_cate->execute(['id' => $_GET['id']]);
+    $row_title = $query_cate->fetch();
 ?>
 
 <div class="show row">
     <p>DANH MỤC SẢN PHẨM: <?php echo $row_title['tendanhmuc'] ?></p>
     
     <?php
-        while($row_pro = mysqli_fetch_array($query_pro)){
+        while($row_pro = $query_pro->fetch()){
     ?>
     
     <div class="card col-lg-3 col-md-4 col-sm-6 col-12 " style="width:300px">

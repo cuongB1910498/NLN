@@ -1,6 +1,10 @@
 <?php
-    $sql = "SELECT * FROM tbl_baiviet order by ngaytao DESC";
-    $query = mysqli_query($mysqli, $sql);
+    // $sql = "SELECT * FROM tbl_baiviet order by ngaytao DESC";
+    // $query = mysqli_query($mysqli, $sql);
+    $query = $pdo->prepare(
+        "SELECT * FROM tbl_baiviet order by ngaytao DESC"
+    );
+    $query->execute();
 
 ?>
 <div class="baiviet">
@@ -9,7 +13,7 @@
         
        
             <?php
-                while ($row = mysqli_fetch_array($query)){
+                while ($row = $query->fetch()){
 
             ?>
             

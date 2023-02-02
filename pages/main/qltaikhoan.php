@@ -3,24 +3,45 @@
     // echo "day la trang ql tk <br>";
     // echo "id = ".$_SESSION['dangnhap'];
     $id_dangky = $_SESSION['dangnhap'];
-    $sql = "SELECT * FROM tbl_dangky WHERE id_dangky=$id_dangky";
     // echo "<br>".$sql;
-    $query = mysqli_query($mysqli, $sql);
+    // $sql = "SELECT * FROM tbl_dangky WHERE id_dangky=$id_dangky";
+    // $query = mysqli_query($mysqli, $sql);
+    $query = $pdo->prepare(
+        "SELECT * FROM tbl_dangky WHERE id_dangky= :id"
+    );
+    $query->execute([
+        'id' => $id_dangky
+    ]);
     
 ?>
 
 <?php 
     
     if($_SERVER['REQUEST_METHOD'] === 'GET'){
-        $sql = "SELECT * FROM tbl_dangky WHERE id_dangky = $id_dangky";
-        $query = mysqli_query($mysqli, $sql);
-        $row = mysqli_fetch_array($query);
+        // $sql = "SELECT * FROM tbl_dangky WHERE id_dangky = $id_dangky";
+        // $query = mysqli_query($mysqli, $sql);
+        $query = $pdo->prepare(
+            "SELECT * FROM tbl_dangky WHERE id_dangky= :id"
+        );
+        $query->execute([
+            'id' => $id_dangky
+        ]);
+        $row = $query->fetch();
     }elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
         $tenkhachhang = $_POST['tenkhachhang'];
         $dienthoai = $_POST['dienthoai'];
-        $sql_luu = "UPDATE tbl_dangky SET tenkhachhang = '".$tenkhachhang."', dienthoai = '".$dienthoai."' 
-        WHERE id_dangky = $id_dangky";
-        $query_luu = mysqli_query($mysqli , $sql_luu);
+        // $sql_luu = "UPDATE tbl_dangky SET tenkhachhang = '".$tenkhachhang."', dienthoai = '".$dienthoai."' 
+        // WHERE id_dangky = $id_dangky";
+        // $query_luu = mysqli_query($mysqli , $sql_luu);
+        $update = $pdo->prepare(
+            "UPDATE tbl_dangky SET tenkhachhang = :ten, dienthoai = :dt 
+                WHERE id_dangky = :id"
+        );
+        $update->execute([
+            'ten' => $tenkhachhang,
+            'dt' => $dienthoai,
+            'id' => $id_dangky
+        ]);
         echo '<script>alert("ĐÃ CẬP NHẬT");</script>'; 
         $page = "index.php?quanly=qltaikhoan";
         

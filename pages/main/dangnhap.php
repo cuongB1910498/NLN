@@ -1,13 +1,22 @@
 <?php
 	session_start();
-	include("../../admincp/config/config.php");
+	//include("../../admincp/config/config.php");
+    include("../../admincp/config/conect.php");
 	if(isset($_POST['dangnhap'])){
 		$email = $_POST['email'];
 		$matkhau = md5($_POST['password']);
-		$sql = "SELECT * FROM tbl_dangky WHERE email='".$email."' AND matkhau='".$matkhau."' LIMIT 1";
-		$row = mysqli_query($mysqli,$sql);
-        $rows = mysqli_fetch_array($row);
-		$count = mysqli_num_rows($row);
+		// $sql = "SELECT * FROM tbl_dangky WHERE email='".$email."' AND matkhau='".$matkhau."' LIMIT 1";
+		// $row = mysqli_query($mysqli,$sql);
+        // $rows = mysqli_fetch_array($row);
+        $row = $pdo->prepare(
+            "SELECT * FROM tbl_dangky WHERE email= :mail AND matkhau= :mk LIMIT 1"
+        );
+        $row->execute([
+            'mail' => $email,
+            'mk' => $matkhau
+        ]);
+        $rows = $row->fetch();
+		$count = $row->rowCount();
 		if($count>0){
 			$_SESSION['dangnhap'] = $rows['id_dangky'];
 			header("Location:../../index.php");

@@ -2,17 +2,30 @@
 <?php 
     $madon = $_GET['id'];
     // echo "day la trang chi tiet don <br>";
-    $sql = "SELECT * FROM tbl_sanpham as a, tbl_chitietdon as b
-    WHERE a.id_sanpham = b.id_sanpham 
-    AND madon = $madon";
-    $query_pro = mysqli_query($mysqli, $sql);
+    // $sql = "SELECT * FROM tbl_sanpham as a, tbl_chitietdon as b
+    // WHERE a.id_sanpham = b.id_sanpham 
+    // AND madon = $madon";
+    // $query_pro = mysqli_query($mysqli, $sql);
+    $query_pro = $pdo->prepare(
+        "SELECT * FROM tbl_sanpham as a, tbl_chitietdon as b
+        WHERE a.id_sanpham = b.id_sanpham 
+        AND madon = :md"
+    );
+    $query_pro->execute(['md' => $madon]);
     // echo $sql;
 
     // lấy chi tiết đơn hàng có những trạng thái nào
-    $sql_trangthai = "SELECT * FROM tbl_trangthaidon as a, tbl_chitiet_tt as b
-    WHERE a.id_trangthai = b.id_trangthai
-    AND madon = '".$madon."' ";
-    $query_madon = mysqli_query($mysqli, $sql_trangthai);
+    // $sql_trangthai = "SELECT * FROM tbl_trangthaidon as a, tbl_chitiet_tt as b
+    // WHERE a.id_trangthai = b.id_trangthai
+    // AND madon = '".$madon."' ";
+    // $query_madon = mysqli_query($mysqli, $sql_trangthai);
+    $query_madon = $pdo->prepare(
+        "SELECT * FROM tbl_trangthaidon as a, tbl_chitiet_tt as b
+        WHERE a.id_trangthai = b.id_trangthai
+        AND madon = :md"
+    );
+    $query_madon->execute(['md'=>$madon])
+
 
 ?>
 
@@ -31,7 +44,7 @@
     $i = 0;
     $tongtien = 0;
     $thanhtien = 0;
-    while  ($row = mysqli_fetch_array($query_pro)){
+    while  ($row = $query_pro->fetch()){
         $i++;
         $thanhtien = $row['giasp']*$row['sl_mua'];
         $tongtien+=$thanhtien;
@@ -68,7 +81,7 @@
     
     <?php 
         $i = 0;
-        while($row_ct = mysqli_fetch_array($query_madon)){
+        while($row_ct = $query_madon->fetch()){
             $i++;
 
         ?>

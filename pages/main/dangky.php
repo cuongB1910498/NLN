@@ -1,16 +1,21 @@
 <?php
     session_start();
-	include("../../admincp/config/config.php");
+	//include("../../admincp/config/config.php");
+    include("../../admincp/config/conect.php");
     $found = false;
 	if(isset($_POST['dangky'])) {
 		$tenkhachhang = $_POST['hovaten'];
 		$email = $_POST['email'];
         //check email
-        $sql_mailcheck = "SELECT email FROM tbl_dangky";
-        $sql_check = mysqli_query($mysqli, $sql_mailcheck);
+        // $sql_mailcheck = "SELECT email FROM tbl_dangky";
+        // $sql_check = mysqli_query($mysqli, $sql_mailcheck);
+        $sql_check = $pdo->prepare(
+            "SELECT email FROM tbl_dangky"
+        );
+        $sql_check->execute();
         $i=0;
         
-        while($row = mysqli_fetch_array($sql_check)){
+        while($row = $sql_check->fetch()){
             if($row['email'] == $email){
                 $found = true;
                 break;
@@ -25,9 +30,19 @@
 		//$diachi = $_POST['diachi'];
         
         if($found == false){
-            $sql = "INSERT INTO tbl_dangky(tenkhachhang,email,matkhau,dienthoai) 
-            VALUE('".$tenkhachhang."','".$email."','".$matkhau."','".$dienthoai."')";
-            $sql_dangky = mysqli_query($mysqli,$sql);
+            // $sql = "INSERT INTO tbl_dangky(tenkhachhang,email,matkhau,dienthoai) 
+            // VALUE('".$tenkhachhang."','".$email."','".$matkhau."','".$dienthoai."')";
+            // $sql_dangky = mysqli_query($mysqli,$sql);
+            $sql_dangky = $pdo->prepare(
+                "INSERT INTO tbl_dangky(tenkhachhang,email,matkhau,dienthoai) 
+                    VALUE(:ten, :mail, :mk, :dt)"
+            );
+            $sql_dangky->execute([
+                'ten' => $tenkhachhang,
+                'mail' => $email,
+                'mk' => $matkhau,
+                'dt' => $dienthoai
+            ]);
             if($sql_dangky){
                 $_SESSION['dangky'] = $tenkhachhang;
                 header("Location:../../index.php");

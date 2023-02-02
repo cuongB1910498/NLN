@@ -1,8 +1,12 @@
 <?php
-    $sql = "SELECT * FROM tbl_baiviet WHERE id_baiviet = '".$_GET['id']."' ";
-    $query = mysqli_query($mysqli, $sql);
-    $row = mysqli_fetch_array($query);
-    //
+    // $sql = "SELECT * FROM tbl_baiviet WHERE id_baiviet = '".$_GET['id']."' ";
+    // $query = mysqli_query($mysqli, $sql);
+    // $row = mysqli_fetch_array($query);
+    $query = $pdo->prepare(
+        "SELECT * FROM tbl_baiviet WHERE id_baiviet = :id "
+    );
+    $query->execute(['id' => $_GET['id']]);
+    $row = $query->fetch();
 ?>
 <div class="chitiet">
     <h1 class="tieude"><?php echo $row['tieude'] ?></h2>

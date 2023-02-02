@@ -58,10 +58,17 @@
 <?php
     //echo $_SESSION['dangnhap'];
     $id_dangky = $_SESSION['dangnhap'];
-    $sql_vc = "SELECT * FROM tbl_diachi as a, tbl_tinh as b WHERE a.id_tinh = b.id_tinh
-    AND id_dangky = '".$id_dangky."' ";
-    $query_vc = mysqli_query($mysqli, $sql_vc);
-    $count_diachi = mysqli_num_rows($query_vc);
+    // $sql_vc = "SELECT * FROM tbl_diachi as a, tbl_tinh as b WHERE a.id_tinh = b.id_tinh
+    // AND id_dangky = '".$id_dangky."' ";
+    // $query_vc = mysqli_query($mysqli, $sql_vc);
+    $query_vc = $pdo->prepare(
+        "SELECT * FROM tbl_diachi as a, tbl_tinh as b WHERE a.id_tinh = b.id_tinh
+        AND id_dangky = :id"
+    );
+    $query_vc->execute([
+        'id' => $id_dangky
+    ]);
+    $count_diachi = $query_vc->rowCount();
 ?>
 <div class="row mb-3">
     <?php
@@ -73,7 +80,7 @@
         <select name="diachi" id="diachi" class="col">
             
             <?php
-                while ($row = mysqli_fetch_array($query_vc)){
+                while ($row = $query_vc->fetch()){
             ?>
 
             <option>

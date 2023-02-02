@@ -1,8 +1,15 @@
 
 <?php
-	$sql_chitiet = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc AND tbl_sanpham.id_sanpham='$_GET[id]' LIMIT 1";
-	$query_chitiet = mysqli_query($mysqli,$sql_chitiet);
-	while($row_chitiet = mysqli_fetch_array($query_chitiet)){
+	// $sql_chitiet = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc AND tbl_sanpham.id_sanpham='$_GET[id]' LIMIT 1";
+	// $query_chitiet = mysqli_query($mysqli,$sql_chitiet);
+    $query_chitiet = $pdo->prepare(
+        "SELECT * FROM tbl_sanpham as a,tbl_danhmuc as b
+            WHERE a.id_danhmuc=b.id_danhmuc AND a.id_sanpham= :id LIMIT 1"
+    );
+    $query_chitiet->execute([
+        'id' => $_GET['id']
+    ]);
+	while($row_chitiet = $query_chitiet->fetch()){
 ?>
 
 <div class="row">

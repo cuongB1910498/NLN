@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include('../../admincp/config/config.php');
+	include("../../admincp/config/conect.php");
 	//lay so luong san pham tu CSDL
 	
   	
@@ -8,9 +9,15 @@
 	// them so luong
 	if(isset($_GET['cong'])){
 		$id=$_GET['cong'];
-		$soluong = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$id'";
-    	$query_pro = mysqli_query($mysqli, $soluong);
-    	$row = mysqli_fetch_array($query_pro);
+		// $soluong = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$id'";
+    	// $query_pro = mysqli_query($mysqli, $soluong);
+		$query_pro = $pdo->prepare(
+			"SELECT * FROM tbl_sanpham WHERE id_sanpham= :id"
+		);
+		$query_pro->execute([
+			'id' => $id
+		]);
+    	$row = $query_pro->fetch();
         $sl=$row['soluong'];
     	
 		
@@ -76,9 +83,13 @@
 		//session_destroy();
 		$id=$_GET['idsanpham'];
 		$soluong=1;
-		$sql ="SELECT * FROM tbl_sanpham WHERE id_sanpham='".$id."' LIMIT 1";
-		$query = mysqli_query($mysqli, $sql);
-		$row = mysqli_fetch_array($query);
+		// $sql ="SELECT * FROM tbl_sanpham WHERE id_sanpham='".$id."' LIMIT 1";
+		// $query = mysqli_query($mysqli, $sql);
+		$query = $pdo->prepare(
+			"SELECT * FROM tbl_sanpham WHERE id_sanpham='" . $id . "' LIMIT 1"
+		);
+		$query->execute();
+		$row = $query->fetch();
 		if($row){
 			$new_product=array(array('tensanpham'=>$row['tensanpham'],'id'=>$id,'soluong'=>$soluong,'giasp'=>$row['giasp'],'hinhanh'=>$row['hinhanh'],'masp'=>$row['masp']));
 			//kiem tra session gio hang ton tai

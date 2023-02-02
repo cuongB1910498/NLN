@@ -35,9 +35,15 @@
     	<a href="pages/main/themgiohang.php?tru=<?php echo $cart_item['id'] ?>"><i class="fa fa-minus fa-style" aria-hidden="true"></i></a>
       <p>
       <?php
-        $sql = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$id'";
-        $query_pro = mysqli_query($mysqli, $sql);
-        $row = mysqli_fetch_array($query_pro);
+        // $sql = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$id'";
+        // $query_pro = mysqli_query($mysqli, $sql);
+        $query_pro = $pdo->prepare(
+          "SELECT * FROM tbl_sanpham WHERE id_sanpham= :id"
+        );
+        $query_pro->execute([
+          'id'=>$id
+        ]);
+        $row = $query_pro->fetch();
         $sl=$row['soluong'];
         if($cart_item['soluong'] == $sl){
           echo "Chỉ được tối đa: $sl Sản Phẩm";
