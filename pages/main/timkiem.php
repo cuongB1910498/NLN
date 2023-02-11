@@ -12,7 +12,7 @@
     //echo "<br>";
     //echo $sql1;
     // $query_pro = mysqli_query($mysqli, $sql);
-$tukhoa = $_POST['tukhoa'];
+    $tukhoa = $_POST['tukhoa'];
     $query_pro = $pdo->prepare(
         "SELECT * FROM tbl_sanpham WHERE tensanpham LIKE :tk"
     );

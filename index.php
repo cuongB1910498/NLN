@@ -25,7 +25,6 @@
         <?php 
             session_start();
             ob_start();
-            include("admincp/config/config.php");
             include("admincp/config/conect.php");
             include("pages/header.php");
             include("pages/menu.php");

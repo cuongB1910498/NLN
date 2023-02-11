@@ -16,7 +16,7 @@
     <script src="https://kit.fontawesome.com/5644bf12f0.js" crossorigin="anonymous"></script>
 
     <!-- css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_foradmin.css">
 </head>
 <?php
     session_start();
@@ -25,15 +25,16 @@
     }
 ?>
 <body>
-
-    <?php 
-        include("config/config.php"); // conect mysqli
-        include("config/conect.php"); // conect pdo
-        include("modules/header.php");
-        include("modules/menu.php");
-        include("modules/main.php");
-        include("modules/footter.php")
-    ?>
+    <div class="container-fluid">
+        <?php 
+            include("config/conect.php"); // conect pdo
+            include("modules/header.php");
+            // include("modules/menu.php");
+            include("modules/main.php");
+            include("modules/footter.php")
+        ?>
+   </div>
+    
     <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'tomtat' );

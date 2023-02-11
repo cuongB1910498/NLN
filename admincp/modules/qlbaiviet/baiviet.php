@@ -85,7 +85,8 @@
 
 <?php
     $sql_lk = "SELECT * FROM tbl_baiviet";
-    $query_lk = mysqli_query($mysqli, $sql_lk);
+    // $query_lk = mysqli_query($mysqli, $sql_lk);
+    $query_lk = $pdo->prepare($sql_lk);
 ?>
 <!-- bài viết đã thêm -->
 <div class="row">
@@ -99,7 +100,7 @@
             </tr>
 
             <?php
-                while($row = mysqli_fetch_array($query_lk)){
+                while($row = $query_lk->fetch()){
 
                 
             ?>

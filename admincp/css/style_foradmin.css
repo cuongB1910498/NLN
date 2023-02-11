@@ -23,3 +23,22 @@ tr:nth-child(even) {
 table{
     width: 90%;
 }
+
+.btn-outline-success {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+/* hiển thị sản phẩm */
+.card#card{
+    margin: 8px;
+}
+
+img#img{
+    padding-top: 5px;
+    height: 300px;
+}
+
+#themsp{
+    margin-top: 10px;
+}

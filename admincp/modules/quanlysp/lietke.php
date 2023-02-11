@@ -8,51 +8,54 @@ $list = $pdo->prepare(
 );
 $list->execute();
 ?>
-<p>Liệt kê danh mục sản phẩm</p>
-<table style="width:100%" border="1">
-  <tr>
-  	<th>Id</th>
-    <th>Tên sản phẩm</th>
-    <th>Hình ảnh</th>
-    <th>Giá sp</th>
-    <th>Số lượng</th>
-    <th>Danh mục</th>
-    <th>Mã sp</th>
-    <th>Tóm tắt</th>
-    <th>Trạng thái</th>
-  	<th>Quản lý</th>
-  
-  </tr>
+<div class="mb-3"></div>
+<div class="row" id="themsp">
+  <div class="col-2 d-flex justify-content-end offset-lg-1 offset-1"><a href="index.php?action=themsp" class="col btn btn-primary">Thêm sản phẩm</a></div>
+</div>
+
+
+<div class="row offset-lg-1 offset-1" id="hienthi">
+<p>tất cả sản phẩm</p>
   <?php
-  $i = 0;
-  while($row = $list->fetch()){
-  	$i++;
+    $i = 0;
+    while($row = $list->fetch()){
+      $i++;
   ?>
-  <tr>
-  	<td><?php echo $i ?></td>
-    <td><?php echo $row['tensanpham'] ?></td>
-    <td><img src="modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?>" width="150px"></td>
-    <td><?php echo $row['giasp'] ?></td>
-    <td><?php echo $row['soluong'] ?></td>
-    <td><?php echo $row['tendanhmuc'] ?></td>
-    <td><?php echo $row['masp'] ?></td>
-    <td><?php echo $row['tomtat'] ?></td>
-    <td><?php if($row['tinhtrang']==1){
-        echo 'Kích hoạt';
-      }else{
-        echo 'Ẩn';
-      } 
-      ?>
-      
-    </td>
-   	<td>
-   		<button class="btn btn-danger" type="button"><a href="modules/quanlysp/xuly.php?idsanpham=<?php echo $row['id_sanpham'] ?>">Xoá</a></button>
-      <button class="btn btn-warning" type="button"><a href="?action=quanlysp&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>">Sửa</a></button>  
-   	</td>
-   
-  </tr>
+  <div class="card col-lg-3 col-md-4 col-sm-6 col-12" style="width:300px" id="card">
+    <div class="card-title">
+      <img class="card-img-top" id="img" src="modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?>" alt="Card image"> 
+    </div>
+    <div class="card-body">
+            <h4 class="card-title"><?php echo $row['tensanpham'] ?></h4>
+            <p class="card-text">Giá: <?php echo number_format($row['giasp'],0,',','.').'vnđ'?></p>
+    </div>
+    <div class="row mb-3 offset-2">
+      <a href="index.php?action=suasp&idsanpham=<?php echo $row['id_sanpham'] ?>" class="themgiohang btn btn-warning col-4" name="themgiohang" type="submit" value="Thêm giỏ hàng">Sửa</a>
+        <div class="col-2"></div>
+          <!-- del btn -->
+          <button class="themgiohang btn btn-danger col-4" type="button" data-bs-toggle="modal" data-bs-target="#modal<?php echo $i ?>">Xóa</button>
+          <!-- modal -->
+          <div class="modal fade" id="modal<?php echo $i?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chú ý</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                hãy suy nghĩ cho thật kỹ xóa là không thể khôi phục
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <a href="modules/quanlysp/xuly.php?idsanpham=<?php echo $row['id_sanpham'] ?>" type="submit" class="btn btn-danger">Xóa</a>
+              </div>
+            </div>
+          </div>
+        </div>  
+    </div>
+  </div>
+
   <?php
-  } 
+    }
   ?>
- 
-</table>
+</div>
