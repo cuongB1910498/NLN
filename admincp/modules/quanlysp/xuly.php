@@ -5,15 +5,6 @@ $tensanpham = $_POST['tensanpham'];
 $masp = $_POST['masp'];
 $giasp = $_POST['giasp'];
 
-//xuly hinh anh
-$hinhanh = $_FILES['hinhanh']['name'];
-$hinhanh_tmp = $_FILES['hinhanh']['tmp_name'];
-$location = 'uploads/';
-$file_extension = pathinfo($location, PATHINFO_EXTENSION);         
-$file_extension = strtolower($file_extension);
-$valid_extension = array("png","jpeg","jpg");
-$hinhanh = time().'_'.$hinhanh.$file_extension;
-
 $soluong = $_POST['soluong'];
 $tomtat = $_POST['tomtat'];
 $noidung = $_POST['noidung'];
@@ -29,9 +20,48 @@ if(isset($_POST['themsanpham'])){
 	// VALUE('".$tensanpham."','".$masp."','".$giasp."','".$soluong."','".$hinhanh."','".$tomtat."','".$noidung."','".$tinhtrang."','".$danhmuc."')";
 	// mysqli_query($mysqli,$sql_them);
 
+	//xu ly anh new
+	$countfiles = count($_FILES['files']['name']);
+	$query = "INSERT INTO tbl_anh VALUES(:id, :masp, :ten)";
+	$upload = $pdo->prepare($query);
+	for($i = 0; $i < $countfiles; $i++) {
+  
+        // File name
+        $filename = $_FILES['files']['name'][$i];
+      
+        // Location
+        $target_file = 'uploads/'.$filename;
+      
+        // file extension
+        $file_extension = pathinfo(
+            $target_file, PATHINFO_EXTENSION);
+             
+        $file_extension = strtolower($file_extension);
+      
+        // Valid image extension
+        $valid_extension = array("png","jpeg","jpg");
+      
+        if(in_array($file_extension, $valid_extension)) {
+  
+            // Upload file
+            if(move_uploaded_file(
+                $_FILES['files']['tmp_name'][$i],
+                $target_file)
+            ) {
+ 
+                // Execute query
+                $upload->execute([
+					'id' => null,
+					'masp' => $masp,
+					'ten' => $filename
+				]);
+            }
+        }
+    }
+
 	$stmt = $pdo->prepare(
 		"INSERT INTO tbl_sanpham
-		VALUE(:id, :ten, :masp, :gia, :sl, :anh, :tom, :nd, :tt, :dm)"
+		VALUE(:id, :ten, :masp, :gia, :sl, :tom, :nd, :tt, :dm)"
 	);
 
 	$stmt ->execute([
@@ -40,63 +70,99 @@ if(isset($_POST['themsanpham'])){
 		'masp' => $masp,
 		'gia' => $giasp,
 		'sl' => $soluong,
-		'anh' => $hinhanh,
 		'tom' => $tomtat,
 		'nd' => $noidung,
 		'tt' => $tinhtrang,
 		'dm' => $danhmuc
 	]);
-	move_uploaded_file($hinhanh_tmp,$location.$hinhanh);
+	
 	header('Location:../../index.php?action=quanlysp&query=them');
 }elseif(isset($_POST['suasanpham'])){
 	//sua
-	if(!empty($_FILES['hinhanh']['name'])){
-		//xoa hinh anh cu
-		$del = $pdo->prepare(
-			"SELECT * FROM tbl_sanpham WHERE id_sanpham = :id_sp LIMIT 1"
+	if(!empty($_FILES['files']['name'])){
+		//co anh moi
+		$selectImg = $pdo->prepare(
+			"SELECT * FROM tbl_anh WHERE masp = :masp"
 		);
-		$del->execute([
-			'id_sp' => $_GET['idsanpham']
+		$selectImg->execute([
+			'masp' => $_GET['masp']
 		]);
-		// $sql = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$_GET[idsanpham]' LIMIT 1";
-		// $query = mysqli_query($mysqli,$sql);
-		while($row = $del->fetch()){
-			unlink('uploads/'.$row['hinhanh']);
-		}
-		move_uploaded_file($hinhanh_tmp,$location.$hinhanh);
 		
-		// $sql_update = "UPDATE tbl_sanpham SET tensanpham='".$tensanpham."',masp='".$masp."',giasp='".$giasp."'
-		//,soluong='".$soluong."',hinhanh='".$hinhanh."',tomtat='".$tomtat."',noidung='".$noidung."',
-		//tinhtrang='".$tinhtrang."',id_danhmuc='".$danhmuc."' WHERE id_sanpham='$_GET[idsanpham]'";
+		//xoa hinh anh cu
+
+		while($row = $selectImg->fetch()){
+		  	unlink('uploads/'.$row['tenanh']);
+		}
+
+		$del = $pdo->prepare("DELETE FROM tbl_anh WHERE masp = :ma");
+		$del->execute(['ma'=>$_GET['masp']]);
+		
+		
+		
+		$countfiles = count($_FILES['files']['name']);
+		$query = "INSERT INTO tbl_anh VALUES(:id, :masp, :ten)";
+		$upload = $pdo->prepare($query);
+		for($i = 0; $i < $countfiles; $i++) {
+	  
+			// File name
+			$filename = $_FILES['files']['name'][$i];
+		  
+			// Location
+			$target_file = 'uploads/'.$filename;
+		  
+			// file extension
+			$file_extension = pathinfo(
+				$target_file, PATHINFO_EXTENSION);
+				 
+			$file_extension = strtolower($file_extension);
+		  
+			// Valid image extension
+			$valid_extension = array("png","jpeg","jpg");
+		  
+			if(in_array($file_extension, $valid_extension)) {
+	  
+				// Upload file
+				if(move_uploaded_file(
+					$_FILES['files']['tmp_name'][$i],
+					$target_file)
+				) {
+	 
+					//Execute query
+					$upload->execute([
+						'id' => null,
+						'masp' => $masp,
+						'ten' => $filename
+					]);
+				}
+			}
+		}
+
 		$update = $pdo->prepare(
 			"UPDATE tbl_sanpham 
-			SET tensanpham = :ten, masp = :ma, giasp = :gia, soluong = :sl, hinhanh = :anh, tomtat = :tom, 
+			SET tensanpham = :ten, masp = :ma, giasp = :gia, soluong = :sl, tomtat = :tom, 
 			noidung =:nd, tinhtrang = :tt, id_danhmuc = :dm 
-			WHERE id_sanpham = :id"
+			WHERE masp = :masp"
 		);
 		$update->execute([
 			'ten' => $tensanpham,
 			'ma' => $masp,
 			'gia' => $giasp,
 			'sl' => $soluong,
-			'anh' => $hinhanh,
 			'tom' => $tomtat,
 			'nd' => $noidung,
 			'tt' => $tinhtrang,
 			'dm' => $danhmuc,
-			'id' => $_GET['idsanpham']
+			'masp' => $_GET['masp']
 		]);
 		
 
 	}else{
-		//$sql_update = "UPDATE tbl_sanpham SET tensanpham='".$tensanpham."',masp='".$masp."',giasp='".$giasp."',soluong='".$soluong."',
-		//tomtat='".$tomtat."',noidung='".$noidung."',tinhtrang='".$tinhtrang."',id_danhmuc='".$danhmuc."' 
-		//WHERE id_sanpham='$_GET[idsanpham]'";
+		//khong co anh moi
 		$update = $pdo->prepare(
 			"UPDATE tbl_sanpham 
 			SET tensanpham = :ten, masp = :ma, giasp = :gia, soluong = :sl, tomtat = :tom, 
 			noidung =:nd, tinhtrang = :tt, id_danhmuc = :dm 
-			WHERE id_sanpham = :id"
+			WHERE masp = :masp"
 		);
 		$update -> execute([
 			'ten' => $tensanpham,
@@ -107,30 +173,40 @@ if(isset($_POST['themsanpham'])){
 			'nd' => $noidung,
 			'tt' => $tinhtrang,
 			'dm' => $danhmuc,
-			'id' => $_GET['idsanpham']
+			'masp' => $_GET['masp']
 		]);
 	}
 	//mysqli_query($mysqli,$sql_update);
 	header('Location:../../index.php?action=quanlysp&query=them');
 }else{
+	//xoa
 	// $id=$_GET['idsanpham'];
 	// $sql = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$id' LIMIT 1";
 	// $query = mysqli_query($mysqli,$sql);
 	$rem = $pdo->prepare(
-		"SELECT * FROM tbl_sanpham WHERE id_sanpham = :id LIMIT 1"
+		"SELECT * FROM tbl_anh WHERE masp = :ma"
 	);
 	$rem->execute([
-		'id' => $_GET['idsanpham']
+		'ma' => $_GET['masp']
 	]);
+	
+	$count = $rem->rowCount();
+	echo $count;
+	
 	while($row = $rem->fetch()){
-		unlink('uploads/'.$row['hinhanh']);
+		unlink('uploads/'.$row['tenanh']);
 	}
+	
 	$delete = $pdo->prepare(
-		"DELETE FROM tbl_sanpham WHERE id_sanpham = :id"
+		"DELETE FROM tbl_sanpham WHERE masp = :ma"
 	);
-	$delete->execute(['id' => $_GET['idsanpham']]);
-	// $sql_xoa = "DELETE FROM tbl_sanpham WHERE id_sanpham='".$id."'";
-	// mysqli_query($mysqli,$sql_xoa);
+	$delete->execute(['ma' => $_GET['masp']]);
+	
+	
+	$removeImg = $pdo->prepare(
+		"DELETE FROM tbl_anh WHERE masp = :ma"
+	);
+	$removeImg->execute(['ma' => $_GET['masp']]);
 	header('Location:../../index.php?action=quanlysp&query=them');
 }
 

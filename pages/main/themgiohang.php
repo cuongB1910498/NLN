@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	include('../../admincp/config/config.php');
 	include("../../admincp/config/conect.php");
 	//lay so luong san pham tu CSDL
 	
@@ -47,10 +46,10 @@
 				$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$cart_item['soluong'],'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);
 				$_SESSION['cart'] = $product;
 			}else{
-				$tangsoluong = $cart_item['soluong'] - 1;
-				if($cart_item['soluong']>1){
+				$trusoluong = $cart_item['soluong'] - 1;
+				if($cart_item['soluong'] > 1){
 					
-					$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$tangsoluong,'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);
+					$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$trusoluong,'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);
 				}else{
 					$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$cart_item['soluong'],'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);
 				}
@@ -86,12 +85,17 @@
 		// $sql ="SELECT * FROM tbl_sanpham WHERE id_sanpham='".$id."' LIMIT 1";
 		// $query = mysqli_query($mysqli, $sql);
 		$query = $pdo->prepare(
-			"SELECT * FROM tbl_sanpham WHERE id_sanpham='" . $id . "' LIMIT 1"
+			"SELECT * FROM tbl_sanpham WHERE id_sanpham=:id LIMIT 1"
 		);
-		$query->execute();
+		$query->execute(['id'=>$id]);
 		$row = $query->fetch();
+		$stmt = $pdo -> prepare("SELECT * FROM tbl_anh WHERE masp = :ma LIMIT 1");
+		$stmt->execute(['ma' => $row['masp']]);
+		$Img = $stmt->fetch();
+		
+		
 		if($row){
-			$new_product=array(array('tensanpham'=>$row['tensanpham'],'id'=>$id,'soluong'=>$soluong,'giasp'=>$row['giasp'],'hinhanh'=>$row['hinhanh'],'masp'=>$row['masp']));
+			$new_product=array(array('tensanpham'=>$row['tensanpham'],'id'=>$id,'soluong'=>$soluong,'giasp'=>$row['giasp'],'hinhanh'=>$Img['tenanh'],'masp'=>$row['masp']));
 			//kiem tra session gio hang ton tai
 			if(isset($_SESSION['cart'])){
 				$found = false;

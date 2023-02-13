@@ -5,18 +5,25 @@
         $tendiachi = "địa chỉ của tôi ";
         //lấy tên tỉnh
         $tentinh = $_POST['tinh'];
-        $sql = "SELECT * FROM tbl_tinh WHERE tentinh = '".$tentinh."'";
+        $sql = "SELECT * FROM tbl_tinh WHERE tentinh =:ten";
         //echo $sql;
-        $query = mysqli_query($mysqli, $sql);
-        $row_tinh = mysqli_fetch_array($query);
+        $query = $pdo->prepare($sql);
+        $query->execute(['ten'=> $tentinh]);
+        $row_tinh = $query->fetch();
         $id_tinh = $row_tinh['id_tinh'];
         
         $diachi = $_POST['diachi'];
         //echo $id_tinh;
         //echo $id_dangky;
         $sql_them = "INSERT INTO tbl_diachi(id_dangky, tendiachi, id_tinh, diachi)
-        VALUE ('".$id_dangky."', '".$tendiachi."', '".$id_tinh."', '".$diachi."')";
-        $query = mysqli_query($mysqli, $sql_them);
+        VALUE (:id, :ten, :id_tinh, :dc)";
+        $add = $pdo->prepare($sql_them);
+        $add->execute([
+            'id' => $id_dangky,
+            'ten' => $tendiachi,
+            'id_tinh' => $id_tinh,
+            'dc' => $diachi
+        ]);
         echo '<script>alert("ĐÃ THÊM ĐỊA CHỈ ");</script>';
         $page = "index.php?quanly=diachi";
         header("Location:$page");
@@ -33,9 +40,10 @@
             <label for="tinh">Tỉnh: </label>
             <select name="tinh" id="tinh"> 
                 <?php 
-                    $sql = "SELECT * FROM tbl_tinh";
-                    $query = mysqli_query($mysqli, $sql);
-                    while($row = mysqli_fetch_array($query)){
+                    $sql_tinh = "SELECT * FROM tbl_tinh";
+                    $query_t =$pdo->prepare($sql_tinh);
+                    $query_t->execute();
+                    while($row = $query_t->fetch()){
                 ?>
                 <option><?php echo $row['tentinh'] ?></option>
                 <?php } ?>

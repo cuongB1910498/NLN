@@ -49,10 +49,7 @@ img.card-img-top {
   height: 200px;
 }
 
-.row .pic img{
-  width: 100%;
-  height: auto;
-}
+
 
 .show .card img{
   width: 100%;
@@ -268,4 +265,54 @@ a#dathang {
 .chitiet .row p a{
   color: blue;
   text-decoration: none;
+}
+
+/* slide show img of product */
+.main-slide{
+  width: 80%;
+  margin-bottom: 5px;
+  /* border: 1px solid black; */
+  position: relative;
+}
+
+.list-image{
+  width: 80%;
+  height: 15%;
+  display: flex;
+  /* border: 1px solid yellow; */
+}
+
+.list-image div{
+  flex: 1;
+  padding: 3px;
+  padding-top: 1px;
+  cursor: pointer;
+}
+
+#slide img{
+  width: 100%;
+  height: 100%;
+  margin: 3px auto;
+}
+
+.coltrol{
+  position: absolute;
+  top: 50%;
+  object-fit: cover;
+  object-position: center;
+  transform: translateY(-50%);
+}
+
+.pre{
+  left: 10px;
+  cursor: pointer;
+}
+
+.next{
+  right: 10px;
+  cursor: pointer;
+}
+
+.active{
+  background: rgb(255, 106, 106);
 }

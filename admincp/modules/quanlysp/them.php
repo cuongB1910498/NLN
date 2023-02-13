@@ -38,7 +38,7 @@
 		<div class="form-group mb-4 row">
 			<label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Hình Ảnh: </label>
 			<div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
-				<input type="file" name="hinhanh"  placeholder="Hình Ảnh... ">
+				<input type="file" name="files[]"  placeholder="Hình Ảnh... " multiple>
 				<label class="error"></label>
 			</div>
 		</div>

@@ -12,30 +12,49 @@
 	while($row_chitiet = $query_chitiet->fetch()){
 ?>
 
-<div class="row">
-    <p>CHI TIẾT SẢN PHẨM</p>
-    <div class="pic col-lg-5 col-md-4 col-sm-4 col-12">
-        <img src="admincp/modules/quanlysp/uploads/<?php echo $row_chitiet['hinhanh'] ?>" alt="error_pic">
-    </div>
-    <div class="cont col-lg-7 col-md-7 col-sm-7 col-12">
-        <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row_chitiet['id_sanpham'] ?>">
-            <div class="chitiet_sanpham">
-                <h3>Tên sản phẩm : <?php echo $row_chitiet['tensanpham'] ?></h3>
-                <p>Mã sp: <?php echo $row_chitiet['masp'] ?></p>
-                <p>Giá sp: <?php echo number_format($row_chitiet['giasp'],0,',','.').'vnđ' ?></p>
-                <p>
-                    Tình trạng: 
-                    <?php
-                     if($row_chitiet['soluong'] > 0) echo "còn hàng"; else echo "hết hàng";
-                    ?>
-                </p>
-                <p>Danh mục sp: <?php echo $row_chitiet['tendanhmuc'] ?></p>
-                <p><button class="themgiohang btn btn-info" name="themgiohang" type="submit" value="Thêm giỏ hàng">THÊM VÀO GIỎ</button></p>
-                
+    <div class="row">
+        <?php
+            $stmt = $pdo->prepare("SELECT * FROM tbl_anh WHERE masp = :ma");
+            $stmt->execute(['ma'=>$row_chitiet['masp']]);
+            $ImgThumnail = $stmt -> fetch();
+            
+        ?>
+        <div class="col-lg-6 col-md-6 col-12" id="slide">
+            <div class="main-slide">
+                <img src="admincp/modules/quanlysp/uploads/<?php echo $ImgThumnail['tenanh'] ?>" class="img-feature">
+                <div class="coltrol pre"><i class="fa-duotone fa-arrow-left"></i></div>
+                <div class="coltrol next"><i class="fa-duotone fa-arrow-right"></i></div>
             </div>
-        </form>
+            <div class="list-image">
+                <?php
+                    $Img = $pdo->prepare("SELECT * FROM tbl_anh WHERE masp = :ma");
+                    $Img->execute(['ma'=>$row_chitiet['masp']]);
+                    $rows = $Img->fetchAll();
+                    foreach($rows as $row){
+                ?>
+                <div><img src="admincp/modules/quanlysp/uploads/<?php echo $row['tenanh'] ?>"></div>
+                <?php } ?>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row_chitiet['id_sanpham'] ?>">
+                <div class="chitiet_sanpham">
+                    <h3>Tên sản phẩm : <?php echo $row_chitiet['tensanpham'] ?></h3>
+                    <p>Mã sp: <?php echo $row_chitiet['masp'] ?></p>
+                    <p>Giá sp: <?php echo number_format($row_chitiet['giasp'],0,',','.').'vnđ' ?></p>
+                    <p>
+                        Tình trạng: 
+                        <?php
+                        if($row_chitiet['soluong'] > 0) echo "còn hàng"; else echo "hết hàng";
+                        ?>
+                    </p>
+                    <p>Danh mục sp: <?php echo $row_chitiet['tendanhmuc'] ?></p>
+                    <p><button class="themgiohang btn btn-info" name="themgiohang" type="submit" value="Thêm giỏ hàng">THÊM VÀO GIỎ</button></p>
+                    
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
 <?php
 } 

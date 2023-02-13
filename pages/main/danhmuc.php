@@ -14,6 +14,7 @@
     );
     $query_cate->execute(['id' => $_GET['id']]);
     $row_title = $query_cate->fetch();
+    
 ?>
 
 <div class="show row">
@@ -21,11 +22,16 @@
     
     <?php
         while($row_pro = $query_pro->fetch()){
+            $stmt = $pdo->prepare("SELECT * FROM tbl_anh WHERE masp = :ma");
+            $stmt->execute([
+                'ma'=>$row_pro['masp']
+            ]);
+            $Img = $stmt->fetch()
     ?>
     
     <div class="card col-lg-3 col-md-4 col-sm-6 col-12 " style="width:300px">
         <a href="index.php?quanly=sanpham&id=<?php echo $row_pro['id_sanpham'] ?>">
-            <img class="card-img-top" src="admincp/modules/quanlysp/uploads/<?php echo $row_pro['hinhanh'] ?>" alt="Card image">
+            <img class="card-img-top" src="admincp/modules/quanlysp/uploads/<?php echo $Img['tenanh'] ?>" alt="Card image">
         </a>   
             <div class="card-body">
                 <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row_pro['id_sanpham'] ?>">

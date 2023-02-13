@@ -48,13 +48,16 @@
         $i++;
         $thanhtien = $row['giasp']*$row['sl_mua'];
         $tongtien+=$thanhtien;
+        $query=$pdo->prepare("SELECT * FROM tbl_anh WHERE masp = :ma");
+        $query->execute(['ma'=>$row['masp']]);
+        $Img = $query->fetch();
 ?>
 <!-- code here -->
     <tr>
         <td><?php echo $i ?></td>
         <td><?php echo $row['masp'] ?></td>
         <td><?php echo $row['tensanpham'] ?></td>
-        <td><img src="admincp/modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?>" alt="" width="100px" height="auto"> </td>
+        <td><img src="admincp/modules/quanlysp/uploads/<?php echo $Img['tenanh'] ?>" alt="" width="100px" height="auto"> </td>
         <td><?php echo $row['sl_mua'] ?></td>
         <td><?php echo number_format($row['giasp'],0,',','.').'vnđ'?></td>
         <td><?php echo number_format($thanhtien,0,',','.').'vnđ'?></td>

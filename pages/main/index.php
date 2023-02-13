@@ -31,11 +31,16 @@
     
     <?php
         while($row = $query_pro->fetch()){
+            $stmt = $pdo->prepare("SELECT * FROM tbl_anh WHERE masp = :ma");
+            $stmt->execute([
+                'ma'=>$row['masp']
+            ]);
+            $Img = $stmt->fetch()
     ?>
     <div class="card col-lg-3 col-md-4 col-sm-6 col-12 mb-3" style="width:300px">
         <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row['id_sanpham'] ?>">
             <a href="index.php?quanly=sanpham&id=<?php echo $row['id_sanpham'] ?>">
-                <img class="card-img-top" src="admincp/modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?>" alt="Card image">
+                <img class="card-img-top" src="admincp/modules/quanlysp/uploads/<?php echo $Img['tenanh'] ?>" alt="Card image">
             </a>
                 <div class="card-body">
                     <a href="index.php?quanly=sanpham&id=<?php echo $row['id_sanpham'] ?>">

@@ -39,6 +39,8 @@
             unset($_SESSION['dangky']);
         }
     ?>
+
+    <script src="js/script.js"></script>
     
   
 </body>

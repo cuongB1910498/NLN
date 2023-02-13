@@ -4,14 +4,16 @@
         
         
         // lay du lieu tu tbl_diachi
-        $sql = "SELECT * FROM tbl_diachi WHERE id_diachi = $id_diachi";
+        $sql = "SELECT * FROM tbl_diachi WHERE id_diachi = :id";
         //echo $sql;
-        $query = mysqli_query($mysqli, $sql);
-        $row = mysqli_fetch_array($query);
+        $query = $pdo->prepare($sql);
+        $query->execute(['id'=>$id_diachi]);
+        $row = $query->fetch();
         
         // lay du lieu tu tbl_tinh
         $sql_tinh = "SELECT * FROM tbl_tinh";
-        $query_tinh = mysqli_query($mysqli ,$sql_tinh);
+        $query_tinh = $pdo->prepare($sql_tinh);
+        $query_tinh->execute();
         
     }
     elseif($_SERVER['REQUEST_METHOD']==='POST'){
@@ -20,13 +22,20 @@
         
         
         $tentinh = $_POST['tinh'];
-        $sql_idtinh = "SELECT id_tinh FROM tbl_tinh WHERE tentinh = '".$tentinh."'";
-        $query_id_tinh = mysqli_query($mysqli, $sql_idtinh);
-        $row_idtinh = mysqli_fetch_array($query_id_tinh);
+        $sql_idtinh = "SELECT id_tinh FROM tbl_tinh WHERE tentinh = :ten_tinh";
+        $query_id_tinh = $pdo->prepare($sql_idtinh);
+        $query_id_tinh->execute(['ten_tinh'=>$tentinh]);
+        $row_idtinh =$query_id_tinh->fetch();
         $id_tinh = $row_idtinh['id_tinh'];
-        $sql = "UPDATE tbl_diachi SET tendiachi = '".$tendiachi."', diachi = '".$diachi."', id_tinh ='".$id_tinh."' 
-        WHERE id_diachi = $id_diachi";
-        $query = mysqli_query($mysqli, $sql);
+        $sql = "UPDATE tbl_diachi SET tendiachi = :ten, diachi = :dc, id_tinh =:id 
+        WHERE id_diachi =:id_dc";
+        $query = $pdo->prepare($sql);
+        $query->execute([
+            'ten'=>$tendiachi,
+            'dc' =>$diachi,
+            'id' =>$id_tinh,
+            'id_dc'=> $id_diachi
+        ]);
         header("Location: index.php?quanly=diachi");
     }
 
@@ -53,7 +62,7 @@
             <label for="tinh">Tỉnh: </label>
             <select name="tinh" id="tinh">
                 <?php 
-                    while($row_tinh = mysqli_fetch_array($query_tinh)){
+                    while($row_tinh = $query_tinh->fetch()){
                 ?>
                     <option <?php if($row_tinh['id_tinh'] == $row['id_tinh']) echo "selected" ?> ><?php echo $row_tinh['tentinh']; ?></option>
                 <?php

@@ -4,10 +4,10 @@
 	// $sql_sua_sp = "SELECT * FROM tbl_sanpham WHERE id_sanpham='$_GET[idsanpham]' LIMIT 1";
 	// $query_sua_sp = mysqli_query($mysqli,$sql_sua_sp);
 	$change = $pdo->prepare(
-		"SELECT * FROM tbl_sanpham WHERE id_sanpham = :id LIMIT 1"
+		"SELECT * FROM tbl_sanpham WHERE masp = :ma LIMIT 1"
 	);
 	$change->execute([
-		'id' => $_GET['idsanpham']
+		'ma' => $_GET['masp']
 	]);
 ?>
 <p>Sửa sản phẩm</p>
@@ -15,7 +15,7 @@
 <?php
 while($row = $change->fetch()) {
 ?>
- <form method="POST" action="modules/quanlysp/xuly.php?idsanpham=<?php echo $row['id_sanpham'] ?>" enctype="multipart/form-data">
+ <form method="POST" action="modules/quanlysp/xuly.php?masp=<?php echo $row['masp'] ?>" enctype="multipart/form-data">
 	  <tr>
 	  	<td>Tên sản phẩm</td>
 	  	<td><input type="text" value="<?php echo $row['tensanpham'] ?>" name="tensanpham"></td>
@@ -35,8 +35,8 @@ while($row = $change->fetch()) {
 	   <tr>
 	  	<td>Hình ảnh</td>
 	  	<td>
-	  		<input type="file" name="hinhanh">
-	  		<img src="modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?>" width="150px">
+	  		<input type="file" name="files[]" multiple>
+	  		<img src="modules/quanlysp/uploads/<?php ?>" width="150px">
 	  	</td>
 
 	  </tr>

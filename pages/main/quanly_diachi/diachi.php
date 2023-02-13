@@ -3,10 +3,12 @@
 <?php 
     $id_dangky = $_SESSION['dangnhap'];
     $sql = "SELECT * from tbl_diachi as a, tbl_tinh as b 
-    WHERE id_dangky = $id_dangky 
+    WHERE id_dangky = :id
     AND a.id_tinh = b.id_tinh";
     // echo $sql;
-    $query = mysqli_query($mysqli, $sql);
+    // $query = mysqli_query($mysqli, $sql);
+    $query = $pdo->prepare($sql);
+    $query->execute(['id'=>$id_dangky]);
 ?>
 
 <!-- Xóa địa chỉ giao hàng -->
@@ -26,7 +28,7 @@
         </tr>
         <?php
             $i = 1;
-            while($row = mysqli_fetch_array($query)){
+            while($row = $query->fetch()){
                  
             
         ?>
