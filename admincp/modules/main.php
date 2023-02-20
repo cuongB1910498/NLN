@@ -17,6 +17,16 @@
         include("modules/quanlysp/them.php");
     }elseif($tam=='suasp'){
         include("modules/quanlysp/sua.php");
+    }elseif($tam=='xemchitiet'){
+        include("modules/quanlydonhang/xemchitietdon.php");
+    }elseif($tam=='themtrangthai'){
+        include("modules/quanlydonhang/themtrangthai.php");
+    }elseif($tam == 'thembaiviet'){
+        include("modules/qlbaiviet/baiviet.php");
+    }elseif($tam == 'suabaiviet'){
+        include("modules/qlbaiviet/sua_bv.php");
+    }elseif($tam == 'xoabaiviet'){
+        include("modules/qlbaiviet/xoa.php");
     }
     
     elseif($tam == 'timkiem'){

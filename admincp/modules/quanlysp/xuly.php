@@ -79,7 +79,7 @@ if(isset($_POST['themsanpham'])){
 	header('Location:../../index.php?action=quanlysp&query=them');
 }elseif(isset($_POST['suasanpham'])){
 	//sua
-	if(!empty($_FILES['files']['name'])){
+	if($_FILES['files']['name'][0] != ''){ // ảnh nhận vào sẽ có dạng mảng 1 chiều
 		//co anh moi
 		$selectImg = $pdo->prepare(
 			"SELECT * FROM tbl_anh WHERE masp = :masp"
@@ -154,8 +154,9 @@ if(isset($_POST['themsanpham'])){
 			'dm' => $danhmuc,
 			'masp' => $_GET['masp']
 		]);
-		
 
+		
+	
 	}else{
 		//khong co anh moi
 		$update = $pdo->prepare(
@@ -175,39 +176,41 @@ if(isset($_POST['themsanpham'])){
 			'dm' => $danhmuc,
 			'masp' => $_GET['masp']
 		]);
+		echo 'sua k co anh';
 	}
-	//mysqli_query($mysqli,$sql_update);
 	header('Location:../../index.php?action=quanlysp&query=them');
+	
 }else{
 	//xoa
 	// $id=$_GET['idsanpham'];
 	// $sql = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$id' LIMIT 1";
 	// $query = mysqli_query($mysqli,$sql);
-	$rem = $pdo->prepare(
-		"SELECT * FROM tbl_anh WHERE masp = :ma"
-	);
-	$rem->execute([
-		'ma' => $_GET['masp']
-	]);
+	// $rem = $pdo->prepare(
+	// 	"SELECT * FROM tbl_anh WHERE masp = :ma"
+	// );
+	// $rem->execute([
+	// 	'ma' => $_GET['masp']
+	// ]);
 	
-	$count = $rem->rowCount();
-	echo $count;
+	// $count = $rem->rowCount();
+	// echo $count;
 	
-	while($row = $rem->fetch()){
-		unlink('uploads/'.$row['tenanh']);
-	}
+	// while($row = $rem->fetch()){
+	// 	unlink('uploads/'.$row['tenanh']);
+	// }
 	
-	$delete = $pdo->prepare(
-		"DELETE FROM tbl_sanpham WHERE masp = :ma"
-	);
-	$delete->execute(['ma' => $_GET['masp']]);
+	// $delete = $pdo->prepare(
+	// 	"DELETE FROM tbl_sanpham WHERE masp = :ma"
+	// );
+	// $delete->execute(['ma' => $_GET['masp']]);
 	
 	
-	$removeImg = $pdo->prepare(
-		"DELETE FROM tbl_anh WHERE masp = :ma"
-	);
-	$removeImg->execute(['ma' => $_GET['masp']]);
-	header('Location:../../index.php?action=quanlysp&query=them');
+	// $removeImg = $pdo->prepare(
+	// 	"DELETE FROM tbl_anh WHERE masp = :ma"
+	// );
+	// $removeImg->execute(['ma' => $_GET['masp']]);
+	// header('Location:../../index.php?action=quanlysp&query=them');
+	echo 'xoa';
 }
 
 ?>

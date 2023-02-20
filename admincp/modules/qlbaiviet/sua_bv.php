@@ -58,7 +58,7 @@
             
             //cẩn thận với vị trí lưu tệp. tốt nhất là nên làm 1 file xử lý độc lập
             // move_uploaded_file($anh_mh_tmp, 'modules/qlbaiviet/uploads/'.$anh_mh);
-            header("location: index.php?action=quanlybaiviet&query=thembaiviet");
+            header("location: index.php?action=thembaiviet");
         }else{
             
             //  nếu k có up ảnh mới

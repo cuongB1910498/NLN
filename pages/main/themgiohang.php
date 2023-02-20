@@ -48,7 +48,6 @@
 			}else{
 				$trusoluong = $cart_item['soluong'] - 1;
 				if($cart_item['soluong'] > 1){
-					
 					$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$trusoluong,'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);
 				}else{
 					$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$cart_item['soluong'],'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);
@@ -79,11 +78,8 @@
 	}
 	//them sanpham vao gio hang
 	if(isset($_POST['themgiohang'])){
-		//session_destroy();
 		$id=$_GET['idsanpham'];
 		$soluong=1;
-		// $sql ="SELECT * FROM tbl_sanpham WHERE id_sanpham='".$id."' LIMIT 1";
-		// $query = mysqli_query($mysqli, $sql);
 		$query = $pdo->prepare(
 			"SELECT * FROM tbl_sanpham WHERE id_sanpham=:id LIMIT 1"
 		);
@@ -101,9 +97,21 @@
 				$found = false;
 				foreach($_SESSION['cart'] as $cart_item){
 					//neu du lieu trung
-					if($cart_item['id']==$id){
-						$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$soluong+1,'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);
-						$found = true;
+					if($cart_item['id']==$id){						
+						$sql = $pdo->prepare("SELECT * FROM tbl_sanpham WHERE id_sanpham = :id");
+						$sql -> execute(['id'=> $id]);
+						$max = $sql->fetch();
+						echo $cart_item['soluong']. ' vs'.$max['soluong'];
+						if($cart_item['soluong'] < $max['soluong']){
+							$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$cart_item['soluong']+1,'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);
+							$found = true;
+							echo 'ok';
+						}
+						else {
+							$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$cart_item['soluong'],'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);
+							$found = true;
+						}
+						
 					}else{
 						//neu du lieu khong trung
 						$product[]= array('tensanpham'=>$cart_item['tensanpham'],'id'=>$cart_item['id'],'soluong'=>$cart_item['soluong'],'giasp'=>$cart_item['giasp'],'hinhanh'=>$cart_item['hinhanh'],'masp'=>$cart_item['masp']);

@@ -29,7 +29,6 @@
         <?php 
             include("config/conect.php"); // conect pdo
             include("modules/header.php");
-            // include("modules/menu.php");
             include("modules/main.php");
             include("modules/footter.php")
         ?>

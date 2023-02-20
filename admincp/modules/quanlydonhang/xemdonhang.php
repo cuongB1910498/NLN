@@ -5,7 +5,8 @@
     // $query = mysqli_query($mysqli, $sql);
     $query = $pdo->prepare(
         "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-            WHERE a.id_dangky = b.id_dangky"
+            WHERE a.id_dangky = b.id_dangky
+            AND hoanthanh = 0"
     );
     $query->execute();
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -20,14 +21,10 @@
             );
             $query->execute();
         }elseif($filler == 'Đã hoàn thành'){
-            // $sql = "SELECT * FROM tbl_donhang as a, tbl_chitiet_tt as b, tbl_trangthaidon as c, tbl_dangky as d
-            // WHERE a.madon = b.madon AND b.id_trangthai = c.id_trangthai AND d.id_dangky = a.id_dangky
-            // HAVING b.id_trangthai = 5";
-            // $query = mysqli_query($mysqli, $sql);
             $query = $pdo->prepare(
-                "SELECT * FROM tbl_donhang as a, tbl_chitiet_tt as b, tbl_trangthaidon as c, tbl_dangky as d
-                    WHERE a.madon = b.madon AND b.id_trangthai = c.id_trangthai AND d.id_dangky = a.id_dangky
-                    HAVING b.id_trangthai = 5"
+                "SELECT * FROM tbl_donhang as a, tbl_dangky as b
+                    WHERE b.id_dangky = a.id_dangky
+                    AND hoanthanh = 1"
             );
             $query->execute();
         }elseif($filler == 'Đã hủy'){
@@ -36,9 +33,9 @@
             // HAVING b.id_trangthai = 6";
             // $query = mysqli_query($mysqli, $sql);
             $query = $pdo->prepare(
-                "SELECT * FROM tbl_donhang as a, tbl_chitiet_tt as b, tbl_trangthaidon as c, tbl_dangky as d
-                    WHERE a.madon = b.madon AND b.id_trangthai = c.id_trangthai AND d.id_dangky = a.id_dangky
-                    HAVING b.id_trangthai = 6"
+                "SELECT * FROM tbl_donhang as a, tbl_dangky as b
+                    WHERE b.id_dangky = a.id_dangky
+                    AND hoanthanh = -1"
             );
             $query->execute();
         }else{
@@ -48,7 +45,8 @@
             // $query = mysqli_query($mysqli, $sql);
             $query = $pdo->prepare(
                 "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-                    WHERE a.id_dangky = b.id_dangky"
+                    WHERE a.id_dangky = b.id_dangky
+                    AND hoanthanh = 0"
             );
             $query->execute();
         }
@@ -89,30 +87,20 @@
     </tr>
 
     <?php 
+   
     if($filler == "Tất cả"){
         $i = 0;
         while($row = $query->fetch()){
             $i++;
-            // $sql_check = "SELECT * FROM tbl_chitiet_tt WHERE madon = '".$row['madon']."' ";
-            //echo $sql_check;
-            // $query_check = mysqli_query($mysqli, $sql_check);
-            $query_check = $pdo->prepare(
-                "SELECT * FROM tbl_chitiet_tt WHERE madon = :ma"
-            );
-            $query_check->execute(['ma'=>$row['madon']]);
             $found = "";
-            while ($row_check = $query_check->fetch()){
-                if($row_check['id_trangthai'] == 5){
-                    $found = "Đã Hoàn Thành";
-                }elseif(($row_check['id_trangthai'] == 6)){
-                    $found = "Đã Hủy";
-                }else{
-                    $found = "Chưa Hoàn Thành";
-                }
+            
+            if($row['hoanthanh'] == 1){
+                $found = "Đã Hoàn Thành";
+            }elseif(($row['hoanthanh'] == -1)){
+                $found = "Đã Hủy";
+            }else{
+                $found = "Chưa Hoàn Thành";
             }
-        
-    
-        
     ?>
     <tr>
         <td><?php echo $i ?></td>
@@ -122,7 +110,7 @@
         <td><?php echo $row['ngay_tao'] ?></td>
         <td><?php echo $found ?></td>
         <td>
-        <button class="btn btn-info"><a href="index.php?action=quanlydonhang&query=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>
+        <button class="btn btn-info"><a href="index.php?action=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>
             
         </td>
     </tr>
@@ -133,6 +121,15 @@
         $i = 0;
         while($row = $query->fetch()){
             $i++;
+            $found = "";
+            
+            if($row['hoanthanh'] == 1){
+                $found = "Đã Hoàn Thành";
+            }elseif(($row['hoanthanh'] == -1)){
+                $found = "Đã Hủy";
+            }else{
+                $found = "Chưa Hoàn Thành";
+            }
     ?>
     <tr>
         <td><?php echo $i ?></td>
@@ -140,9 +137,9 @@
         <td><?php echo $row['tenkhachhang'] ?></td>
         <td><?php echo $row['dienthoai'] ?></td>
         <td><?php echo $row['ngay_tao'] ?></td>
-        <td><?php echo $row['tentrangthai'] ?></td>
+        <td><?php echo $found ?></td>
         <td>
-        <button class="btn btn-info"><a href="index.php?action=quanlydonhang&query=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>
+        <button class="btn btn-secondary" disabled><a href="index.php?action=xemchitiet&madon=<?php echo $row['madon'] ?>" >Cập Nhật Đơn</a></button>
             
         </td>
     </tr>
@@ -152,6 +149,15 @@
             $i = 0;
             while($row = $query->fetch()){
                 $i++;
+                $found = "";
+            
+                if($row['hoanthanh'] == 1){
+                    $found = "Đã Hoàn Thành";
+                }elseif(($row['hoanthanh'] == -1)){
+                    $found = "Đã Hủy";
+                }else{
+                    $found = "Chưa Hoàn Thành";
+                }
     ?>
         <tr>
         <td><?php echo $i ?></td>
@@ -159,9 +165,9 @@
         <td><?php echo $row['tenkhachhang'] ?></td>
         <td><?php echo $row['dienthoai'] ?></td>
         <td><?php echo $row['ngay_tao'] ?></td>
-        <td><?php echo $row['tentrangthai'] ?></td>
+        <td><?php echo $found ?></td>
         <td>
-        <button class="btn btn-info"><a href="index.php?action=quanlydonhang&query=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>    
+        <button class="btn btn-secondary" disabled><a href="index.php?action=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>    
         </td>
         </tr>
     <?php 
@@ -170,23 +176,16 @@
             $i = 0;
            while($row = $query->fetch()){
             $i++;
-            // $sql_check = "SELECT * FROM tbl_chitiet_tt WHERE madon = '".$row['madon']."' ";
-            // echo $sql_check;
-            // $query_check = mysqli_query($mysqli, $sql_check);
-            $query_check = $pdo->prepare(
-                "SELECT * FROM tbl_chitiet_tt WHERE madon = :madon"
-            );
-            $query_check->execute(['madon' => $row['madon']]);
+            
             $found = "";
-            while ($row_check = $query_check->fetch()){
-                if($row_check['id_trangthai'] == 5){
-                    $found = "Đã Hoàn Thành";
-                }elseif(($row_check['id_trangthai'] == 6)){
-                    $found = "Đã Hủy";
-                }else{
-                    $found = "Chưa Hoàn Thành";
-                }
+            if($row['hoanthanh'] == 1){
+                $found = "Đã Hoàn Thành";
+            }elseif(($row['hoanthanh'] == -1)){
+                $found = "Đã Hủy";
+            }else{
+                $found = "Chưa Hoàn Thành";
             }
+            
     ?>
     <tr>
     <td><?php echo $i ?></td>
@@ -196,7 +195,7 @@
         <td><?php echo $row['ngay_tao'] ?></td>
         <td><?php echo $found ?></td>
         <td>
-        <button class="btn btn-info"><a href="index.php?action=quanlydonhang&query=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>
+        <button class="btn btn-info"><a href="index.php?action=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>
             
     </td>
     </tr>

@@ -87,6 +87,7 @@
     $sql_lk = "SELECT * FROM tbl_baiviet";
     // $query_lk = mysqli_query($mysqli, $sql_lk);
     $query_lk = $pdo->prepare($sql_lk);
+    $query_lk->execute();
 ?>
 <!-- bài viết đã thêm -->
 <div class="row">
@@ -110,8 +111,8 @@
                 </td>
                 <td><?php echo date("d/m/Y", strtotime($row['ngaytao'])) ?></td>
                 <td>
-                    <a href="index.php?action=quanlybaiviet&query=sua&id=<?php  echo $row['id_baiviet'] ?>" class="btn btn-warning" type="button">SỬA</a>
-                    <a href="index.php?action=quanlybaiviet&query=xoa&id=<?php  echo $row['id_baiviet'] ?>" class="btn btn-danger" type="button">XÓA</a>
+                    <a href="index.php?action=suabaiviet&id=<?php  echo $row['id_baiviet'] ?>" class="btn btn-warning" type="button">SỬA</a>
+                    <a href="index.php?action=xoabaiviet&id=<?php  echo $row['id_baiviet'] ?>" class="btn btn-danger" type="button">XÓA</a>
                 </td>
             </tr>
 

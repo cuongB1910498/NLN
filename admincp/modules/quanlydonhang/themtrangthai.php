@@ -18,11 +18,7 @@
 
     // cập nhật đơn
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        //echo "ok";
         $tentrangthai = $_POST['tentrangthai'];
-        // $sql_tentt = "SELECT id_trangthai FROM tbl_trangthaidon WHERE tentrangthai = '".$tentrangthai."'";
-        //echo $sql_tentt;
-        // $query_tentt = mysqli_query($mysqli, $sql_tentt);
         $query_tentt = $pdo->prepare(
             "SELECT id_trangthai FROM tbl_trangthaidon WHERE tentrangthai = :tentt"
         );
@@ -34,17 +30,21 @@
         
         // cập nhật lại csdl nếu hủy đơn
         if($id_trangthai == 6){
-            // $sql_chondonhuy = "SELECT * from tbl_chitietdon WHERE madon = '".$madon."' ";
-            // $query_chondonhuy = mysqli_query($mysqli, $sql_chondonhuy);
+            //update trang thai tbl_donhang.hoanthanh = -1
+            $sql = "UPDATE tbl_donhang SET hoanthanh = :ht WHERE madon = :md";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                'ht' => -1,
+                'md' => $madon
+            ]);
+
+            // xu ly
             $query_chondonhuy = $pdo->prepare(
                 "SELECT * from tbl_chitietdon WHERE madon = :ma"
             );
             $query_chondonhuy->execute(['ma' => $madon]);
                 
             while ($row = $query_chondonhuy->fetch()){
-                // $sql_themlai = "UPDATE tbl_sanpham SET soluong = soluong + '".$row['sl_mua']."' 
-                // WHERE id_sanpham = '".$row['id_sanpham']."' ";
-                // $query_themlai = mysqli_query($mysqli, $sql_themlai);
                 $query_themlai = $pdo->prepare(
                     "UPDATE tbl_sanpham SET soluong = soluong + :sl_mua
                         WHERE id_sanpham = :id "
@@ -54,14 +54,16 @@
                     'id' => $row['id_sanpham']
                 ]);
             }
+        }elseif($id_trangthai == 5){
+            $sql = "UPDATE tbl_donhang SET hoanthanh = :ht WHERE madon = :md";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                'ht' => 1,
+                'md' => $madon
+            ]);
         }
 
 
-        //echo $id_trangthai;
-        // $sql_capnhat = "INSERT INTO tbl_chitiet_tt(madon, id_trangthai, ghichu) 
-        // VALUES ('".$madon."', '".$id_trangthai."', '".$ghichu."')";
-        //echo $sql_capnhat;        
-        // $query_capnhat = mysqli_query($mysqli, $sql_capnhat);
         $query_capnhat = $pdo->prepare(
             "INSERT INTO tbl_chitiet_tt(madon, id_trangthai, ghichu) 
                 VALUES (:ma, :id_tt, :gc)"

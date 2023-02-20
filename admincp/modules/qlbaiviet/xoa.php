@@ -25,5 +25,5 @@
     $stmt->execute([
         'id' => $id_baiviet
     ]);
-    header("Location: index.php?action=quanlybaiviet&query=thembaiviet");
+    header("Location: index.php?action=thembaiviet");
 ?>

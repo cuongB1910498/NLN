@@ -128,10 +128,10 @@
             if($found == false){
         ?>
         <button class="btn btn-primary">
-            <a href="index.php?action=quanlydonhang&query=themtrangthai&madon=<?php echo $madon ?>">THÊM TRẠNG THÁI</a>
+            <a href="index.php?action=themtrangthai&madon=<?php echo $madon ?>">THÊM TRẠNG THÁI</a>
         </button>
         <button class="btn btn-primary">
-            <a href="index.php?action=quanlydonhang&query=suatrangthai&madon=<?php echo $madon ?>">SỬA GHI CHÚ</a>
+            <a href="index.php?action=suatrangthai&madon=<?php echo $madon ?>">SỬA GHI CHÚ</a>
         </button>
 
         <?php } ?>

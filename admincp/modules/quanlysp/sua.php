@@ -36,7 +36,6 @@ while($row = $change->fetch()) {
 	  	<td>Hình ảnh</td>
 	  	<td>
 	  		<input type="file" name="files[]" multiple>
-	  		<img src="modules/quanlysp/uploads/<?php ?>" width="150px">
 	  	</td>
 
 	  </tr>

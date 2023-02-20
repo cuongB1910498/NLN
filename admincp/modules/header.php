@@ -27,7 +27,7 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="index.php?action=danhmuc">Quản lý Danh mục</a></li>
             <li><a class="dropdown-item" href="index.php?action=quanlysp">Quản lý Sản Phẩm</a></li>
-            <li><a class="dropdown-item" href="index.php?action=quanlybaiviet&query=thembaiviet">Quản lý bài viết</a></li>
+            <li><a class="dropdown-item" href="index.php?action=thembaiviet">Quản lý bài viết</a></li>
           </ul>
         </li>
         <li class=" nav-item">
