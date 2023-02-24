@@ -4,20 +4,22 @@ include('../../config/conect.php');
 
 $tenloaisp = $_POST['tendanhmuc'];
 $thutu = $_POST['thutu'];
+$buildpc = $_POST['buildpc'];
 if(isset($_POST['themdanhmuc'])){
 	//them
 	// $sql_them = "INSERT INTO tbl_danhmuc(tendanhmuc,thutu) VALUE('".$tenloaisp."','".$thutu."')";
 	// mysqli_query($mysqli,$sql_them);
 
 	$stmt = $pdo->prepare(
-		"INSERT INTO tbl_danhmuc(tendanhmuc, thutu) VALUES(:ten, :tt)"
+		"INSERT INTO tbl_danhmuc(tendanhmuc, buildpc, thutu) VALUES(:ten, :pc, :tt)"
 	);
 	$stmt->execute([
 		'ten' => $tenloaisp,
+		'pc' => $buildpc,
 		'tt' => $thutu
 	]);
 
-	header('Location:../../index.php?action=quanlydanhmucsanpham&query=them');
+	header('Location:../../index.php?action=danhmuc');
 }elseif(isset($_POST['suadanhmuc'])){
 	//sua
 	
@@ -25,14 +27,15 @@ if(isset($_POST['themdanhmuc'])){
 	// mysqli_query($mysqli,$sql_update);
 
 	$change = $pdo->prepare(
-		"UPDATE tbl_danhmuc SET tendanhmuc = :ten WHERE id_danhmuc = :id"
+		"UPDATE tbl_danhmuc SET tendanhmuc = :ten, buildpc = :pc WHERE id_danhmuc = :id"
 	);
 
 	$change->execute([
 		'ten' => $tenloaisp,
+		'pc' => $buildpc,
 		'id' => $_GET['iddanhmuc']
 	]);
-	header('Location:../../index.php?action=quanlydanhmucsanpham&query=them');
+	header('Location:../../index.php?action=danhmuc');
 }else{
 
 	$id=$_GET['iddanhmuc'];
@@ -57,7 +60,7 @@ if(isset($_POST['themdanhmuc'])){
 		'dm' => $id
 	]);
 
-	header('Location:../../index.php?action=quanlydanhmucsanpham&query=them');
+	header('Location:../../index.php?action=danhmuc');
 }
 
 ?>

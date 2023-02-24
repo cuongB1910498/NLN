@@ -42,6 +42,8 @@
         include("main/vanchuyen.php");
       }elseif ($tam == 'chitiet_bv'){
         include("main/chitiet_bv.php");
+      }elseif( $tam =='buildpc'){
+        include("main/buildpc.php");
       }
         
         

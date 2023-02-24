@@ -205,16 +205,16 @@ a{
   color: white;
 }
 
-button.btn.btn-primary {
+.menu button.btn.btn-primary {
   background-color: mediumseagreen;
 }
 
-button.btn.btn-primary:hover {
+.menu button.btn.btn-primary:hover {
   background-color: rgb(255, 255, 140);
   
 }
 
-button.btn.btn-primary a{
+.menu button.btn.btn-primary a{
   font-weight: 600;
 }
 
@@ -222,7 +222,7 @@ button.btn.btn.btn-primary.dropdown-toggle:hover{
   color: black;
 }
 
-button.btn.btn-primary a:hover{
+.menu button.btn.btn-primary a:hover{
   color: black;
 }
 

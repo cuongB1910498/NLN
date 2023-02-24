@@ -55,12 +55,7 @@
     ]);
     
     foreach($_SESSION['cart'] as $row){
-        // $sql_chitietdon = "INSERT INTO tbl_chitietdon(madon, id_sanpham, sl_mua) 
-        // VALUE ('".$madon."', '".$row['id']."', '".$row['soluong']."')";
-        // cập nhật đơn hàng: số lượng  = số lượng - sl mua
-        // $sql_trusl="UPDATE tbl_sanpham SET soluong = soluong - '".$row['soluong']."' WHERE id_sanpham = '".$row['id']."'";
-        // $sql_trusl = mysqli_query($mysqli, $sql_trusl);
-        // $query_chitietdon = mysqli_query($mysqli, $sql_chitietdon);
+        
         $query_chitietdon = $pdo->prepare(
             "INSERT INTO tbl_chitietdon(madon, id_sanpham, sl_mua) 
                 VALUE (:md, :id, :sl)"
@@ -71,6 +66,7 @@
             'sl' => $row['soluong']
         ]);
 
+        // cập nhật lại tbl_sanpham
         $query_trusl = $pdo->prepare(
             "UPDATE tbl_sanpham SET soluong = soluong - :sl WHERE id_sanpham = :id"
         );

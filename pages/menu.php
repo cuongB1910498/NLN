@@ -35,6 +35,7 @@
     <button type="button" class="btn btn btn-primary"><a href="index.php?quanly=tintuc">Bài viết</a></button>
     <button type="button" class="btn btn btn-primary"><a href="index.php?quanly=khuyenmai">Khuyến mãi</a></button>
     <button type="button" class="btn btn btn-primary"><a href="index.php?quanly=lienhe">Liên Hệ</a></button>
+    <button type="button" class="btn btn btn-primary"><a href="index.php?quanly=buildpc">Tự xây dựng PC</a></button>
   </div>
 
   <?php

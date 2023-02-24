@@ -17,6 +17,7 @@ $stmt->execute();
     <tr>
       <th>ID</th>
       <th>Tên Danh Mục</th>
+      <th>Build PC ?</th>
       <th>Quản Lý</th>
     </tr>
     <?php
@@ -27,6 +28,7 @@ $stmt->execute();
     <tr>
       <td><?php echo $i ?></td>
       <td><?php echo $row['tendanhmuc'] ?></td>
+      <td><?php if($row['buildpc']) echo "có"; else echo "Không"?></td>
         <td>
             
             <button class="btn btn-warning" type="button">

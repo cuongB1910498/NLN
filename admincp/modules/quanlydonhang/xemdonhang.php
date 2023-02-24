@@ -1,206 +1,55 @@
-<?php 
-    $filler = "Tất cả";
-    // $sql = "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-    // WHERE a.id_dangky = b.id_dangky";
-    // $query = mysqli_query($mysqli, $sql);
-    $query = $pdo->prepare(
-        "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-            WHERE a.id_dangky = b.id_dangky
-            AND hoanthanh = 0"
-    );
-    $query->execute();
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $filler = $_POST['trangthai'];
-        if($filler == 'Tất cả'){
-            // $sql = "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-            // WHERE a.id_dangky = b.id_dangky";
-            // $query = mysqli_query($mysqli, $sql);
-            $query = $pdo->prepare(
-                "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-                    WHERE a.id_dangky = b.id_dangky"
-            );
-            $query->execute();
-        }elseif($filler == 'Đã hoàn thành'){
-            $query = $pdo->prepare(
-                "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-                    WHERE b.id_dangky = a.id_dangky
-                    AND hoanthanh = 1"
-            );
-            $query->execute();
-        }elseif($filler == 'Đã hủy'){
-            // $sql = "SELECT * FROM tbl_donhang as a, tbl_chitiet_tt as b, tbl_trangthaidon as c, tbl_dangky as d
-            // WHERE a.madon = b.madon AND b.id_trangthai = c.id_trangthai AND d.id_dangky = a.id_dangky
-            // HAVING b.id_trangthai = 6";
-            // $query = mysqli_query($mysqli, $sql);
-            $query = $pdo->prepare(
-                "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-                    WHERE b.id_dangky = a.id_dangky
-                    AND hoanthanh = -1"
-            );
-            $query->execute();
-        }else{
-            
-            // $sql = "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-            // WHERE a.id_dangky = b.id_dangky";
-            // $query = mysqli_query($mysqli, $sql);
-            $query = $pdo->prepare(
-                "SELECT * FROM tbl_donhang as a, tbl_dangky as b
-                    WHERE a.id_dangky = b.id_dangky
-                    AND hoanthanh = 0"
-            );
-            $query->execute();
-        }
-    }
-?>
-
-<?php
-    
-?>
-<div class="row m-4"></div>
 <div class="row mb-4">
     <div class="col offset-10">
-        <form method="POST">
-            <div class="form-group">
-                <select name="trangthai">
-                    <option <?php if($filler == "Chưa hoàn thành") echo "selected"?>>Chưa hoàn thành</option>
-                    <option <?php if($filler == "Đã hoàn thành") echo "selected"?>>Đã hoàn thành</option>
-                    <option <?php if($filler == "Đã hủy") echo "selected"?>>Đã hủy</option>
-                    <option <?php if($filler == "Tất cả") echo "selected"?>>Tất cả</option>
-                </select>
-                <button class="btn btn-sm btn-primary" type="submit">Lọc</button>
-            </div>
-        </form>
-        
+        <select name="trangthai" class="tuychon">
+            <option value="all">Tất cả</option>
+            <option value="0">Chưa hoàn thành</option>
+            <option value="1">Đã hoàn thành</option>
+            <option value="-1">Đã hủy</option>
+            
+        </select>
     </div>
 </div>
 
-<table class="table table-light">
+<div class="re-data">
     
-    <tr>
-        <th>STT</th>
-        <th>MÃ ĐƠN</th>
-        <th>Tên Khách</th>
-        <th>SĐT</th>
-        <th>Ngày tạo</th>
-        <th>Trạng thái</th>
-        <th>Hành Động</th>
-    </tr>
+</div>
 
-    <?php 
-   
-    if($filler == "Tất cả"){
+<table class="table" id="showAll">
+  <thead>
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Mã đơn</th>
+      <th scope="col">Tên khách hàng</th>
+      <th scope="col">SĐT</th>
+      <th scope="col">Ngày tạo</th>
+      <th scope="col">Quản Lý</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+        $query = $pdo->prepare(
+            "SELECT * FROM tbl_donhang as a, tbl_dangky as b
+                WHERE a.id_dangky = b.id_dangky"
+        );
+        $query->execute();
         $i = 0;
         while($row = $query->fetch()){
-            $i++;
-            $found = "";
-            
-            if($row['hoanthanh'] == 1){
-                $found = "Đã Hoàn Thành";
-            }elseif(($row['hoanthanh'] == -1)){
-                $found = "Đã Hủy";
-            }else{
-                $found = "Chưa Hoàn Thành";
-            }
+            $i++
     ?>
     <tr>
-        <td><?php echo $i ?></td>
+        <th scope="row"><?php echo $i ?></th>
         <td><?php echo $row['madon'] ?></td>
         <td><?php echo $row['tenkhachhang'] ?></td>
         <td><?php echo $row['dienthoai'] ?></td>
         <td><?php echo $row['ngay_tao'] ?></td>
-        <td><?php echo $found ?></td>
         <td>
-        <button class="btn btn-info"><a href="index.php?action=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>
-            
+            <button class="btn btn-info">
+                <a href="index.php?action=xemchitiet&madon=<?php echo $row['madon'] ?>" >Cập Nhật Đơn</a>
+            </button>
         </td>
     </tr>
-
     <?php
         }
-    }elseif($filler == 'Đã hoàn thành'){
-        $i = 0;
-        while($row = $query->fetch()){
-            $i++;
-            $found = "";
-            
-            if($row['hoanthanh'] == 1){
-                $found = "Đã Hoàn Thành";
-            }elseif(($row['hoanthanh'] == -1)){
-                $found = "Đã Hủy";
-            }else{
-                $found = "Chưa Hoàn Thành";
-            }
     ?>
-    <tr>
-        <td><?php echo $i ?></td>
-        <td><?php echo $row['madon'] ?></td>
-        <td><?php echo $row['tenkhachhang'] ?></td>
-        <td><?php echo $row['dienthoai'] ?></td>
-        <td><?php echo $row['ngay_tao'] ?></td>
-        <td><?php echo $found ?></td>
-        <td>
-        <button class="btn btn-secondary" disabled><a href="index.php?action=xemchitiet&madon=<?php echo $row['madon'] ?>" >Cập Nhật Đơn</a></button>
-            
-        </td>
-    </tr>
-
-    <?php }
-        }elseif($filler == 'Đã hủy'){
-            $i = 0;
-            while($row = $query->fetch()){
-                $i++;
-                $found = "";
-            
-                if($row['hoanthanh'] == 1){
-                    $found = "Đã Hoàn Thành";
-                }elseif(($row['hoanthanh'] == -1)){
-                    $found = "Đã Hủy";
-                }else{
-                    $found = "Chưa Hoàn Thành";
-                }
-    ?>
-        <tr>
-        <td><?php echo $i ?></td>
-        <td><?php echo $row['madon'] ?></td>
-        <td><?php echo $row['tenkhachhang'] ?></td>
-        <td><?php echo $row['dienthoai'] ?></td>
-        <td><?php echo $row['ngay_tao'] ?></td>
-        <td><?php echo $found ?></td>
-        <td>
-        <button class="btn btn-secondary" disabled><a href="index.php?action=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>    
-        </td>
-        </tr>
-    <?php 
-            }
-        }else{
-            $i = 0;
-           while($row = $query->fetch()){
-            $i++;
-            
-            $found = "";
-            if($row['hoanthanh'] == 1){
-                $found = "Đã Hoàn Thành";
-            }elseif(($row['hoanthanh'] == -1)){
-                $found = "Đã Hủy";
-            }else{
-                $found = "Chưa Hoàn Thành";
-            }
-            
-    ?>
-    <tr>
-    <td><?php echo $i ?></td>
-        <td><?php echo $row['madon'] ?></td>
-        <td><?php echo $row['tenkhachhang'] ?></td>
-        <td><?php echo $row['dienthoai'] ?></td>
-        <td><?php echo $row['ngay_tao'] ?></td>
-        <td><?php echo $found ?></td>
-        <td>
-        <button class="btn btn-info"><a href="index.php?action=xemchitiet&madon=<?php echo $row['madon'] ?>">Cập Nhật Đơn</a></button>
-            
-    </td>
-    </tr>
-
-    <?php }
-        }
-    ?>
+  </tbody>
 </table>

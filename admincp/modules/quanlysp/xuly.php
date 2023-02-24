@@ -61,7 +61,7 @@ if(isset($_POST['themsanpham'])){
 
 	$stmt = $pdo->prepare(
 		"INSERT INTO tbl_sanpham
-		VALUE(:id, :ten, :masp, :gia, :sl, :tom, :nd, :tt, :dm)"
+		VALUE(:id, :ten, :masp, :gia, :sl, :tom, :nd, :tt, :nt, :dm)"
 	);
 
 	$stmt ->execute([
@@ -73,6 +73,7 @@ if(isset($_POST['themsanpham'])){
 		'tom' => $tomtat,
 		'nd' => $noidung,
 		'tt' => $tinhtrang,
+		'nt'=> $_POST['nentang'],
 		'dm' => $danhmuc
 	]);
 	
@@ -152,6 +153,7 @@ if(isset($_POST['themsanpham'])){
 			'nd' => $noidung,
 			'tt' => $tinhtrang,
 			'dm' => $danhmuc,
+			'nt'=> $_POST['nentang'],
 			'masp' => $_GET['masp']
 		]);
 

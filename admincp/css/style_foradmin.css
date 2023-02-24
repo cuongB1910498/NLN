@@ -42,3 +42,7 @@ img#img{
 #themsp{
     margin-top: 10px;
 }
+
+.hide{
+    visibility: hidden;
+}

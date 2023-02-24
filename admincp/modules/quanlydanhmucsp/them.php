@@ -26,6 +26,17 @@
 				<label class="error"></label>
 			</div>
 		</div>
+		
+		<div class="form-group mb-4 row">
+			<label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="buildpc">Xây đựng cấu hình?: </label>
+			<div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
+				<select name="buildpc" id="buildpc">
+					<option selected value="0">Không</option>
+					<option value="1">Có</option>
+				</select>
+				<label class="error"></label>
+			</div>
+		</div>
 
 		<div class="form-group mb-4 row">
 			

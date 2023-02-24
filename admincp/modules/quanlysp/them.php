@@ -60,6 +60,20 @@
 		</div>
 
 		<div class="form-group mb-4 row">
+			<label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Nền Tảng: </label>
+			<div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
+				<select name="nentang">
+					<option value="intel">intel</option>
+					<option value="amd">amd</option>
+					<option value="0">không phụ thuộc</option>
+				</select>
+				<label class="error"></label>
+			</div>
+		</div>
+
+		
+
+		<div class="form-group mb-4 row">
 			<label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Danh Mục sản Phẩm: </label>
 			<div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">
 				<select name="danhmuc">
