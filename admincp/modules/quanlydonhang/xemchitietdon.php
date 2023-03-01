@@ -7,9 +7,10 @@
     // $query_sp = mysqli_query($mysqli, $sql_sp);
     $query_sp = $pdo->prepare(
         "SELECT * FROM tbl_chitietdon as a, tbl_sanpham as b 
-            WHERE a.id_sanpham = b.id_sanpham"
+            WHERE a.id_sanpham = b.id_sanpham
+            AND madon = :ma"
     );
-    $query_sp->execute();
+    $query_sp->execute(['ma'=>$madon]);
     //echo $sql_sp;
     
     //hiển thị trạng thái đơn

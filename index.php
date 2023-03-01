@@ -18,6 +18,10 @@
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- ajax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
 </head>
 <body>
 
@@ -41,7 +45,8 @@
     ?>
 
     <script src="js/script.js"></script>
+    <script src="pages/main/build_pc/ajax.js"></script>
     
-  
+ 
 </body>
 </html>

@@ -77,7 +77,7 @@ if(isset($_POST['themsanpham'])){
 		'dm' => $danhmuc
 	]);
 	
-	header('Location:../../index.php?action=quanlysp&query=them');
+	header('Location:../../index.php?action=quanlysp');
 }elseif(isset($_POST['suasanpham'])){
 	//sua
 	if($_FILES['files']['name'][0] != ''){ // ảnh nhận vào sẽ có dạng mảng 1 chiều
@@ -180,7 +180,7 @@ if(isset($_POST['themsanpham'])){
 		]);
 		echo 'sua k co anh';
 	}
-	header('Location:../../index.php?action=quanlysp&query=them');
+	header('Location:../../index.php?action=quanlysp');
 	
 }else{
 	//xoa

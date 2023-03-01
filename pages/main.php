@@ -43,7 +43,9 @@
       }elseif ($tam == 'chitiet_bv'){
         include("main/chitiet_bv.php");
       }elseif( $tam =='buildpc'){
-        include("main/buildpc.php");
+        include("main/build_pc/buildpc.php");
+      }elseif( $tam =='dathangpc'){
+        include("main/build_pc/add_order.php");
       }
         
         
