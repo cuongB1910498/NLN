@@ -48,4 +48,5 @@
         ]);
     }
 
+    header("Location: index.php?quanly=lichsudon");
 ?>

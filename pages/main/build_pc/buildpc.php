@@ -1,7 +1,7 @@
 <form action="index.php?quanly=dathangpc" method="post" id="build">
 <div class="row ">
 
-    <div class="mb-3 row offset-2">
+    <div class="mb-3 row offset-lg-2">
         <label class="col-lg-2 col-md-2 col-sm-3 col-10" for="choice-bg">Nền tảng:</label>
         <div class="col-lg-8 col-md-8 col-sm-7 col-10">
             <select name="choice_bg" id="choice_bg" class="choice_bg">
@@ -27,7 +27,7 @@
             if($module['tendanhmuc'] == 'cpu' || $module['tendanhmuc'] == 'main') continue;
                 
     ?>
-        <div class="mb-3 row offset-2">
+        <div class="mb-3 row offset-lg-2">
             <label for="<?php echo $module['tendanhmuc'] ?>" class="col-lg-2 col-md-2 col-sm-3 col-10"><?php echo strtoupper($module['tendanhmuc']) ?>:</label>
             <div class="col-lg-5 col-md-8 col-sm-7 col-10">
                 <?php
@@ -40,7 +40,7 @@
                     ]);
                 ?>
                 <select class="form-select" name="<?php echo $module['id_danhmuc'] ?>" id="<?php echo $module['id_danhmuc'] ?>">
-                    <option selected value="">Chọn <?php echo $module['tendanhmuc']?> ...</option>
+                    <option value="" disabled selected>Chọn <?php echo $module['tendanhmuc']?> ...</option>
                     <?php
                         while($row = $cpu->fetch()){
                     ?>
@@ -50,12 +50,14 @@
                     ?>
                 </select>
             </div>
+            <div class="<?php echo $module['id_danhmuc'].'-pri col-1'?>"></div>
         </div>
 
     <?php
         }
     ?>
     </div>
+
     <?php
         if(isset($_SESSION['dangnhap'])){
             $getAddreess = $pdo->prepare("SELECT * FROM tbl_diachi as a, tbl_tinh as b
@@ -65,7 +67,7 @@
     ?>
     
     <div>
-    <div class="mb-3 row offset-2">
+    <div class="mb-3 row offset-lg-2">
         <label for="diachi" class="col-lg-2 col-md-2 col-sm-3 col-10">Địa chỉ</label>
         <div class="col-lg-5 col-md-8 col-sm-7 col-10">
             <select name="diachi" id="diachi" class="row form-select mb-3">
@@ -83,7 +85,15 @@
     </div>
     </div>
 
-    <div class="row offset-3 mb-3">
+    <div>
+        <div class="row offset-lg-2">
+            <div class="col"><button id="tinhTong" type="button" class="btn btn-success mb-3">Ước tính chi phí: </button></div>
+            <div class="col"><p id="ketQua"></p></div>
+        </div>
+    </div>
+    
+
+    <div class="row offset-lg-3 mb-3">
         <button class="btn btn-primary col-lg-1 col-md-1 col-sm-1 col-4" type="submit">Đặt Hàng</button>
     </div>
     
@@ -91,7 +101,7 @@
         }else{
     ?>
     
-    <div class="row offset-3 mb-3">
+    <div class="row offset-lg-3 mb-3">
         <button class="btn btn-primary col-lg-3 col-md-3 col-sm-2 col-4"
         disabled>Đăng nhập để mua hàng</button>
     </div>

@@ -18,10 +18,10 @@
 
 ?>
 
-    <div class="row mb-3 offset-2">
+    <div class="row mb-3 offset-lg-2">
         <label class="col-lg-2 col-md-2 col-sm-3 col-10" for="cpu">CPU:</label>
         <div class="col-lg-5 col-md-8 col-sm-7 col-10">
-            <select name="cpu" id="cpu" class="form-select">
+            <select name="cpu" id="cpu" class="cpu form-select">
                 <option value=""> Chọn CPU Intel</option>
                 <?php 
                     while($row = $cpu->fetch()){
@@ -33,9 +33,10 @@
                 ?>
             </select>
         </div>
+        <div class="cpu-pri col-1"></div>
     </div>
 
-    <div class="row offset-2">
+    <div class="row offset-lg-2">
         <label class="col-lg-2 col-md-2 col-sm-3 col-10" for="main">Main:</label>
         <div class="col-lg-5 col-md-8 col-sm-7 col-10">
             <select name="main" id="main" class="form-select">
@@ -50,6 +51,7 @@
                 ?>
             </select>
         </div>
+        <div class="main-pri col-1"></div>
     </div>
 
     
@@ -70,10 +72,10 @@
         );
         $main->execute();
 ?>
-    <div class="row mb-3 offset-2">
+    <div class="row mb-3 offset-lg-2">
         <label class="col-lg-2 col-md-2 col-sm-3 col-10" for="cpu">CPU:</label>
         <div class="col-lg-5 col-md-8 col-sm-7 col-10">
-            <select name="cpu" id="cpu" class="form-select">
+            <select name="cpu" id="cpu" class="cpu form-select">
                 <option value="">Chọn cpu AMD </option>
 
                 <?php
@@ -84,10 +86,10 @@
                 <?php }?>
             </select>
         </div>
-        <div class="col-1"></div>
+        <div class="cpu-pri col-1">1</div>
     </div>
 
-    <div class="row offset-2">
+    <div class="row offset-lg-2">
         <label class="col-lg-2 col-md-2 col-sm-3 col-10" for="main">Main:</label>
         <div class="col-lg-5 col-md-8 col-sm-7 col-10">
             <select name="main" id="main" class="form-select">
@@ -102,6 +104,7 @@
                 ?>
             </select>
         </div>
+        <div class="main-pri col-1"></div>
     </div>
     
 

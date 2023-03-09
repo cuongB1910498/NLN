@@ -7,8 +7,8 @@
         
     }
 ?>
-<div class="menu  row ">
-  <div class="menu-L col-lg-7 col-md-12 col-sm-12 col-12 offset-1">
+<div class="menu row ">
+  <div class="menu-L col-lg-8 col-md-12 col-sm-12 col-12 ">
                 
     <button type="button" class="btn btn-primary"><a href="index.php">Trang chủ</a></button>
     <?php 

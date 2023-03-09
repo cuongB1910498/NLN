@@ -316,3 +316,9 @@ a#dathang {
 .active{
   background: rgb(255, 106, 106);
 }
+
+
+/* css cho thanh tien buildpc */
+p.add{
+  color: rgb(0, 255, 64);
+}

@@ -43,10 +43,20 @@
             unset($_SESSION['dangky']);
         }
     ?>
-
+    </script>
     <script src="js/script.js"></script>
     <script src="pages/main/build_pc/ajax.js"></script>
-    
- 
+
+    <script>
+        $("#tinhTong").click(function(){
+            var sum = 0;
+            var elements = document.querySelectorAll('p.add');
+            for (var i = 0; i < elements.length; i++) {
+                sum += parseInt(elements[i].textContent);
+            }
+            var sumStr = sum.toLocaleString();
+            document.getElementById('ketQua').innerHTML = sumStr + " VND";
+        })
+    </script>
 </body>
 </html>
