@@ -1,4 +1,8 @@
 <?php
+    require("../carbon/autoload.php");
+    use Carbon\Carbon;
+    use Carbon\CarbonInterval;
+
     $madon = $_GET['madon'];
     //echo $madon;
     
@@ -61,6 +65,55 @@
                 'ht' => 1,
                 'md' => $madon
             ]);
+
+            $lietkedon = $pdo->prepare(
+                "SELECT * FROM tbl_sanpham as a, tbl_chitietdon as b, tbl_donhang as c WHERE a.id_sanpham = b.id_sanpham AND c.madon = b.madon
+                AND c.madon = :md"
+            );
+            $lietkedon ->execute([
+                'md' =>$madon
+            ]);
+            
+            $now = Carbon::now("Asia/Ho_Chi_Minh")->toDateString();
+            $thongke=$pdo->prepare(
+                "SELECT * FROM tbl_thongke WHERE ngaydat = :ht"
+            );
+            $thongke->execute([
+                'ht'=>$now
+            ]);
+
+            $doanhso = 0;
+            while($row = $lietkedon->fetch()){
+                $doanhso+=$row['giasp'];
+            }
+
+            $count = $thongke->rowCount();
+            if( $count == 0){
+                $sql = $pdo->prepare(
+                    "INSERT INTO tbl_thongke(ngaydat, donhang, doanhso) 
+                    VALUES(:ngaydat, :don, :ds)"
+                );
+                $sql->execute([
+                    'ngaydat' => $now,
+                    'don' => 1,
+                    'ds' => $doanhso
+                ]);
+            }elseif($count != 0){
+                while($row_tk = $thongke->fetch()){
+                    $donhang = $row_tk['donhang']+1;
+                    $doanhso = $row_tk['doanhso']+$doanhso;
+                    $sql = $pdo->prepare(
+                        "UPDATE tbl_thongke SET donhang = :dh, doanhso = :ds WHERE ngaydat = :nd"
+                    );
+                    $sql->execute([
+                        'dh'=>$donhang,
+                        'ds'=>$doanhso,
+                        'nd'=>$now 
+                    ]);
+                }
+                
+            }
+
         }
 
 

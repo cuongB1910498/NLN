@@ -22,6 +22,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" 
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- morris chart -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     
 
 </head>
@@ -40,7 +42,9 @@
             include("modules/footter.php")
         ?>
    </div>
-    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script> 
     <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'tomtat' );
@@ -51,6 +55,9 @@
     </script>
 
     <script src="modules/quanlydonhang/ajax.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/order_status.js"></script>
+
 
 </body>
 

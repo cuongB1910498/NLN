@@ -27,14 +27,14 @@
         include("modules/qlbaiviet/sua_bv.php");
     }elseif($tam == 'xoabaiviet'){
         include("modules/qlbaiviet/xoa.php");
-    }
-    
-    elseif($tam == 'timkiem'){
+    }elseif($tam == 'timkiem'){
         include("modules/timkiem.php");
+    }elseif($tam == "quanlydonhang"){
+        include("modules/quanlydonhang/xemdonhang.php");
     }
         
     else{
-        include("modules/quanlydonhang/xemdonhang.php");
+        include("modules/thongke/thongke.php");
     }
 
 ?>
