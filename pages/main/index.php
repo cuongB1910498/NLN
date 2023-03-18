@@ -26,7 +26,7 @@
 
 
 <div class="alert alert-success mb-3" role="alert">
-<h2>Sản Phẩm nổi bậc</h2>
+<h2>Sản Phẩm Mới</h2>
 </div>
     
     <?php
@@ -64,7 +64,7 @@
         );
         $sql_trang->execute();
         $row = $sql_trang->fetch();
-        $dem_dong = $sql_trang->rowCount();
+        $dem_dong = 8;
         $trang = ceil($dem_dong/$inpage);
     ?>
     <!-- phan trang -->

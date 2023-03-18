@@ -31,6 +31,12 @@
         include("modules/timkiem.php");
     }elseif($tam == "quanlydonhang"){
         include("modules/quanlydonhang/xemdonhang.php");
+    }elseif($tam == 'themkhuyenmai'){
+        include("modules/qlkhuyenmai/khuyenmai.php");
+    }elseif($tam == 'suakm'){
+        include("modules/qlkhuyenmai/suakm.php");
+    }elseif($tam == 'xoakm'){
+        include("modules/qlkhuyenmai/xoakm.php");
     }
         
     else{

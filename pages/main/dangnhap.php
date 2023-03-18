@@ -50,14 +50,13 @@
         }
 
         .box{
-            width: 20%;
             width: 50%;
             height: auto;
             position: absolute;
-            top: 50%;
+            top: 10%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgb(229, 247, 253);
+            /* transform: translate(-50%, -50%); */
+            /* background-color: rgb(229, 247, 253); */
         }
 
         h1{
@@ -86,18 +85,29 @@
             font-weight: 400;
             color: red;
         }
+
+        .pic {
+            top: 10%;
+            width:50%;
+        }
+
+        .pic img{
+            
+            width: 100%;
+        }
     </style>
 </head>
 <body>
-   <div class="container">
+   <div class="container-fluit">
+        <div class="pic"><img src="../../images/draw2.webp" alt=""></div>
         <div class="box">
-            <h1>LOGIN</h1>
+            <h1>Thành viên THYNC</h1>
             <form class="form-horizontal" method="post" id="login-form">
                 
                 <div class="form-group mb-4 row">
                     <label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Email: </label>
                     <div class="from-control col-lg-8 col-md-8 col-sm-12 col-12 offset-1">
-                        <input class="" type="text" name="email" id="usn" placeholder="Enter Username..." >
+                        <input class="" type="text" name="email" id="usn" placeholder="Nhập email..." >
                         <label class="error"></label>
                     </div>
                 </div>
@@ -105,7 +115,7 @@
                 <div class="form-group mb-4 row">
                     <label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="pwd">Password: </label>
                     <div class="from-control col-lg-8 col-md-8 col-sm-12 col-12 offset-1">
-                        <input class="" type="password" name="password" id="pwd" placeholder="Enter Password..." >
+                        <input class="" type="password" name="password" id="pwd" placeholder="Nhập mật khẩu..." >
                         <label class="error"></label>
                     </div>
                 </div>
@@ -114,7 +124,7 @@
                 <div class="form-group mb-4 row">
                     <div class="col-5"></div>
                     <div class="col">
-                        <button class="btn btn-primary col" type="submit" name="dangnhap">SUBMIT</button>
+                        <button class="btn btn-primary col" type="submit" name="dangnhap">Đăng nhập</button>
                     </div>
                     <div class="col-5"></div>
                       

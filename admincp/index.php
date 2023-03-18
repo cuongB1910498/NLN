@@ -29,6 +29,7 @@
 </head>
 <?php
     session_start();
+    ob_start();
     if(!isset($_SESSION['admin'])){
         header("Location:login.php");
     }
@@ -52,6 +53,10 @@
 
     <script>
         CKEDITOR.replace( 'noidung' );
+    </script>
+
+<script>
+        CKEDITOR.replace( 'nd' );
     </script>
 
     <script src="modules/quanlydonhang/ajax.js"></script>

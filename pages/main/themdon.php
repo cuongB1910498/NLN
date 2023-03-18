@@ -1,5 +1,5 @@
 <?php
-    
+    $makm = $_GET['khuyenmai'];
     $id_dangky = $_SESSION['dangnhap'];
     //echo $_POST['diachi'];
     
@@ -28,13 +28,14 @@
     // $sql_themdon = "INSERT INTO tbl_donhang(id_dangky, madon, id_diachi) VALUE ('".$id_dangky."', '".$madon."', '".$id_diachi."')";
     // $query_themdon = mysqli_query($mysqli, $sql_themdon);
     $query_themdon = $pdo->prepare(
-        "INSERT INTO tbl_donhang(id_dangky, madon, id_diachi) 
-            VALUE (:id, :md, :dc)"
+        "INSERT INTO tbl_donhang(id_dangky, madon, id_diachi, makm) 
+            VALUE (:id, :md, :dc, :km)"
     );
     $query_themdon->execute([
         'id' => $id_dangky,
         'md' => $madon,
-        'dc' => $id_diachi
+        'dc' => $id_diachi,
+        'km' => $makm
     ]);
 
 

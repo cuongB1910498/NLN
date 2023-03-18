@@ -28,6 +28,7 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
             <li><a class="dropdown-item" href="index.php?action=danhmuc">Quản lý Danh mục</a></li>
             <li><a class="dropdown-item" href="index.php?action=quanlysp">Quản lý Sản Phẩm</a></li>
             <li><a class="dropdown-item" href="index.php?action=thembaiviet">Quản lý bài viết</a></li>
+            <li><a class="dropdown-item" href="index.php?action=themkhuyenmai">Quản lý Khuyến mãi</a></li>
           </ul>
         </li>
         <li class=" nav-item">

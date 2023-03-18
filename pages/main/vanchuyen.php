@@ -1,5 +1,15 @@
 <?php
-    
+    $khuyenmai =0;
+    if(isset($_POST['km'])){
+        $stmt = $pdo->prepare("SELECT * FROM tbl_khuyenmai WHERE makm = :ma LIMIT 1");
+        $stmt -> execute([
+            'ma'=>$_POST['makm']
+        ]);
+        $row = $stmt->fetch();
+        if($stmt->rowCount() > 0){
+            $khuyenmai = $row['giakm'];
+        }
+    }
 ?>
 
 <div class="row mb-3">
@@ -71,10 +81,15 @@
     $count_diachi = $query_vc->rowCount();
 ?>
 <div class="row mb-3">
+    <form action="" method="post" class="mb-3">
+        <label for="">Nhập khuyến mãi(nếu có):</label>
+        <input type="text" name="makm">
+        <button type="submit" name="km">Kiểm tra</button>
+    </form>
     <?php
         if($count_diachi > 0){
     ?>
-    <form method="post" action="index.php?quanly=themdon" class="mb-3">
+<form method="post" action="index.php?quanly=themdon&khuyenmai=<?php echo $row['makm'] ?>" class="mb-3">
     <div class="row mb-3">
         <label for="diachi" class="col-3">CHỌN ĐỊA ĐIỂM GIAO HÀNG: </label>
         <select name="diachi" id="diachi" class="col">
@@ -95,16 +110,16 @@
         </select>
         
     </div>
-          
+    <p>Khuyến mãi: <?php echo $khuyenmai.' VND' ?></p>     
     <p>Phí vận chuyển cố định: 50.000 VND</p>
     <p>TỔNG CỘNG: 
         <?php 
-            $canthanhtoan = $tongtien+50000;
+            $canthanhtoan = $tongtien + 50000 - $khuyenmai;
             echo number_format($canthanhtoan,0,',','.').' VND'
         ?>
     </p>
-</div>
-<button class="btn btn-primary mb-3"> ĐẶT HÀNG</button>
+    </div>
+    <button class="btn btn-primary mb-3"> ĐẶT HÀNG</button>
 </form>
 <?php
     }else {    

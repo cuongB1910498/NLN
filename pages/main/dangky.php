@@ -123,7 +123,7 @@
     
 	<div class="container row">
         <div class="box col offset-3">
-            <h1>NEW MEMBER</h1>
+            <h1>ĐĂNG KÝ THÀNH VIÊN</h1>
             <form class="form-horizontal" method="POST" id="register-form" autocomplete="off" onsubmit="return validateEmail()">
                 
 				<div class="form-group mb-4 row">

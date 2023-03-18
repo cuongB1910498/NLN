@@ -67,7 +67,9 @@
             ]);
 
             $lietkedon = $pdo->prepare(
-                "SELECT * FROM tbl_sanpham as a, tbl_chitietdon as b, tbl_donhang as c WHERE a.id_sanpham = b.id_sanpham AND c.madon = b.madon
+                "SELECT * FROM tbl_sanpham as a, tbl_chitietdon as b, tbl_donhang as c
+                WHERE a.id_sanpham = b.id_sanpham 
+                AND c.madon = b.madon
                 AND c.madon = :md"
             );
             $lietkedon ->execute([
@@ -82,10 +84,18 @@
                 'ht'=>$now
             ]);
 
-            $doanhso = 0;
+            $doanhso = 0 ;
             while($row = $lietkedon->fetch()){
                 $doanhso+=$row['giasp'];
             }
+
+            // lấy ra giá khuyến mãi sau đó trừ doanh số cho khuyên mãi
+            $km = $pdo->prepare("SELECT * FROM tbl_khuyenmai as a, tbl_donhang as b
+            WHERE a.makm = b.makm AND madon = '".$madon."'");
+            $km->execute();
+            $row_km = $km->fetch();
+            if($row_km['giakm'] != 0) $doanhso= $doanhso-$row_km['giakm'];
+
 
             $count = $thongke->rowCount();
             if( $count == 0){

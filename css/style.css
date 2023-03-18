@@ -187,13 +187,13 @@ tr:nth-child(even) {
 /* css header */
 .c-header{
   
-  background-image: url(../images/baner.jpg);
+  background-image: url(../images/banner2.png);
   background-repeat: no-repeat;
   background-size: 100% 140px;
 }
 
 .logo{
-  background-image: url(../images/lolo_chinhthuc.jpg);
+  background-image: url(../images/logo5.png);
   background-size: 95% 140px;
 }
 

@@ -1,30 +1,30 @@
 <?php
     $madon = $_GET['madon'];
-    // hiển thị sản phẩm có trong đơn hàng
-    // $sql_sp = "SELECT * FROM tbl_chitietdon as a, tbl_sanpham as b 
-    // WHERE a.id_sanpham = b.id_sanpham
-    // AND madon = '".$madon."' ";
-    // $query_sp = mysqli_query($mysqli, $sql_sp);
+   
     $query_sp = $pdo->prepare(
         "SELECT * FROM tbl_chitietdon as a, tbl_sanpham as b 
             WHERE a.id_sanpham = b.id_sanpham
             AND madon = :ma"
     );
     $query_sp->execute(['ma'=>$madon]);
-    //echo $sql_sp;
-    
-    //hiển thị trạng thái đơn
-    // $sql = "SELECT * FROM tbl_trangthaidon as a, tbl_chitiet_tt as b
-    // WHERE a.id_trangthai = b.id_trangthai 
-    // AND madon = '".$madon."' ";
-    //echo $sql;
-    // $query = mysqli_query($mysqli, $sql);
+   
     $query = $pdo->prepare(
         "SELECT * FROM tbl_trangthaidon as a, tbl_chitiet_tt as b
             WHERE a.id_trangthai = b.id_trangthai 
             AND madon = :ma"
     );
     $query->execute(['ma' => $madon]);
+
+    $km = $pdo->prepare("SELECT * FROM tbl_donhang as a, tbl_khuyenmai as b 
+    WHERE madon = '".$madon."' 
+    AND a.makm = b.makm LIMIT 1");
+    $km ->execute();
+    $row_km = $km -> fetch();
+    if($row_km == 0){
+        $tienkm = 0;
+    }else
+    $tienkm = 0 - $row_km['giakm'];
+
 ?>
 
 
@@ -47,7 +47,7 @@
         
         $i = 1;
         $tongtien = 0;
-        $thanhtien = 0;
+        $thanhtien = 0 + 50000 - $tienkm;
         while ($row_sp = $query_sp->fetch()){
             
             $tongtien = $row_sp['giasp']*$row_sp['sl_mua'];
