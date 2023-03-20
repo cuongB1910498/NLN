@@ -38,7 +38,7 @@
             $Img = $stmt->fetch()
     ?>
     <div class="card col-lg-3 col-md-4 col-sm-6 col-12 mb-3" style="width:300px">
-        <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row['id_sanpham'] ?>">
+        <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row['id_sanpham'] ?>" autocomplete="off">
             <a href="index.php?quanly=sanpham&id=<?php echo $row['id_sanpham'] ?>">
                 <img class="card-img-top" src="admincp/modules/quanlysp/uploads/<?php echo $Img['tenanh'] ?>" alt="Card image">
             </a>

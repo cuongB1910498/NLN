@@ -1,13 +1,21 @@
 <?php
+    require('carbon/autoload.php');
+    use Carbon\Carbon;
+    use Carbon\CarbonInterval;
     $khuyenmai =0;
+    $result='';
     if(isset($_POST['km'])){
-        $stmt = $pdo->prepare("SELECT * FROM tbl_khuyenmai WHERE makm = :ma LIMIT 1");
+        $stmt = $pdo->prepare("SELECT * FROM tbl_khuyenmai WHERE makm = :ma AND hethan >= :ht LIMIT 1");
         $stmt -> execute([
-            'ma'=>$_POST['makm']
+            'ma'=>$_POST['makm'],
+            'ht'=>Carbon::now()
         ]);
         $row = $stmt->fetch();
         if($stmt->rowCount() > 0){
             $khuyenmai = $row['giakm'];
+            $result = '<i class="fa-solid fa-check"></i>';
+        }else{
+            $result = '<i class="fa-solid fa-x"></i>';
         }
     }
 ?>
@@ -85,11 +93,13 @@
         <label for="">Nhập khuyến mãi(nếu có):</label>
         <input type="text" name="makm">
         <button type="submit" name="km">Kiểm tra</button>
+        <label><?php echo $result ?></label> 
     </form>
+    
     <?php
         if($count_diachi > 0){
     ?>
-<form method="post" action="index.php?quanly=themdon&khuyenmai=<?php echo $row['makm'] ?>" class="mb-3">
+<form method="post" action="index.php?quanly=themdon&khuyenmai=<?php echo $row['makm'] ?>" class="mb-3" autocomplete="off">
     <div class="row mb-3">
         <label for="diachi" class="col-3">CHỌN ĐỊA ĐIỂM GIAO HÀNG: </label>
         <select name="diachi" id="diachi" class="col">

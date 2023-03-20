@@ -46,6 +46,8 @@
         include("main/build_pc/buildpc.php");
       }elseif( $tam =='dathangpc'){
         include("main/build_pc/add_order.php");
+      }elseif ($tam == 'chitietkm'){
+        include("main/chitietkm.php");
       }
         
         

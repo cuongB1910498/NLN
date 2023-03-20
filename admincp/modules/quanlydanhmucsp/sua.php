@@ -12,7 +12,7 @@ $dong = $stmt->fetch()
 <div class="col offset-3">
 	<p>Sửa danh mục sản phẩm</p>
 
-	<form method="POST" action="modules/quanlydanhmucsp/xuly.php?iddanhmuc=<?php echo $_GET['iddanhmuc'] ?>" class="form-horizontal">
+	<form method="POST" action="modules/quanlydanhmucsp/xuly.php?iddanhmuc=<?php echo $_GET['iddanhmuc'] ?>" class="form-horizontal" autocomplete="off">
 	
 		<div class="form-group mb-4 row">
 			<label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Tên danh mục: </label>

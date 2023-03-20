@@ -1,6 +1,6 @@
-<form action="index.php?quanly=dathangpc" method="post" id="build">
-<div class="row ">
 
+<div class="row ">
+<form action="index.php?quanly=dathangpc" method="post" id="build">
     <div class="mb-3 row offset-lg-2">
         <label class="col-lg-2 col-md-2 col-sm-3 col-10" for="choice-bg">Nền tảng:</label>
         <div class="col-lg-8 col-md-8 col-sm-7 col-10">
@@ -109,8 +109,9 @@
     <?php
         }
     ?>
-</div>
 </form>
+</div>
+
 
 <!-- Jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

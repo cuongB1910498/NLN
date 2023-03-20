@@ -10,7 +10,7 @@
 <div class="col offset-2">
 	<p>Thêm danh mục sản phẩm</p>
 
-	<form method="POST" class="form-horizontal" id="them" action="modules/quanlydanhmucsp/xuly.php">
+	<form method="POST" class="form-horizontal" id="them" action="modules/quanlydanhmucsp/xuly.php" autocomplete="off">
 		<div class="form-group mb-4 row">
 			<label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Tên danh mục: </label>
 			<div class="from-control col-lg-9 col-md-9 col-sm-12 col-12">

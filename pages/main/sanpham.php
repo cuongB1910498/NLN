@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-12">
-            <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row_chitiet['id_sanpham'] ?>">
+            <form method="POST" action="pages/main/themgiohang.php?idsanpham=<?php echo $row_chitiet['id_sanpham'] ?>" autocomplete="off">
                 <div class="chitiet_sanpham">
                     <h3>Tên sản phẩm : <?php echo $row_chitiet['tensanpham'] ?></h3>
                     <p>Mã sp: <?php echo $row_chitiet['masp'] ?></p>

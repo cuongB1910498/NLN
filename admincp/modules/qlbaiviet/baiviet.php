@@ -54,7 +54,7 @@
 <!-- thêm bài viết -->
 <div class="row">
     <h2 class="mb-3">THÊM BÀI VIẾT</h2>
-    <form method="post"  class="col-10 offset-1" enctype='multipart/form-data'>
+    <form method="post"  class="col-10 offset-1" enctype='multipart/form-data' autocomplete="off">
         <div class="form-group mb-3 row">
             <label for="tieude" class="col-3" >TIÊU ĐỀ BÀI VIẾT: </label>
             <div class="col-7"><input id="tieude" class="form-control" type="text" name="tieude"></div>

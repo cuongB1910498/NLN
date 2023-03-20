@@ -59,7 +59,7 @@
             <h3>THÔNG TIN TÀI KHOẢN</h3>
         </div>
         <div class="card-body">
-            <form action="" method="POST" class="form-horizontal" id="qltaikhoan">
+            <form action="" method="POST" class="form-horizontal" id="qltaikhoan" autocomplete="off">
                 <div class="form-group row mb-3">
 					<label class="col-sm-4 col-form-label offset-1" for="firstname">Tên của bạn: </label>
 					<div class="col-sm-5">

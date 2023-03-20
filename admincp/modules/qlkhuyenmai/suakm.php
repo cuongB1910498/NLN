@@ -25,7 +25,7 @@
 
 <div class="row">
     <h2 class="mb-3">SỬA KHUYẾN MÃI</h2>
-    <form method="post"  class="col-10 offset-1" id="themkm">
+    <form method="post"  class="col-10 offset-1" id="themkm" autocomplete="off">
         <div class="form-group mb-3 row">
             <label for="makm" class="col-3" >MÃ KHUYẾN MÃI: </label>
             <div class="col-7"><input id="makm" class="form-control" type="text" name="makm" value="<?php echo $row['makm'] ?>"></div>

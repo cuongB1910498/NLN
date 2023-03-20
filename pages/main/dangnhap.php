@@ -102,7 +102,7 @@
         <div class="pic"><img src="../../images/draw2.webp" alt=""></div>
         <div class="box">
             <h1>Thành viên THYNC</h1>
-            <form class="form-horizontal" method="post" id="login-form">
+            <form class="form-horizontal" method="post" id="login-form" autocomplete="off">
                 
                 <div class="form-group mb-4 row">
                     <label class="col-lg-2 col-md-3 col-sm-12 col-12 offset-1" for="usn">Email: </label>

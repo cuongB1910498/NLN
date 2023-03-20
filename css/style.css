@@ -193,7 +193,7 @@ tr:nth-child(even) {
 }
 
 .logo{
-  background-image: url(../images/logo5.png);
+  background-image: url(../images/logo6.png);
   background-size: 95% 140px;
 }
 
@@ -235,6 +235,7 @@ button.btn.btn.btn-primary.dropdown-toggle:hover{
   font-weight: 500;
   text-decoration: none;
 }
+
 
 .lk a{
   text-decoration: none;
@@ -321,4 +322,16 @@ a#dathang {
 /* css cho thanh tien buildpc */
 p.add{
   color: rgb(0, 255, 64);
+}
+
+
+/* khuyen mai */
+/* .km{
+  width: 30%;
+  margin: 0px auto;
+} */
+
+.km a{
+  color: black;
+  text-decoration: none;
 }

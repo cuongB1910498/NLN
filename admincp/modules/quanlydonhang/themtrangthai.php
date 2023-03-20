@@ -174,7 +174,7 @@
 <div class="row">
     <div class="col-6 offset-3">
         <h2>CẬP NHẬT ĐƠN</h2>
-        <form method="POST" id="themtrangthai">
+        <form method="POST" id="themtrangthai" autocomplete="off">
             <div class="form-group mb-3">
                 <label for="tentrangthai">Trạng Thái đơn</label>
                 <select name="tentrangthai" id="tentrangthai">
