@@ -76,6 +76,18 @@
             'id' => $row['id']
         ]);
 
+        $status = $pdo->prepare("SELECT * FROM tbl_sanpham WHERE id_sanpham = :id");
+        $status -> execute([
+            'id'=> $row['id']
+        ]);
+        $check = $status->fetch();
+        if($check['soluong'] <= 0){
+            $hide = $pdo->prepare(
+                "UPDATE tbl_sanpham SET tinhtrang = 0 WHERE id_sanpham = '".$check['id_sanpham']."'"
+            );
+            $hide->execute();
+        }
+
     }
     
     

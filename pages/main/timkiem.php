@@ -1,20 +1,9 @@
 <div class="show row">
 <?php
-    // $select = "SELECT * FROM tbl_sanpham";
-    // if(isset($_POST['tiemkiem'])){
-    //     $tukhoa = $_POST['tukhoa'];
-    //     //tìm kiếm dựa trên tên sản phẩm
-    //     $sql_tukhoa = " WHERE tensanpham LIKE :tk";
-    // }
-    // $sql = "$select $sql_tukhoa";
-    //$sql1 = "SELECT * FROM tbl_sanpham as a WHERE tensanpham LIKE '%".$tukhoa."%'";
-    //echo $sql;
-    //echo "<br>";
-    //echo $sql1;
-    // $query_pro = mysqli_query($mysqli, $sql);
+   
     $tukhoa = $_POST['tukhoa'];
     $query_pro = $pdo->prepare(
-        "SELECT * FROM tbl_sanpham WHERE tensanpham LIKE :tk"
+        "SELECT * FROM tbl_sanpham WHERE tensanpham LIKE :tk AND tinhtrang = 1"
     );
     $query_pro->execute([
         'tk' => '%'.$tukhoa.'%'

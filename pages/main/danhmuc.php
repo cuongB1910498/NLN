@@ -1,14 +1,13 @@
 <?php 
-    // $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc = '$_GET[id]' ORDER BY id_sanpham DESC";
-    // $query_pro = mysqli_query($mysqli, $sql_pro);
+    
     $query_pro = $pdo->prepare(
-        "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc = :id ORDER BY id_sanpham DESC"
+        "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc = :id 
+        AND tinhtrang = 1 ORDER BY id_sanpham DESC"
     );
     $query_pro->execute(['id' => $_GET['id']]);
 
     //ten Danh Muc
-    // $sql_cate = "SELECT * FROM tbl_danhmuc WHERE tbl_danhmuc.id_danhmuc = '$_GET[id]' LIMIT 1";
-    // $query_cate = mysqli_query($mysqli, $sql_cate);
+    
     $query_cate = $pdo->prepare(
         "SELECT * FROM tbl_danhmuc WHERE tbl_danhmuc.id_danhmuc = :id LIMIT 1"
     );

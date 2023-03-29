@@ -19,6 +19,7 @@
     // $query_pro = mysqli_query($mysqli, $sql_pro);
     $query_pro = $pdo->prepare(
         "SELECT * FROM tbl_sanpham, tbl_danhmuc WHERE tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc
+        AND tinhtrang = 1
         ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin, $inpage"
     );
     $query_pro->execute();

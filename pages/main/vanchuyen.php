@@ -1,8 +1,7 @@
 <?php
     require('carbon/autoload.php');
     use Carbon\Carbon;
-    use Carbon\CarbonInterval;
-    $khuyenmai =0;
+    $khuyenmai = '0';
     $result='';
     if(isset($_POST['km'])){
         $stmt = $pdo->prepare("SELECT * FROM tbl_khuyenmai WHERE makm = :ma AND hethan >= :ht LIMIT 1");
@@ -12,7 +11,7 @@
         ]);
         $row = $stmt->fetch();
         if($stmt->rowCount() > 0){
-            $khuyenmai = $row['giakm'];
+            $khuyenmai = $row['makm'];
             $result = '<i class="fa-solid fa-check"></i>';
         }else{
             $result = '<i class="fa-solid fa-x"></i>';
@@ -89,7 +88,7 @@
     $count_diachi = $query_vc->rowCount();
 ?>
 <div class="row mb-3">
-    <form action="" method="post" class="mb-3">
+    <form method="post" class="mb-3">
         <label for="">Nhập khuyến mãi(nếu có):</label>
         <input type="text" name="makm">
         <button type="submit" name="km">Kiểm tra</button>
@@ -98,39 +97,42 @@
     
     <?php
         if($count_diachi > 0){
+            
     ?>
-<form method="post" action="index.php?quanly=themdon&khuyenmai=<?php echo $row['makm'] ?>" class="mb-3" autocomplete="off">
-    <div class="row mb-3">
-        <label for="diachi" class="col-3">CHỌN ĐỊA ĐIỂM GIAO HÀNG: </label>
-        <select name="diachi" id="diachi" class="col">
-            
-            <?php
-                while ($row = $query_vc->fetch()){
-            ?>
+    <form action="index.php?quanly=themdon&khuyenmai=<?php echo $khuyenmai ?>" method="post">
 
-            <option>
-                <?php 
-                    echo $row['tendiachi'].' , '.$row['diachi'].' , '.$row['tentinh']
+   
+        <div class="row mb-3">
+            <label for="diachi" class="col-3">CHỌN ĐỊA ĐIỂM GIAO HÀNG: </label>
+            <select name="diachi" id="diachi" class="col">
+                
+                <?php
+                    while ($row = $query_vc->fetch()){
                 ?>
-            </option>
+
+                <option>
+                    <?php 
+                        echo $row['tendiachi'].' , '.$row['diachi'].' , '.$row['tentinh']
+                    ?>
+                </option>
+                
+                <?php
+                    }
+                ?>
+            </select>
             
-            <?php
-                }
+        </div>
+        <p>Khuyến mãi: <?php echo $khuyenmai.' VND' ?></p>     
+        <p>Phí vận chuyển cố định: 50.000 VND</p>
+        <p>TỔNG CỘNG: 
+            <?php 
+                $canthanhtoan = $tongtien + 50000 - $khuyenmai;
+                echo number_format($canthanhtoan,0,',','.').' VND'
             ?>
-        </select>
-        
-    </div>
-    <p>Khuyến mãi: <?php echo $khuyenmai.' VND' ?></p>     
-    <p>Phí vận chuyển cố định: 50.000 VND</p>
-    <p>TỔNG CỘNG: 
-        <?php 
-            $canthanhtoan = $tongtien + 50000 - $khuyenmai;
-            echo number_format($canthanhtoan,0,',','.').' VND'
-        ?>
-    </p>
-    </div>
-    <button class="btn btn-primary mb-3"> ĐẶT HÀNG</button>
-</form>
+        </p>
+        </div>
+        <button type = "submit" class="btn btn-primary mb-3">ĐẶT HÀNG</button>
+    </form>
 <?php
     }else {    
 ?>
