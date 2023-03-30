@@ -1,0 +1,6 @@
+{
+    "require": {
+        "cloudinary/cloudinary_php": "^2.10",
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}

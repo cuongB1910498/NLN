@@ -21,7 +21,7 @@
         ?>
         <div class="col-lg-6 col-md-6 col-12" id="slide">
             <div class="main-slide">
-                <img src="admincp/modules/quanlysp/uploads/<?php echo $ImgThumnail['tenanh'] ?>" class="img-feature">
+                <img src="<?php echo $ImgThumnail['link'] ?>" class="img-feature">
                 <div class="coltrol pre"><i class="fa-duotone fa-arrow-left"></i></div>
                 <div class="coltrol next"><i class="fa-duotone fa-arrow-right"></i></div>
             </div>
@@ -32,7 +32,7 @@
                     $rows = $Img->fetchAll();
                     foreach($rows as $row){
                 ?>
-                <div><img src="admincp/modules/quanlysp/uploads/<?php echo $row['tenanh'] ?>"></div>
+                <div><img src="<?php echo $row['link'] ?>"></div>
                 <?php } ?>
             </div>
         </div>

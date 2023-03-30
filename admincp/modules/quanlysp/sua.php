@@ -92,6 +92,28 @@ while($row = $change->fetch()) {
 	    	</select>
 	    </td>
 	  </tr>
+	  <tr>
+		<td>Nền Tảng</td>
+		
+		<td>
+			<select name="nentang">
+				<?php
+						$stmt = $pdo->prepare(
+							"SELECT * FROM tbl_sanpham WHERE masp = :ma LIMIT 1"
+						);
+						$stmt->execute([
+							'ma' => $_GET['masp']
+						]);
+						$row_nt=$stmt->fetch();
+						
+				?>
+				<option value="intel" <?php echo ($row_nt['nentang'] == 'intel') ? 'selected' : ''; ?>>intel</option>
+				<option value="amd" <?php echo ($row_nt['nentang'] == 'amd') ? 'selected' : ''; ?>>amd</option>
+				<option value="0" <?php echo ($row_nt['nentang'] == '0') ? 'selected' : ''; ?>>không phụ thuộc</option>
+			</select>
+		</td>
+
+	  </tr>
 	   <tr>
 	    <td colspan="2"><input type="submit" name="suasanpham" value="Sửa sản phẩm"></td>
 	  </tr>

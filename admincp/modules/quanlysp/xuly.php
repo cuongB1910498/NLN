@@ -1,6 +1,16 @@
 <?php
-//include('../../config/config.php');
 include "../../config/conect.php";
+require('../../../vendor/autoload.php');
+use Cloudinary\Cloudinary;
+$cloudinary = new Cloudinary(
+	[
+		'cloud' => [
+			'cloud_name' => 'dx3ymfyd4',
+			'api_key'    => '198624231658798',
+			'api_secret' => '9IshlkXpSpVocXzqy49XPNtq_Ww',
+		],
+	]
+);
 $tensanpham = $_POST['tensanpham'];
 $masp = $_POST['masp'];
 $giasp = $_POST['giasp'];
@@ -16,48 +26,35 @@ $danhmuc = $_POST['danhmuc'];
 
 if(isset($_POST['themsanpham'])){
 	//them
-	// $sql_them = "INSERT INTO tbl_sanpham(tensanpham,masp,giasp,soluong,hinhanh,tomtat,noidung,tinhtrang,id_danhmuc) 
-	// VALUE('".$tensanpham."','".$masp."','".$giasp."','".$soluong."','".$hinhanh."','".$tomtat."','".$noidung."','".$tinhtrang."','".$danhmuc."')";
-	// mysqli_query($mysqli,$sql_them);
-
-	//xu ly anh new
+	//xu ly anh
 	$countfiles = count($_FILES['files']['name']);
-	$query = "INSERT INTO tbl_anh VALUES(:id, :masp, :ten)";
+	$query = "INSERT INTO tbl_anh VALUES(:id, :masp, :ten, :link)";
 	$upload = $pdo->prepare($query);
 	for($i = 0; $i < $countfiles; $i++) {
-  
-        // File name
-        $filename = $_FILES['files']['name'][$i];
-      
-        // Location
-        $target_file = 'uploads/'.$filename;
-      
-        // file extension
-        $file_extension = pathinfo(
-            $target_file, PATHINFO_EXTENSION);
-             
-        $file_extension = strtolower($file_extension);
-      
-        // Valid image extension
-        $valid_extension = array("png","jpeg","jpg");
-      
-        if(in_array($file_extension, $valid_extension)) {
-  
-            // Upload file
-            if(move_uploaded_file(
-                $_FILES['files']['tmp_name'][$i],
-                $target_file)
-            ) {
- 
-                // Execute query
-                $upload->execute([
-					'id' => null,
-					'masp' => $masp,
-					'ten' => $filename
-				]);
-            }
-        }
+        try{
+			$filename = $_FILES['files']['name'][$i];
+			$file_tmp = $_FILES['files']['tmp_name'][$i];
+			$data = $cloudinary->uploadApi()->upload(
+				$file_tmp, 
+				[
+					'public_id' => $filename
+				]
+			);
+
+			$query = "INSERT INTO tbl_anh VALUES(:id, :masp, :ten, :link)";
+			$upload = $pdo->prepare($query);
+			$upload->execute([
+				'id' => null,
+				'masp' => $masp,
+				'ten' => $filename,
+				'link' => $data['secure_url']
+			]);
+		}catch (Exception $e) {
+			echo "ĐÃ có lỗi xảy ra";
+		}
+            
     }
+    
 
 	$stmt = $pdo->prepare(
 		"INSERT INTO tbl_sanpham
@@ -92,56 +89,47 @@ if(isset($_POST['themsanpham'])){
 		//xoa hinh anh cu
 
 		while($row = $selectImg->fetch()){
-		  	unlink('uploads/'.$row['tenanh']);
+			// xoa tren clondinary
+			$data = $cloudinary->uploadApi()->destroy($row['tenanh']);
 		}
 
+		//xoa anh tren tbl_anh
 		$del = $pdo->prepare("DELETE FROM tbl_anh WHERE masp = :ma");
 		$del->execute(['ma'=>$_GET['masp']]);
 		
 		
-		
+		//upload tat ca cac anh
 		$countfiles = count($_FILES['files']['name']);
-		$query = "INSERT INTO tbl_anh VALUES(:id, :masp, :ten)";
-		$upload = $pdo->prepare($query);
 		for($i = 0; $i < $countfiles; $i++) {
-	  
-			// File name
-			$filename = $_FILES['files']['name'][$i];
-		  
-			// Location
-			$target_file = 'uploads/'.$filename;
-		  
-			// file extension
-			$file_extension = pathinfo(
-				$target_file, PATHINFO_EXTENSION);
-				 
-			$file_extension = strtolower($file_extension);
-		  
-			// Valid image extension
-			$valid_extension = array("png","jpeg","jpg");
-		  
-			if(in_array($file_extension, $valid_extension)) {
-	  
-				// Upload file
-				if(move_uploaded_file(
-					$_FILES['files']['tmp_name'][$i],
-					$target_file)
-				) {
-	 
-					//Execute query
-					$upload->execute([
-						'id' => null,
-						'masp' => $masp,
-						'ten' => $filename
-					]);
-				}
+			try{
+				$filename = $_FILES['files']['name'][$i];
+				$file_tmp = $_FILES['files']['tmp_name'][$i];
+				$data = $cloudinary->uploadApi()->upload(
+					$file_tmp, 
+					[
+						'public_id' => $filename
+					]
+				);
+	
+				$query = "INSERT INTO tbl_anh VALUES(:id, :masp, :ten, :link)";
+				$upload = $pdo->prepare($query);
+				$upload->execute([
+					'id' => null,
+					'masp' => $masp,
+					'ten' => $filename,
+					'link' => $data['secure_url']
+				]);
+			}catch (Exception $e) {
+				echo "ĐÃ có lỗi xảy ra";
 			}
 		}
 
+
+		// update tbl_sanpham
 		$update = $pdo->prepare(
 			"UPDATE tbl_sanpham 
 			SET tensanpham = :ten, masp = :ma, giasp = :gia, soluong = :sl, tomtat = :tom, 
-			noidung =:nd, tinhtrang = :tt, id_danhmuc = :dm 
+			noidung =:nd, tinhtrang = :tt, nentang = :nt, id_danhmuc = :dm
 			WHERE masp = :masp"
 		);
 		$update->execute([
@@ -152,15 +140,14 @@ if(isset($_POST['themsanpham'])){
 			'tom' => $tomtat,
 			'nd' => $noidung,
 			'tt' => $tinhtrang,
-			'dm' => $danhmuc,
 			'nt'=> $_POST['nentang'],
+			'dm' => $danhmuc,
 			'masp' => $_GET['masp']
 		]);
-
-		
 	
 	}else{
 		//khong co anh moi
+		//update tbl_sanpham
 		$update = $pdo->prepare(
 			"UPDATE tbl_sanpham 
 			SET tensanpham = :ten, masp = :ma, giasp = :gia, soluong = :sl, tomtat = :tom, 
@@ -178,40 +165,41 @@ if(isset($_POST['themsanpham'])){
 			'dm' => $danhmuc,
 			'masp' => $_GET['masp']
 		]);
+		
+
 		echo 'sua k co anh';
 	}
 	header('Location:../../index.php?action=quanlysp');
 	
 }else{
 	//xoa
-	// $id=$_GET['idsanpham'];
-	// $sql = "SELECT * FROM tbl_sanpham WHERE id_sanpham = '$id' LIMIT 1";
-	// $query = mysqli_query($mysqli,$sql);
-	// $rem = $pdo->prepare(
-	// 	"SELECT * FROM tbl_anh WHERE masp = :ma"
-	// );
-	// $rem->execute([
-	// 	'ma' => $_GET['masp']
-	// ]);
+	$id=$_GET['idsanpham'];
 	
-	// $count = $rem->rowCount();
-	// echo $count;
+	$rem = $pdo->prepare(
+		"SELECT * FROM tbl_anh WHERE masp = :ma"
+	);
+	$rem->execute([
+		'ma' => $_GET['masp']
+	]);
 	
-	// while($row = $rem->fetch()){
-	// 	unlink('uploads/'.$row['tenanh']);
-	// }
+	//$count = $rem->rowCount();
+	//echo $count;
 	
-	// $delete = $pdo->prepare(
-	// 	"DELETE FROM tbl_sanpham WHERE masp = :ma"
-	// );
-	// $delete->execute(['ma' => $_GET['masp']]);
+	while($row = $rem->fetch()){
+		$data = $cloudinary->uploadApi()->destroy($row['tenanh']);
+	}
+	
+	$delete = $pdo->prepare(
+		"DELETE FROM tbl_sanpham WHERE masp = :ma"
+	);
+	$delete->execute(['ma' => $_GET['masp']]);
 	
 	
-	// $removeImg = $pdo->prepare(
-	// 	"DELETE FROM tbl_anh WHERE masp = :ma"
-	// );
-	// $removeImg->execute(['ma' => $_GET['masp']]);
-	// header('Location:../../index.php?action=quanlysp&query=them');
+	$removeImg = $pdo->prepare(
+		"DELETE FROM tbl_anh WHERE masp = :ma"
+	);
+	$removeImg->execute(['ma' => $_GET['masp']]);
+	header('Location:../../index.php?action=quanlysp&query=them');
 	echo 'xoa';
 }
 

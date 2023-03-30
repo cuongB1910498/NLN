@@ -30,7 +30,7 @@ $list->execute();
   ?>
   <div class="card col-lg-3 col-md-4 col-sm-6 col-12" style="width:300px" id="card">
     <div class="card-title">
-      <img class="card-img-top" id="img" src="modules/quanlysp/uploads/<?php echo $anh['tenanh'] ?>" alt="Card image"> 
+      <img class="card-img-top" id="img" src="<?php echo $anh['link'] ?>" alt="Card image"> 
     </div>
     <div class="card-body">
             <h4 class="card-title"><?php echo $row['tensanpham'] ?></h4>
