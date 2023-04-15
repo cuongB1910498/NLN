@@ -260,7 +260,7 @@ a#dathang {
 }
 
 .main{
-  min-height: 400px;
+  min-height: 700px;
 }
 
 .chitiet .row p a{
@@ -314,7 +314,7 @@ a#dathang {
   cursor: pointer;
 }
 
-.active{
+.productdetail .active{
   background: rgb(255, 106, 106);
 }
 

@@ -12,7 +12,7 @@
 	while($row_chitiet = $query_chitiet->fetch()){
 ?>
 
-    <div class="row">
+    <div class="row productdetail">
         <?php
             $stmt = $pdo->prepare("SELECT * FROM tbl_anh WHERE masp = :ma");
             $stmt->execute(['ma'=>$row_chitiet['masp']]);
