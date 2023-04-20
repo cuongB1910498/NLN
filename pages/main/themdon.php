@@ -88,6 +88,10 @@
             $hide->execute();
         }
 
+        //cap nhat so lieu thong ke trang thai don
+        $update_status = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu+1 WHERE id_trangthai = 1");
+        $update_status->execute();
+
     }
     
     

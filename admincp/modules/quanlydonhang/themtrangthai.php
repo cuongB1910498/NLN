@@ -34,6 +34,11 @@
         
         // cập nhật lại csdl nếu hủy đơn
         if($id_trangthai == 6){
+            $tru_donggoi = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu-1 WHERE id_trangthai=1");
+            $tru_donggoi->execute();
+
+            $cong_dahuy = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu+1 WHERE id_trangthai=6");
+            $cong_dahuy->execute();
             //update trang thai tbl_donhang.hoanthanh = -1
             $sql = "UPDATE tbl_donhang SET hoanthanh = :ht WHERE madon = :md";
             $stmt = $pdo->prepare($sql);
@@ -59,6 +64,12 @@
                 ]);
             }
         }elseif($id_trangthai == 5){
+            $tru_vanchuyen = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu-1 WHERE id_trangthai=4");
+            $tru_vanchuyen->execute();
+
+            $cong_hoanthanh = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu+1 WHERE id_trangthai=5");
+            $cong_hoanthanh->execute();
+
             $sql = "UPDATE tbl_donhang SET hoanthanh = :ht WHERE madon = :md";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
@@ -124,8 +135,26 @@
                 
             }
 
-        }
+        }elseif($id_trangthai == 2){
+            $tru_choduyet = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu-1 WHERE id_trangthai=1");
+            $tru_choduyet->execute();
 
+            $cong_daduyet = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu+1 WHERE id_trangthai=2");
+            $cong_daduyet->execute();
+        }elseif($id_trangthai == 3){
+            $tru_daduyet = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu-1 WHERE id_trangthai=2");
+            $tru_daduyet->execute();
+
+            $cong_donggoi = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu+1 WHERE id_trangthai=3");
+            $cong_donggoi->execute();
+        }elseif($id_trangthai == 4){
+            $tru_donggoi = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu-1 WHERE id_trangthai=3");
+            $tru_donggoi->execute();
+
+            $cong_vanchuyen = $pdo->prepare("UPDATE tbl_trangthaidon SET solieu=solieu+1 WHERE id_trangthai=4");
+            $cong_vanchuyen->execute();
+        }
+        
 
         $query_capnhat = $pdo->prepare(
             "INSERT INTO tbl_chitiet_tt(madon, id_trangthai, ghichu) 

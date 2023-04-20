@@ -52,11 +52,12 @@
         </li> -->
         
       </ul>
-      <form class="d-flex mb-3" action="index.php?quanly=timkiem" method="POST">
+      <form class="d-flex mb" action="index.php?quanly=timkiem" method="POST">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="tukhoa">
         <button class="btn btn-warning me-2" type="submit" name="tiemkiem">Search</button>
+        <a href="index.php?quanly=giohang" class="btn btn-warning me-2"><i class="fa-solid fa-cart-shopping "></i></a>
       </form>
-      <a href="index.php?quanly=giohang" class="btn btn-warning"><i class="fa-solid fa-cart-shopping "></i></a>
+      
     </div>
   </div>
 </nav>

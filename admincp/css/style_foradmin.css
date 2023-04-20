@@ -17,7 +17,7 @@ button.btn a{
 }
 
 tr:nth-child(even) {
-    background-color: rgb(186, 209, 255);
+    background-color: rgb(219, 235, 255);
 }
 
 table{

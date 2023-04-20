@@ -83,7 +83,7 @@
                 'id' => $id_baiviet
             ]);
             
-            header("location: index.php?action=quanlybaiviet&query=thembaiviet");
+            header("location:location:index.php?action=thembaiviet");
         }
         
         

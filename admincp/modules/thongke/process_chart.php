@@ -46,5 +46,5 @@ while($row = $stmt->fetch()){
     );
 }
 
-echo $data =json_encode($chart_data);
+echo $data = json_encode($chart_data);
 ?>

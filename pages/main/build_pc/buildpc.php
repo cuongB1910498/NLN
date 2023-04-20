@@ -1,5 +1,6 @@
 
 <div class="row ">
+<h2>Tự xây dụng PC</h2>
 <form action="index.php?quanly=dathangpc" method="post" id="build">
     <div class="mb-3 row offset-lg-2">
         <label class="col-lg-2 col-md-2 col-sm-3 col-10" for="choice-bg">Nền tảng:</label>
@@ -15,9 +16,6 @@
     <div class="result_bg mb-3">
 
     </div>
-
-
-
 
     <div>
     <?php

@@ -8,7 +8,7 @@ $(document).ready(function(){
             
         ykeys: ['order'],
             
-        labels: ['Tổng đơn']
+        labels: ['Tổng đơn'],
     });
 
     $(document).on('change', '.select-day', function(){

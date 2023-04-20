@@ -1,6 +1,6 @@
 <div class="footer bg-success row">
     <div class="col-lg-3 col-12 offset-lg-1"> 
-       <img src="images/lolo_chinhthuc.jpg" alt="error" width="150px">
+       <img src="images/logo7.png" alt="error" width="150px">
         <p style="font-weight: bold; color: white;">Tổng công ti THYN</p>
         <p style="font-weight: bold; color: white;">THYN FARM</p>
         <p style="color: white;">Địa chỉ: CẦN THƠ VIỆT NAM</p>

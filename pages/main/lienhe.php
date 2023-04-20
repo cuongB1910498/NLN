@@ -1,26 +1,29 @@
 <div class="lienhe">
     <h1 class="lh_1">TỔNG CÔNG TI THYN</h1>
-    <h2 class="lh_2">Thyn-Farm</h2>
+    <h2 class="lh_2">THYNc</h2>
 
 
     <div class="row mb-3">
-        GIỚI THIỆU: THYN_FRAM là một trong những sản phẩm của tập đoàn THYN, với mục tiêu cung cấp những sản phẩm tốt 
-        đồng thời đáp ứng linh hoạt và cập nhật nhanh chống theo thị trường, cũng như đồng hành cùng bà con nông dân trong suốt quá trình canh tác
-        Nhầm tối ưu hóa lợi nhuận nói riêng, cũng như thúc đẩy phát triển kinh tế nong nghiệp vững mạnh nói chung.
+        GIỚI THIỆU: Với sự phát triển không ngừng của Xã hội, sở hữu cho mình một máy tính cá nhân chưa bao giờ là đơn giản đến thể, chỉ cần bạn đặt hàng
+        dù là ở đâu, từ nơi xa hải đảo, núi cao đến Thành phố nhộn nhịp chúng tôi sẽ giao hàng cho bạn một cách nhanh chóng
     </div>
 
     <div class="img row">
-        <img src="images/giongcaytrong.jpg" alt="error"  class="row">
-        <p class="row">Hạt giống cây trồng</p>
+        <h3 class="row">Máy tính chơi game/ văn phòng</h3>    
+        <img src="images/info_1.jpg" alt="error"  class="row">
     </div>
 
     <div class="img row">
-        <img src="images/congculamvuon.jpg" alt="" class="row">
-        <p class="row">Công cụ làm vườn</p>
+        <h3 class="row">Linh kiện máy tính</h3>
+        <img src="images/info_2.jpg" alt="error" class="row">
     </div>
 
-    <div class="row">LIEN HE VOI CHNUNG TOI TAI</div>
+    <div class="img row">
+        <h3 class="row">Tự xây dựng PC</h3>
+        <img src="images/info_3.jpg" alt="error" class="row">
+    </div>
 
+    <div class="row">LIÊN HỆ VỚI CHÚNG TÔI TẠI</div>
     <div class="row mb-3">
         <div class="col offset-3">TRỤ SỞ CHÍNH</div>
         <div class="col">CHI NHÁNH</div>
@@ -36,8 +39,5 @@
         <div class="col">SĐT: 0336961879</div>
     </div>
 
-    <div class="row">
-        
-    </div>
 
 </div>

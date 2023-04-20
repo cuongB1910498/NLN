@@ -38,7 +38,7 @@
                 'nd' =>$noidung,
                 'tag' => $tag
             ]);
-            header("location: index.php?action=quanlybaiviet&query=thembaiviet");
+            header("location:index.php?action=thembaiviet");
         }
         // $sql = "INSERT INTO tbl_baiviet(tieude,noidung,anh_mh,tag) 
         // VALUES ('".$tieude."', '".$noidung."', '".$anh_mh."', '".$tag."');";

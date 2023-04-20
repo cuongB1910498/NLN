@@ -32,7 +32,7 @@
                     $rows = $Img->fetchAll();
                     foreach($rows as $row){
                 ?>
-                <div><img src="<?php echo $row['link'] ?>"></div>
+                <div><img src="<?php echo $row['link'] ?>" hidden></div>
                 <?php } ?>
             </div>
         </div>
